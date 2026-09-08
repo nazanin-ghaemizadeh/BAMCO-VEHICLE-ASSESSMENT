@@ -1,0 +1,788 @@
+/* guide.css */
+/* Integrated bilingual user guide on the entry screen */
+.entryTabs{display:flex;justify-content:center;gap:10px;margin:22px auto 8px;padding:5px;width:min(560px,100%);border:1px solid #d9e5ee;border-radius:16px;background:#f5f9fc}
+.entryTabButton{flex:1;border:0;border-radius:12px;background:transparent;color:#49647d;padding:11px 16px;font-weight:700;box-shadow:none}
+.entryTabButton.active{background:linear-gradient(120deg,#123e75,#246ba9);color:#fff;box-shadow:0 7px 16px #163b6924}
+.entryGuidePanel{margin-top:16px;text-align:initial}
+.guideLang{display:block}.guideEn{display:none}.english .guideFa{display:none!important}.english .guideEn{display:block!important}
+.guideHero{position:relative;overflow:hidden;padding:28px;border-radius:22px;background:linear-gradient(125deg,#0f3967,#176ca2 64%,#168f85);color:#fff;margin-bottom:18px}
+.guideHero:after{content:"";position:absolute;width:240px;height:240px;border-radius:50%;border:40px solid #ffffff12;inset:auto -55px -95px auto}
+.guideHero h1{position:relative;margin:0 0 8px;font-size:29px;z-index:1}.guideHero p{position:relative;margin:0;max-width:760px;line-height:1.9;color:#e5f4fb;z-index:1}
+.guideQuickNav{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:9px;margin:0 0 18px}.guideQuickNav a{display:flex;align-items:center;justify-content:center;min-height:46px;padding:8px 10px;border:1px solid #cfdee8;border-radius:12px;background:#fff;color:#174b77;text-decoration:none;font-weight:700;text-align:center;line-height:1.45}.guideQuickNav a:hover{border-color:#2c7fae;background:#eef8fc}
+.guideSection{margin:0 0 18px;padding:24px;border:1px solid #d8e4ed;border-radius:20px;background:#fff;box-shadow:0 8px 24px #1236590b;scroll-margin-top:20px}.guideSectionHead{display:flex;align-items:center;gap:13px;margin-bottom:18px}.guideSectionIcon{flex:0 0 48px;width:48px;height:48px;display:grid;place-items:center;border-radius:14px;background:linear-gradient(135deg,#123e75,#2586b8);color:#fff;font:700 22px "Times New Roman",serif}.guideSection h2{margin:0;color:#153d63;font-size:23px}.guideSectionHead p{margin:4px 0 0;color:#6b7f91;line-height:1.7}
+.guideOverviewGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.guideRoleTile{padding:18px;border:1px solid #d7e4ed;border-radius:16px;background:#fbfdff}.guideRoleTile strong{display:block;color:#123e75;font-size:18px;margin-bottom:6px}.guideRoleTile p{margin:0;color:#60758a;line-height:1.75}.guideRoleTile.evaluator{border-top:4px solid #159486}.guideRoleTile.expert{border-top:4px solid #8a61b4}.guideRoleTile.manager{border-top:4px solid #2463a5}
+.guideFlow{display:flex;align-items:stretch;gap:8px;margin-top:18px;direction:ltr}.guideFlowNode{flex:1;min-width:0;padding:15px 12px;border:1px solid #cfe0eb;border-radius:15px;background:#f9fcfe;text-align:center;color:#24445f}.guideFlowNode b{display:block;color:#123e75;margin-bottom:5px}.guideFlowNode small{display:block;line-height:1.5;color:#678096}.guideFlowNode.branch{background:#f2fbf8;border-color:#bce4d7}.guideFlowNode.merge{background:#f4f5fb;border-color:#d8d1ea}.guideFlowNode.final{background:#eef6fd;border-color:#bfd8eb}.guideFlowArrow{align-self:center;flex:0 0 26px;text-align:center;color:#4f7896;font:700 26px "Times New Roman",serif}.guideFlowBranch{display:grid;grid-template-columns:1fr;gap:8px;flex:1.4}.guideFlowBranch .guideFlowNode{width:100%}
+.guideSteps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.guideStep{position:relative;padding:17px 17px 17px 62px;border:1px solid #dce6ee;border-radius:15px;background:#fbfdff;min-height:106px}.guideStepNum{position:absolute;left:15px;top:17px;width:34px;height:34px;border-radius:11px;background:#e7f3fa;color:#175d8a;display:grid;place-items:center;font:700 17px "Times New Roman",serif}.guideStep h3{margin:0 0 5px;color:#173f65;font-size:17px}.guideStep p{margin:0;color:#60758a;line-height:1.75;font-size:14px}.guideFa .guideStep{padding:17px 62px 17px 17px}.guideFa .guideStepNum{left:auto;right:15px}
+.guideCallout{margin-top:14px;padding:14px 16px;border-radius:13px;background:#eef8f5;border:1px solid #c9e7dc;color:#285d51;line-height:1.8}.guideCallout.warning{background:#fff7e9;border-color:#efd9ae;color:#805c18}.guideCallout.danger{background:#fff0f0;border-color:#edcccc;color:#8c3434}
+.guideToolbar{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.guideTool{padding:15px;border:1px solid #dae5ed;border-radius:14px;background:#fbfdff}.guideTool strong{display:block;color:#17466f;margin-bottom:5px}.guideTool span{display:block;color:#687f93;line-height:1.65;font-size:14px}
+.guideDecision{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}.guideDecision div{padding:15px;border-radius:14px;text-align:center;border:1px solid #d8e4ed}.guideDecision strong{display:block;font:700 18px "Times New Roman",serif;margin-bottom:4px}.guideDecision span{display:block;font-weight:700;margin-bottom:5px}.guideDecision small{display:block;line-height:1.55;color:#60758a}.guideDecision .pass{background:#edf9f3;border-color:#c0e6d2}.guideDecision .conditional{background:#fff8e9;border-color:#efddb1}.guideDecision .revise{background:#fff2e9;border-color:#efcdb6}.guideDecision .reject{background:#fff0f0;border-color:#eac9c9}
+.guideFileFlow{display:grid;grid-template-columns:1fr 42px 1fr 42px 1fr;align-items:center;gap:6px}.guideFileBox{padding:17px;border:1px solid #cfdee8;border-radius:15px;background:#f9fcfe;text-align:center}.guideFileBox strong{display:block;color:#173f65;margin-bottom:5px}.guideFileBox small{color:#60758a;line-height:1.6}.guideFileArrow{text-align:center;font-size:26px;color:#527793;font-family:"Times New Roman",serif}
+.guideChecklist{display:grid;grid-template-columns:repeat(2,1fr);gap:9px 20px;margin:0;padding:0;list-style:none}.guideChecklist li{position:relative;padding-inline-start:27px;color:#526b80;line-height:1.75}.guideChecklist li:before{content:"✓";position:absolute;inset-inline-start:0;top:0;color:#0c8a70;font-weight:700}
+.guideLegend{display:flex;gap:10px;flex-wrap:wrap;margin-top:15px}.guideBadge{padding:6px 10px;border-radius:999px;font-size:13px;background:#edf4f9;color:#42627b}.guideBadge.green{background:#e9f7f1;color:#08734b}.guideBadge.purple{background:#f2ecf8;color:#75529d}.guideBadge.blue{background:#eaf3fb;color:#1f6095}
+.entryScreen.guideMode{place-items:start center;padding-top:28px;padding-bottom:28px}.entryScreen.guideMode .entryCard{width:min(1220px,100%)!important}.entryScreen.guideMode .entryIntro{margin-top:14px!important}
+.english .guideSection,.english .guideHero,.english .guideQuickNav,.english .guideRoleTile,.english .guideTool,.english .guideStep{font-family:"Times New Roman",serif!important}
+@media(max-width:900px){.guideQuickNav{grid-template-columns:repeat(2,1fr)}.guideOverviewGrid,.guideToolbar{grid-template-columns:1fr}.guideDecision{grid-template-columns:repeat(2,1fr)}.guideFlow{display:grid;grid-template-columns:1fr}.guideFlowArrow{transform:rotate(90deg)}.guideFlowBranch{grid-template-columns:1fr 1fr}.guideSteps{grid-template-columns:1fr}.guideFileFlow{grid-template-columns:1fr}.guideFileArrow{transform:rotate(90deg)}.guideChecklist{grid-template-columns:1fr}}
+@media(max-width:650px){.entryTabs{margin-top:16px}.entryTabButton{padding:10px 8px}.guideHero{padding:21px 18px}.guideHero h1{font-size:24px}.guideSection{padding:18px 14px}.guideSectionHead{align-items:flex-start}.guideQuickNav{grid-template-columns:1fr 1fr}.guideDecision{grid-template-columns:1fr}.guideFlowBranch{grid-template-columns:1fr}.entryScreen.guideMode{padding:12px!important}.guideOverviewGrid{grid-template-columns:1fr}}
+
+
+/* v18 — guide typography, alignment, and centered flowchart content */
+@font-face{font-family:"BAMCO Guide Mixed";src:local("Times New Roman");unicode-range:U+0000-024F,U+1E00-1EFF}
+@font-face{font-family:"BAMCO Guide Mixed";src:local("B Nazanin"),local("Tahoma");unicode-range:U+0600-06FF,U+0750-077F,U+08A0-08FF,U+FB50-FDFF,U+FE70-FEFF}
+.guideFa{font-family:"BAMCO Guide Mixed","B Nazanin",Tahoma,sans-serif}
+.guideEn{font-family:"Times New Roman",serif!important}
+.guideHero p{max-width:none!important;width:100%;text-align:justify;text-justify:inter-word}
+.guideLang p,.guideLang li,.guideLang .guideTool span,.guideLang .guideCallout,.guideLang .guideRoleTile p,.guideLang .guideStep p,.guideLang .guideSectionHead p{text-align:justify;text-justify:inter-word}
+.guideQuickNav{grid-template-columns:repeat(4,minmax(0,1fr))}
+.guideFlowNode,.guideFileBox{display:flex!important;flex-direction:column;align-items:center;justify-content:center;text-align:center!important}
+.guideFlowNode b,.guideFlowNode small,.guideFileBox strong,.guideFileBox small{text-align:center!important;width:100%}
+.guideFlowNode small,.guideFileBox small{line-height:1.7}
+.guideToolbar{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media(max-width:900px){.guideQuickNav{grid-template-columns:repeat(2,1fr)}.guideToolbar{grid-template-columns:1fr}}
+
+.guideDecision small{display:block;text-align:justify;text-justify:inter-word}.guideLang .guideToolbar h3{text-align:justify}
+
+/* v19 — clearer semantic classification colors */
+.guideDecision .pass{background:#e2f5ea!important;border-color:#72c69a!important;color:#0a6844}.guideDecision .pass span,.guideDecision .pass strong{color:#0a6844}
+.guideDecision .conditional{background:#fff3c9!important;border-color:#e1bd4e!important;color:#7a5b00}.guideDecision .conditional span,.guideDecision .conditional strong{color:#7a5b00}
+.guideDecision .revise{background:#ffe3ca!important;border-color:#df914a!important;color:#93470c}.guideDecision .revise span,.guideDecision .revise strong{color:#93470c}
+.guideDecision .reject{background:#fbdadd!important;border-color:#d96f7a!important;color:#9e2433}.guideDecision .reject span,.guideDecision .reject strong{color:#9e2433}
+.guideDecision small{color:#4f6478!important}
+.barLabel small{display:block;margin-top:4px;color:#6b8194;font-size:11px;line-height:1.25}
+
+
+/* features.css */
+.pdfButton{background:#9b1c31}.finalizeButton{background:#08745f}.unlockButton{background:#b56b08}.caseLocked .evaluatorOnly input,.caseLocked .evaluatorOnly textarea,.caseLocked .evaluatorOnly button:not(#finalizeAssessmentButton),.caseLocked .metadata input,.caseLocked #evaluatorVehiclePhotos button,.caseLocked #evaluatorVehiclePhotos input{pointer-events:none!important;opacity:.58!important}.caseLocked #finalizeAssessmentButton{background:#4f6475;cursor:not-allowed}.lockNotice{margin:0 0 16px;padding:12px 16px;border:1px solid #e1bd75;border-radius:12px;background:#fff7df;color:#74500b;font-weight:800}.strengthWeaknessCard,.auditTrailCard{margin-top:16px}.strengthWeaknessGrid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.strengthPanel,.weaknessPanel{padding:18px;border-radius:15px}.strengthPanel{background:#edf9f4;border:1px solid #bce5d4}.weaknessPanel{background:#fff2f1;border:1px solid #f0c5c1}.strengthPanel h3,.weaknessPanel h3{margin:0 0 12px}.strengthPanel h3{color:#08745f}.weaknessPanel h3{color:#a82c39}.summaryPoint{display:grid;grid-template-columns:1fr auto;gap:8px;padding:10px 0;border-bottom:1px dashed #cfdde2}.summaryPoint:last-child{border:0}.summaryPoint strong{line-height:1.65}.summaryPoint span{font-family:"Times New Roman",serif;font-weight:800}.summaryPoint small{grid-column:1/-1;color:#64748b}.caseLockBadge{padding:7px 12px;border-radius:20px;background:#e7eef4;color:#52697b;font-weight:800}.caseLockBadge.locked{background:#e5f6ef;color:#08745f}.caseLockBadge.editing{background:#fff0d7;color:#995a00}.auditTrailList{display:grid;gap:9px}.auditEntry{display:grid;grid-template-columns:155px 170px 1fr;gap:12px;align-items:start;padding:12px 14px;border:1px solid #dbe6ed;border-radius:12px;background:#f8fbfd}.auditEntry time{direction:ltr;text-align:right;color:#597086;font-family:"Times New Roman",serif}.auditEntry strong{color:#173e62}.auditEntry p{margin:0;line-height:1.7}.auditEmpty{padding:18px;text-align:center;color:#6e8293}.qualityChart{display:grid!important;grid-template-columns:1fr!important;gap:10px!important;height:auto!important;padding:12px 4px!important;align-items:stretch!important}.qualityBar{display:grid!important;grid-template-columns:46px minmax(0,1fr) 58px minmax(110px,180px)!important;align-items:center!important;gap:10px!important;min-height:34px!important}.qualityBar strong{grid-column:1!important;grid-row:1!important;text-align:center!important}.qualityBar .qualityTrack{grid-column:2!important;grid-row:1!important;width:100%!important;height:24px!important;display:block!important;border-radius:7px!important;overflow:hidden!important;background:#edf3f8!important}.qualityBar .qualityTrack i{display:block!important;width:var(--quality-width)!important;height:100%!important;border-radius:7px!important;background:var(--quality-color)!important}.qualityBar .qualityCount{grid-column:3!important;grid-row:1!important;text-align:center!important;font-weight:900!important}.qualityBar span{grid-column:4!important;grid-row:1!important;text-align:right!important}.scoreChart{height:390px!important}.barTrack{height:285px!important}.chartZoomNote{font-size:12px;color:#64748b;text-align:center;margin:8px 0 0}.managerPrintTitle{display:none}
+@media(max-width:760px){.strengthWeaknessGrid{grid-template-columns:1fr}.auditEntry{grid-template-columns:1fr}.qualityBar{grid-template-columns:40px minmax(0,1fr) 42px!important}.qualityBar span{grid-column:1/-1!important;grid-row:2!important;text-align:center!important}.scoreChart{height:350px!important}.barTrack{height:245px!important}}
+@media print{body.managerPdfMode{background:#fff!important}.managerPdfMode .topbar,.managerPdfMode footer,.managerPdfMode #managerWeightPanel,.managerPdfMode #auditTrailCard,.managerPdfMode #switchRoleButton,.managerPdfMode .actionCard{display:none!important}.managerPdfMode .managerOnly{display:block!important}.managerPdfMode .analyticsGrid{display:block!important}.managerPdfMode .managerHero{display:grid!important}.managerPdfMode .managerPrintTitle{display:block;text-align:center;color:#163b69;margin:0 0 14px}.managerPdfMode .card,.managerPdfMode .hero{box-shadow:none!important;break-inside:avoid;margin-bottom:14px}.managerPdfMode .scoreChart{height:300px!important}.managerPdfMode .barTrack{height:205px!important}.managerPdfMode .radarChart{min-height:420px!important}.managerPdfMode .radarChart svg{height:410px!important}.managerPdfMode main{padding:0 8mm!important}.managerPdfMode .strengthWeaknessGrid{grid-template-columns:1fr 1fr!important}}
+.caseLocked .assessmentLayout button,.caseLocked .assessmentLayout input,.caseLocked .assessmentLayout textarea{pointer-events:none!important;opacity:.58!important}
+.qualityChart{direction:ltr!important;display:grid!important;grid-template-columns:1fr!important;gap:12px!important;height:auto!important;padding:16px 8px!important}.qualityBar{direction:ltr!important;display:grid!important;grid-template-columns:180px minmax(0,1fr)!important;align-items:center!important;gap:14px!important;min-height:38px!important}.qualityLabel{grid-column:1!important;text-align:left!important;color:#254b69!important;font-weight:800!important;font-size:14px!important;min-height:0!important}.qualityBar .qualityTrack{grid-column:2!important;position:relative!important;width:100%!important;height:26px!important;display:block!important;overflow:visible!important;border-radius:7px!important;background:#edf3f8!important}.qualityBar .qualityTrack i{position:absolute!important;inset:0 auto 0 0!important;display:block!important;width:var(--quality-width)!important;height:100%!important;border-radius:7px!important;background:var(--quality-color)!important}.qualityBar .qualityCount{position:absolute!important;top:50%!important;left:clamp(12px,var(--quality-count-position),calc(100% - 12px))!important;z-index:2!important;transform:translate(-50%,-50%)!important;margin:0!important;padding:2px 5px!important;border-radius:6px!important;background:#fff!important;color:#173e62!important;box-shadow:0 1px 5px #163b6933!important;font-size:14px!important;line-height:1.25!important;font-weight:900!important}.barTrack{position:relative!important;overflow:visible!important}.barEndValue{position:absolute;left:50%;bottom:var(--bar-height);z-index:3;transform:translate(-50%,-7px);padding:2px 5px;border-radius:6px;background:#fff;color:#173e62;box-shadow:0 1px 5px #163b6929;font-family:"Times New Roman",serif;font-size:16px;font-weight:900;line-height:1.15;white-space:nowrap}.performanceDetails{overflow:hidden;border:1px solid #d8e5ec;border-radius:12px;background:#fff}.performanceDetails summary{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 14px;cursor:pointer;color:#173e62;list-style:none}.performanceDetails summary::-webkit-details-marker{display:none}.performanceDetails summary:after{content:"⌄";font-size:19px;transition:transform .2s}.performanceDetails[open] summary:after{transform:rotate(180deg)}.performanceDetails summary span{margin-inline-start:auto;padding:4px 9px;border-radius:15px;background:#edf4f8;color:#52697b;font-size:12px}.performanceDetails>div{padding:0 14px 8px;border-top:1px solid #e3ebf0}.finalCommentCard{margin:16px 0}.finalCommentCard textarea{width:100%;min-height:125px;resize:vertical;line-height:1.9}.pdfExportRoot{position:absolute;top:0;left:-100000px;width:1120px;padding:30px;background:#fff;color:#172033;font-family:Tahoma,"B Nazanin",sans-serif;direction:rtl}.pdfReportHeader{display:flex;align-items:center;gap:18px;margin-bottom:18px;padding:18px 22px;border-radius:16px;background:linear-gradient(120deg,#163b69,#2463a5);color:#fff}.pdfReportHeader img{width:100px;height:64px;object-fit:contain;padding:4px;border-radius:8px;background:#fff}.pdfReportHeader h1{margin:0 0 6px;font-size:27px}.pdfReportHeader p{margin:0;color:#e2f1ff}.pdfExportRoot .card,.pdfExportRoot .hero{box-shadow:none!important;margin:0 0 16px!important;break-inside:avoid}.pdfExportRoot #managerWeightPanel,.pdfExportRoot button,.pdfExportRoot input,.pdfExportRoot textarea{display:none!important}.pdfExportRoot .analyticsGrid{display:block!important}.pdfExportRoot .analyticsGrid>.card{margin-bottom:16px!important}.pdfExportRoot .managerHero{display:grid!important}.pdfExportRoot .radarChart{min-height:500px!important}.pdfExportRoot .strengthWeaknessGrid{grid-template-columns:1fr 1fr!important}.pdfExportRoot .performanceDetails{break-inside:avoid}.pdfExportRoot .performanceDetails>div{display:block!important}.pdfExportRoot .performanceDetails summary:after{display:none}.pdfOpinionGrid{display:grid;gap:10px}.pdfOpinionGrid article{padding:13px 15px;border:1px solid #d9e5ec;border-radius:11px;background:#f8fbfd}.pdfOpinionGrid strong{color:#163b69}.pdfOpinionGrid p{margin:7px 0 0;line-height:1.9;white-space:pre-wrap}
+@media(max-width:760px){.qualityBar{grid-template-columns:115px minmax(0,1fr)!important;gap:8px!important}.qualityLabel{font-size:12px!important}.barEndValue{font-size:14px}.finalCommentCard textarea{min-height:105px}}
+.pdfExportRoot{position:absolute!important;top:0!important;left:0!important;z-index:2147483647!important}.qualityChart,.qualityBar,.qualityTrack{direction:ltr!important}.qualityBar{grid-template-columns:180px minmax(0,1fr)!important}.qualityBar .qualityLabel{direction:rtl!important;grid-column:1!important;text-align:left!important;justify-self:start!important}.qualityBar .qualityCount{left:var(--quality-count-position)!important;transform:translate(10px,-50%)!important;color:#000!important;background:transparent!important;box-shadow:none!important;font-size:17px!important;font-weight:900!important;padding:0!important}.qualityBar .qualityTrack{overflow:visible!important}.performanceDetails{margin-bottom:10px}
+
+.managerReviewComments{margin-top:16px}.managerReviewCommentsGrid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.managerReviewCommentsGrid article{padding:16px 18px;border:1px solid #d9e5ec;border-radius:14px;background:#f8fbfd}.managerReviewCommentsGrid strong{display:block;color:#163b69;margin-bottom:8px}.managerReviewCommentsGrid p{margin:0;min-height:52px;line-height:1.9;white-space:pre-wrap;color:#344b5f}@media(max-width:760px){.managerReviewCommentsGrid{grid-template-columns:1fr}}
+
+/* Global English typography: use Times New Roman throughout every role/tab. */
+.english, .english *{font-family:"Times New Roman",Times,serif!important}
+
+/* v12 — evaluator header: retain the two-row layout, shorten box widths, keep the original button height. */
+@media (min-width: 1181px){
+  body:not(.managerMode):not(.expertMode) .topbar{
+    align-items:center;
+    gap:42px;
+  }
+  body:not(.managerMode):not(.expertMode) .headerActions{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr) 60px;
+    align-items:stretch!important;
+    gap:10px;
+    flex:0 1 820px;
+    width:min(820px,100%);
+    max-width:820px;
+    margin-inline-start:auto;
+  }
+  body:not(.managerMode):not(.expertMode) .headerActions .actionCard{
+    display:grid!important;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    grid-auto-rows:minmax(48px,auto);
+    gap:8px;
+    width:100%;
+    margin:0!important;
+    padding:0!important;
+    align-items:stretch;
+  }
+  body:not(.managerMode):not(.expertMode) .headerActions .actionCard > button,
+  body:not(.managerMode):not(.expertMode) .headerActions .actionCard > .button{
+    width:100%!important;
+    min-width:0!important;
+    min-height:48px!important;
+    height:100%;
+    padding:9px 12px!important;
+    white-space:normal!important;
+    text-align:center;
+    line-height:1.25;
+    font-size:inherit!important;
+  }
+  body:not(.managerMode):not(.expertMode) .headerActions > .languageButton{
+    width:60px!important;
+    min-width:60px!important;
+    min-height:106px!important;
+    height:100%;
+    align-self:stretch;
+    margin:0!important;
+  }
+}
+
+/* English typography must override older role-specific Calibri/Tahoma rules, including typed form values. */
+body.english #entryScreen,body.english #entryScreen *,body.english #appShell,body.english #appShell *{font-family:"Times New Roman",Times,serif!important}
+
+
+/* v13 — unified desktop headers for evaluator, expert and manager. */
+@media (min-width:1181px){
+  body.managerMode .topbar,
+  body.expertMode .topbar{
+    align-items:center;
+    gap:54px;
+  }
+  body.managerMode .headerActions,
+  body.expertMode .headerActions{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr) 60px;
+    align-items:stretch!important;
+    gap:12px;
+    flex:0 1 780px;
+    width:min(780px,100%);
+    max-width:780px;
+    margin-inline-start:auto;
+  }
+  body.managerMode .headerActions .actionCard,
+  body.expertMode .headerActions .actionCard{
+    display:grid!important;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    grid-auto-rows:minmax(48px,auto);
+    gap:10px;
+    width:100%;
+    margin:0!important;
+    padding:0!important;
+    align-items:stretch;
+  }
+  body.expertMode .headerActions .actionCard .expertHeaderActions{
+    display:contents!important;
+  }
+  body.managerMode .headerActions .actionCard > button,
+  body.managerMode .headerActions .actionCard > .button,
+  body.expertMode .headerActions .actionCard > button,
+  body.expertMode .headerActions .actionCard > .button,
+  body.expertMode .headerActions .actionCard .expertHeaderActions > button{
+    width:100%!important;
+    min-width:0!important;
+    min-height:48px!important;
+    height:100%;
+    padding:9px 14px!important;
+    white-space:normal!important;
+    text-align:center;
+    line-height:1.25;
+    font-size:inherit!important;
+  }
+  body.managerMode .headerActions > .languageButton,
+  body.expertMode .headerActions > .languageButton{
+    width:60px!important;
+    min-width:60px!important;
+    min-height:106px!important;
+    height:100%;
+    align-self:stretch;
+    margin:0!important;
+  }
+}
+
+/* v13 — destructive weight reset: muted red, but visibly distinct even while disabled. */
+.managerWeightControls .managerRemoveWeights{
+  background:#c85f69!important;
+  color:#fff!important;
+  border:1px solid #b94f59!important;
+  box-shadow:0 4px 10px #9e3e4728!important;
+}
+.managerWeightControls .managerRemoveWeights:hover:not(:disabled){
+  background:#b94d58!important;
+  color:#fff!important;
+  border-color:#a9424c!important;
+}
+.managerWeightControls .managerRemoveWeights:disabled{
+  background:#d99aa0!important;
+  color:#fff!important;
+  border-color:#cc8188!important;
+  opacity:.82!important;
+  box-shadow:none!important;
+  cursor:not-allowed!important;
+}
+
+/* v13 — Latin values use Times New Roman even while the Persian UI is active. */
+html[dir="rtl"] .metadata input.latinValue,
+html[dir="rtl"] .metadata textarea.latinValue,
+html[dir="rtl"] #expertPanel input.latinValue,
+html[dir="rtl"] #expertPanel textarea.latinValue,
+html[dir="rtl"] .metadata input[type="email"],
+html[dir="rtl"] #expertPanel input[type="email"]{
+  font-family:"Times New Roman",Times,serif!important;
+  direction:ltr!important;
+  text-align:left!important;
+}
+
+
+/* v15.css */
+/* v15 — balanced expert/manager desktop action headers. */
+@media (min-width:1181px){
+  /* Expert: 3 equal controls on row one, 2 wider equal controls on row two. */
+  body.expertMode .headerActions .actionCard{
+    grid-template-columns:repeat(6,minmax(0,1fr))!important;
+  }
+  body.expertMode .headerActions .actionCard > #backupButton,
+  body.expertMode .headerActions .actionCard .expertHeaderActions > #expertResetButton,
+  body.expertMode .headerActions .actionCard .expertHeaderActions > #expertConfirmButton{
+    grid-column:span 2!important;
+  }
+  body.expertMode .headerActions .actionCard .expertHeaderActions > #expertExcelButton,
+  body.expertMode .headerActions .actionCard > #switchRoleButton{
+    grid-column:span 3!important;
+  }
+
+  /* Manager: 2 x 2 balanced layout; dashboard Excel moves to the lower row. */
+  body.managerMode .headerActions .actionCard{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+  body.managerMode .headerActions .actionCard > #backupButton{grid-column:1!important;grid-row:1!important}
+  body.managerMode .headerActions .actionCard > .button{grid-column:2!important;grid-row:1!important}
+  body.managerMode .headerActions .actionCard > #managerExcelButton{grid-column:1!important;grid-row:2!important}
+  body.managerMode .headerActions .actionCard > #switchRoleButton{grid-column:2!important;grid-row:2!important}
+  body.managerMode .headerActions .actionCard > #unlockAssessmentButton:not([hidden]){grid-column:1 / -1!important;grid-row:3!important}
+}
+
+
+/* v20.css */
+/* v20 — unified typography, guide readability, and experience selectors */
+@font-face{
+  font-family:"BAMCO Mixed";
+  src:local("Times New Roman");
+  unicode-range:U+0000-024F,U+1E00-1EFF;
+}
+@font-face{
+  font-family:"BAMCO Mixed";
+  src:local("B Nazanin"),local("Tahoma");
+  unicode-range:U+0600-06FF,U+0750-077F,U+08A0-08FF,U+FB50-FDFF,U+FE70-FEFF;
+}
+
+/* Use the same Persian face as the guide throughout the application.
+   Latin characters embedded in Persian UI resolve to Times New Roman. */
+body:not(.english),
+body:not(.english) #entryScreen,
+body:not(.english) #entryScreen *,
+body:not(.english) #appShell,
+body:not(.english) #appShell *{
+  font-family:"BAMCO Mixed","B Nazanin",Tahoma,sans-serif!important;
+}
+body.english #entryScreen,body.english #entryScreen *,body.english #appShell,body.english #appShell *{
+  font-family:"Times New Roman",Times,serif!important;
+}
+
+/* Explicitly preserve Times New Roman for Latin content in Management. */
+.managerMode .latinValue,
+.managerMode [dir="ltr"],
+.managerMode input[type="email"],
+.managerMode .managerLatin,
+.managerMode code,
+.managerMode abbr{
+  font-family:"Times New Roman",Times,serif!important;
+}
+
+.experienceField select,.experienceField .experienceOtherInput,
+.expertInfoGrid .expertExperienceSelect,.expertInfoGrid .expertExperienceOther{
+  width:100%;min-height:62px;padding:12px;font-size:18px;font-weight:400;
+  border:1px solid #cad6e2;border-radius:8px;background:#fbfdff;color:var(--text);
+}
+.experienceField .experienceOtherInput,.expertInfoGrid .expertExperienceOther{margin-top:8px}
+.experienceField .experienceOtherInput[hidden],.expertInfoGrid .expertExperienceOther[hidden]{display:none!important}
+body.english .experienceField select,body.english .experienceField input,
+body.english .expertExperienceSelect,body.english .expertExperienceOther{font-family:"Times New Roman",Times,serif!important}
+
+/* Guide: titles stay as-is; explanatory copy is one step larger and easier to read. */
+.guideLang p,
+.guideLang li,
+.guideLang .guideTool span,
+.guideLang .guideCallout,
+.guideLang .guideRoleTile p,
+.guideLang .guideStep p,
+.guideLang .guideSectionHead p,
+.guideLang .guideFlowNode small,
+.guideLang .guideFileBox small,
+.guideLang .guideDecision small{
+  font-size:15.5px!important;
+  line-height:1.9!important;
+}
+.guideHero p{font-size:16px!important;line-height:2!important}
+.guideSectionIcon.workflowIcon{font-size:27px!important;line-height:1}
+
+/* Do not let older Calibri/Tahoma overrides win for Persian fields. */
+body:not(.english) .fieldGrid input,
+body:not(.english) .fieldGrid select,
+body:not(.english) .ratingBox select,
+body:not(.english) .ratingBox textarea,
+body:not(.english) .noteBox textarea,
+body:not(.english) #expertPanel input,
+body:not(.english) #expertPanel select,
+body:not(.english) #expertPanel textarea,
+body:not(.english) .managerMode input,
+body:not(.english) .managerMode select,
+body:not(.english) .managerMode textarea{
+  font-family:"BAMCO Mixed","B Nazanin",Tahoma,sans-serif!important;
+}
+
+
+/* v21.css */
+/* v21 — tighter quality labels and two-column scoring guide */
+.qualityBar{grid-template-columns:138px minmax(0,1fr)!important;gap:6px!important}
+.qualityLabel{padding-inline-end:2px!important;white-space:normal!important}
+.scoreGuideGrid{display:grid!important;grid-template-columns:1fr 1fr!important;gap:1px!important;direction:ltr!important;align-items:start!important}
+.scoreGuideColumn{display:grid!important;grid-template-columns:1fr!important;gap:1px!important;min-width:0!important;direction:rtl!important}
+.english .scoreGuideColumn{direction:ltr!important}
+.scoreGuideColumn .guideLevel{min-height:102px!important}
+.scoreGuideHigh{grid-column:2!important}
+.scoreGuideLow{grid-column:1!important}
+.barLabel small{display:none!important}
+@media(max-width:760px){.qualityBar{grid-template-columns:104px minmax(0,1fr)!important;gap:5px!important}.scoreGuideGrid{grid-template-columns:1fr!important}.scoreGuideHigh,.scoreGuideLow{grid-column:1!important}}
+
+
+/* v22.css */
+/* v22 — restore former score-guide layout and keep quality-frequency labels bounded */
+.scoreGuideGrid{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:1px!important;
+  direction:rtl!important;
+  align-items:stretch!important;
+}
+.english .scoreGuideGrid{direction:ltr!important}
+.scoreGuideGrid>.guideLevel{min-height:auto!important}
+
+/* The manual "Other" field is no longer part of the work-experience UI. */
+.experienceOtherInput,.expertExperienceOther{display:none!important}
+
+/* The frequency appears immediately after the colored bar whenever space permits,
+   then clamps inward so the text/number can never cross the chart boundary. */
+.qualityBar .qualityTrack{
+  position:relative!important;
+  overflow:hidden!important;
+  padding-right:0!important;
+}
+.qualityBar .qualityTrack i{z-index:1!important}
+.qualityBar .qualityCount{
+  position:absolute!important;
+  top:50%!important;
+  left:clamp(6px,calc(var(--quality-count-position) + 8px),calc(100% - 108px))!important;
+  transform:translateY(-50%)!important;
+  z-index:3!important;
+  width:auto!important;
+  max-width:102px!important;
+  margin:0!important;
+  padding:2px 6px!important;
+  border-radius:6px!important;
+  background:rgba(255,255,255,.94)!important;
+  color:#111827!important;
+  box-shadow:0 1px 4px #163b6925!important;
+  font-size:13px!important;
+  line-height:1.35!important;
+  font-weight:800!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+  direction:rtl!important;
+  text-align:center!important;
+}
+.english .qualityBar .qualityCount{direction:ltr!important;font-family:"Times New Roman",Times,serif!important;max-width:102px!important}
+
+@media(max-width:760px){
+  .scoreGuideGrid{grid-template-columns:1fr!important}
+  .qualityBar .qualityCount{font-size:12px!important;max-width:96px!important;left:clamp(5px,calc(var(--quality-count-position) + 6px),calc(100% - 101px))!important}
+}
+
+
+/* v23.css */
+/* v23 — Management Persian heh cleanup, bounded raw frequency labels, expert Excel state */
+.managerMode .actionCard:before{
+  content:'حالت مدیریت: مشاهده نتایج و گزارش‌ها'!important;
+}
+
+/* The number shown after each bar is the actual frequency and never leaves the track. */
+.qualityBar .qualityTrack{
+  position:relative!important;
+  overflow:hidden!important;
+}
+.qualityBar .qualityCount{
+  position:absolute!important;
+  top:50%!important;
+  left:clamp(5px,calc(var(--quality-count-position) + 8px),calc(100% - 38px))!important;
+  transform:translateY(-50%)!important;
+  min-width:28px!important;
+  max-width:34px!important;
+  padding:1px 4px!important;
+  border-radius:5px!important;
+  background:rgba(255,255,255,.96)!important;
+  box-shadow:0 1px 4px #163b6920!important;
+  color:#111827!important;
+  font-size:14px!important;
+  line-height:1.4!important;
+  font-weight:800!important;
+  text-align:center!important;
+  white-space:nowrap!important;
+  overflow:visible!important;
+  direction:ltr!important;
+}
+.english .qualityBar .qualityCount{font-family:"Times New Roman",Times,serif!important}
+
+/* Make the expert Excel control unmistakably inactive before final confirmation. */
+body.expertMode #expertExcelButton:disabled{
+  background:#7f8c99!important;
+  border-color:#7f8c99!important;
+  color:#e8edf2!important;
+  opacity:.52!important;
+  filter:grayscale(1)!important;
+  cursor:not-allowed!important;
+  pointer-events:none!important;
+}
+body.expertMode #expertExcelButton:not(:disabled){
+  background:#08734b!important;
+  color:#fff!important;
+  opacity:1!important;
+  filter:none!important;
+  cursor:pointer!important;
+}
+
+
+/* v24.css */
+/* v24 — plain chart values and frequency outside colored quality bars */
+
+/* Weighted comparison: keep the value, remove the white pill/card around it. */
+#scoreChart .barEndValue{
+  background:transparent!important;
+  box-shadow:none!important;
+  border:0!important;
+  border-radius:0!important;
+  padding:0!important;
+  color:#173e62!important;
+  font-weight:800!important;
+  line-height:1!important;
+}
+.english #scoreChart .barEndValue{font-family:"Times New Roman",Times,serif!important}
+
+/* Quality distribution: label | bar | frequency. The frequency is never over the bar. */
+#qualityChart .qualityBar{
+  grid-template-columns:138px minmax(0,1fr) 38px!important;
+  gap:7px!important;
+  align-items:center!important;
+}
+#qualityChart .qualityLabel{grid-column:1!important}
+#qualityChart .qualityTrack{
+  grid-column:2!important;
+  position:relative!important;
+  overflow:hidden!important;
+}
+#qualityChart .qualityTrack i{z-index:1!important}
+#qualityChart .qualityCount{display:none!important}
+#qualityChart .qualityFrequency{
+  grid-column:3!important;
+  position:static!important;
+  transform:none!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  color:#111827!important;
+  font-size:14px!important;
+  line-height:1!important;
+  font-weight:800!important;
+  text-align:left!important;
+  white-space:nowrap!important;
+  direction:rtl!important;
+}
+.english #qualityChart .qualityFrequency{
+  direction:ltr!important;
+  font-family:"Times New Roman",Times,serif!important;
+}
+
+@media(max-width:760px){
+  #qualityChart .qualityBar{grid-template-columns:104px minmax(0,1fr) 32px!important;gap:5px!important}
+  #qualityChart .qualityFrequency{font-size:12px!important}
+}
+
+
+/* v25.css */
+/* v25 — explicit bidi handling for empty chart messages */
+html[dir="rtl"] .chartEmpty,
+html[dir="rtl"] .qualityEmpty{
+  direction:rtl!important;
+  unicode-bidi:plaintext!important;
+  text-align:center!important;
+  width:100%!important;
+}
+html[dir="ltr"] .chartEmpty,
+html[dir="ltr"] .qualityEmpty{
+  direction:ltr!important;
+  unicode-bidi:plaintext!important;
+  text-align:center!important;
+  width:100%!important;
+}
+
+
+/* v26.css */
+/* v26 — frequency a few pixels after each bar; expert Excel matches header buttons */
+
+/* Quality distribution: grade label | visual lane. The count follows the actual bar end. */
+#qualityChart .qualityBar{
+  grid-template-columns:138px minmax(0,1fr)!important;
+  gap:7px!important;
+  align-items:center!important;
+}
+#qualityChart .qualityLabel{
+  grid-column:1!important;
+  min-width:0!important;
+}
+#qualityChart .qualityVisual{
+  grid-column:2!important;
+  min-width:0!important;
+  padding-right:48px!important; /* reserved room for the count after a 100% bar */
+}
+#qualityChart .qualityTrack{
+  width:100%!important;
+  position:relative!important;
+  overflow:visible!important;
+}
+#qualityChart .qualityTrack i{
+  z-index:1!important;
+}
+#qualityChart .qualityFrequency{
+  display:block!important;
+  position:absolute!important;
+  top:50%!important;
+  left:calc(var(--quality-count-position) + 8px)!important;
+  transform:translateY(-50%)!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  color:#111827!important;
+  font-size:14px!important;
+  line-height:1!important;
+  font-weight:800!important;
+  text-align:left!important;
+  white-space:nowrap!important;
+  direction:rtl!important;
+  z-index:2!important;
+}
+.english #qualityChart .qualityFrequency{
+  direction:ltr!important;
+  font-family:"Times New Roman",Times,serif!important;
+}
+
+/* The expert Excel button uses exactly the same visual language as the other header buttons. */
+body.expertMode #expertExcelButton:not(:disabled){
+  background:#ffffff16!important;
+  border:1px solid #ffffff9c!important;
+  color:#fff!important;
+  opacity:1!important;
+  filter:none!important;
+  box-shadow:none!important;
+}
+body.expertMode #expertExcelButton:disabled{
+  background:#ffffff16!important;
+  border:1px solid #ffffff9c!important;
+  color:#fff!important;
+  opacity:.45!important;
+  filter:none!important;
+  box-shadow:none!important;
+  cursor:not-allowed!important;
+}
+body.expertMode #expertExcelButton:not(:disabled):hover{
+  background:#fff!important;
+  color:#0b568d!important;
+}
+
+@media(max-width:760px){
+  #qualityChart .qualityBar{grid-template-columns:104px minmax(0,1fr)!important;gap:5px!important}
+  #qualityChart .qualityVisual{padding-right:38px!important}
+  #qualityChart .qualityFrequency{font-size:12px!important;left:calc(var(--quality-count-position) + 6px)!important}
+}
+
+
+/* v29.css */
+/* v29 — compact, equal-height chart cards when no assessment data exists */
+.analyticsGrid > .card.chartEmptyCard{
+  height:150px!important;
+  min-height:150px!important;
+  overflow:hidden!important;
+}
+.analyticsGrid > .card.chartEmptyCard .sectionTitle{
+  margin-bottom:6px!important;
+}
+#scoreChart.chartEmptyHost,
+#qualityChart.chartEmptyHost,
+#radarChart.chartEmptyHost{
+  height:38px!important;
+  min-height:38px!important;
+  padding:0!important;
+  margin:0!important;
+  display:grid!important;
+  place-items:center!important;
+  background:transparent!important;
+}
+#scoreChart.chartEmptyHost .chartEmpty,
+#qualityChart.chartEmptyHost .qualityEmpty,
+#radarChart.chartEmptyHost .chartEmpty{
+  margin:0!important;
+  padding:0!important;
+  line-height:1.5!important;
+  white-space:nowrap!important;
+  max-width:100%!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+}
+@media(max-width:680px){
+  .analyticsGrid > .card.chartEmptyCard{height:158px!important;min-height:158px!important}
+  #scoreChart.chartEmptyHost .chartEmpty,
+  #qualityChart.chartEmptyHost .qualityEmpty,
+  #radarChart.chartEmptyHost .chartEmpty{white-space:normal!important;text-align:center!important}
+}
+
+
+/* v32.css */
+/* v32 — bilingual guidance alignment, strict locked media controls, header fill, revision history */
+
+/* Guidance callouts: teal/green accent follows reading direction and every description is justified. */
+.instructionBox,
+.instructionBox p{
+  text-align:justify!important;
+  text-justify:inter-word!important;
+}
+html[dir="rtl"] .instructionBox{
+  direction:rtl!important;
+  border-left:0!important;
+  border-right:4px solid #26a0a2!important;
+}
+html[dir="ltr"] .instructionBox{
+  direction:ltr!important;
+  border-right:0!important;
+  border-left:4px solid #26a0a2!important;
+}
+
+/* A locked assessment must not expose any evidence/photo mutation control. */
+.caseLocked .uploadButton,
+.caseLocked .attachment button,
+.caseLocked .vehiclePhotoButton,
+.caseLocked .vehiclePhotoRemove{
+  pointer-events:none!important;
+  opacity:.5!important;
+  cursor:not-allowed!important;
+  filter:saturate(.35)!important;
+}
+
+/* When the reopen control creates a third row in Evaluator, Switch Role fills the full row. */
+@media (min-width:1181px){
+  body:not(.managerMode):not(.expertMode).reopenVisible .headerActions .actionCard > #switchRoleButton{
+    grid-column:1 / -1!important;
+    width:100%!important;
+  }
+}
+
+/* Applied revision history, shown only after an actual post-reopen edit exists. */
+.revisionHistoryCard{margin-top:16px}
+.revisionHistoryList{display:grid;gap:10px}
+.revisionEntry{
+  display:grid;
+  grid-template-columns:minmax(150px,.8fr) minmax(210px,1.35fr) minmax(140px,.8fr) minmax(120px,.7fr);
+  gap:10px;
+  align-items:stretch;
+  padding:12px;
+  border:1px solid #dbe6ed;
+  border-radius:13px;
+  background:#f8fbfd;
+}
+.revisionField{
+  display:grid;
+  align-content:start;
+  gap:4px;
+  min-width:0;
+  padding:8px 10px;
+  border-radius:10px;
+  background:#fff;
+  border:1px solid #e4ecf2;
+}
+.revisionField span{font-size:12px;color:#6c8194;font-weight:700}
+.revisionField strong{color:#173e62;line-height:1.65;overflow-wrap:anywhere}
+.revisionField.revisionReason strong{font-weight:600}
+.english .revisionEntry{direction:ltr}
+.english .revisionField{text-align:left}
+@media(max-width:900px){.revisionEntry{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.revisionEntry{grid-template-columns:1fr}}
+
+
+/* v37.css */
+/* v37 — quiet locked startup, reliable revision history, quiet invalid manager weight UI */
+
+/* Keep weight-file validation active but do not show the red error blocks requested for removal. */
+#managerWeightMessage.error{display:none!important;}
+#managerWeightPreview > ul{display:none!important;}
+
+
+/* v39.css */
+/* v39 — management-only edit authorization and persistent revision-session record */
+body:not(.managerMode) #unlockAssessmentButton{display:none!important;}
+
+
+/* v40.css */
+/* v40 — second vehicle comparison */
+.managerComparisonCard{margin-top:16px}
+.comparisonStatus{display:inline-flex;align-items:center;min-height:34px;padding:6px 12px;border-radius:999px;background:#edf4f8;color:#47647c;font-weight:800;font-size:13px}
+.comparisonControls{display:grid;grid-template-columns:minmax(220px,auto) minmax(170px,auto) 1fr;gap:10px;align-items:center;margin-top:14px}
+.comparisonUploadButton,.comparisonRemoveButton{min-height:44px;border-radius:11px;padding:10px 16px;display:inline-flex;align-items:center;justify-content:center;font-weight:850;cursor:pointer}
+.comparisonUploadButton{background:linear-gradient(135deg,#19588a,#12898b);color:#fff;border:1px solid rgba(255,255,255,.28)}
+.comparisonRemoveButton{border:1px solid #d4e0e8;background:#fff;color:#526a7e}.comparisonRemoveButton:disabled{opacity:.45;cursor:not-allowed}
+.comparisonMessage{min-height:44px;border-radius:11px;padding:10px 14px;display:flex;align-items:center;font-size:13px;font-weight:700}.comparisonMessage.neutral{background:#f5f8fa;color:#607487}.comparisonMessage.success{background:#edf8f4;color:#0b735e}.comparisonMessage.error{background:#fff1f2;color:#a82c39}
+.comparisonEmpty{margin-top:14px;border:1px dashed #cbd9e3;border-radius:13px;padding:16px;text-align:center;color:#6b7e8e;background:#fbfcfd}
+.comparisonScoreGrid{display:grid;grid-template-columns:1fr 1fr .8fr;gap:12px;margin-top:16px}.comparisonScoreGrid article{border:1px solid #dce7ee;border-radius:14px;padding:14px;background:#fbfdfe;display:grid;gap:5px;min-width:0}.comparisonScoreGrid small{color:#718293;font-weight:700}.comparisonScoreGrid strong{color:#173e62;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.comparisonScoreGrid b{font-size:24px;color:#0c6f68;font-family:"Times New Roman",serif}.comparisonScoreGrid b em{font-size:12px;font-style:normal;color:#758797}.comparisonScoreGrid span{font-size:12px;color:#657a8c}.comparisonScoreGrid .comparisonDeltaCard{align-content:center;text-align:center}.comparisonScoreGrid .comparisonDeltaCard b{font-size:28px}
+.comparisonTable{margin-top:14px;border:1px solid #dce7ee;border-radius:14px;overflow:hidden}.comparisonHead,.comparisonRow{display:grid;grid-template-columns:minmax(280px,1.8fr) minmax(120px,.7fr) minmax(120px,.7fr) minmax(110px,.6fr);align-items:center}.comparisonHead{min-height:48px;background:linear-gradient(90deg,#15496f,#118179);color:#fff;font-weight:850}.comparisonHead>*{padding:10px 14px;text-align:center}.comparisonHead strong{text-align:start}.comparisonRow{min-height:48px;border-top:1px solid #e4edf2;background:#fff}.comparisonRow:nth-child(odd){background:#fbfdfe}.comparisonRow>*{padding:10px 14px;text-align:center}.comparisonCriterion{text-align:start!important;color:#173e62}.comparisonDiff{font-family:"Times New Roman",serif;font-weight:900}.positive{color:#08745f!important}.negative{color:#b02e43!important}.equal{color:#6a7d8e!important}
+html[dir="ltr"] .comparisonHead strong,html[dir="ltr"] .comparisonCriterion{text-align:left!important}html[dir="rtl"] .comparisonHead strong,html[dir="rtl"] .comparisonCriterion{text-align:right!important}
+@media(max-width:900px){.comparisonControls{grid-template-columns:1fr 1fr}.comparisonMessage{grid-column:1/-1}.comparisonScoreGrid{grid-template-columns:1fr}.comparisonTable{overflow-x:auto}.comparisonHead,.comparisonRow{min-width:760px}}
+@media(max-width:560px){.comparisonControls{grid-template-columns:1fr}.comparisonMessage{grid-column:auto}}
+
+
+/* v41.css */
+/* v41 — dedicated management comparison workspace */
+.managerComparisonEntry{margin-top:16px;border:1px solid #d8e6ee;background:linear-gradient(135deg,#f8fbfd,#eef7f6)}
+.comparisonEntryCopy{display:flex;align-items:center;justify-content:space-between;gap:20px}.comparisonEntryCopy>div{min-width:0}.comparisonEntryCopy h2{margin:0 0 5px;color:#173f63}.comparisonEntryCopy p{margin:0;color:#64798b;line-height:1.7}.comparisonEntryCopy button{border:0;border-radius:12px;min-height:46px;padding:10px 24px;background:linear-gradient(135deg,#144c78,#10857f);color:#fff;font-weight:900;white-space:nowrap;cursor:pointer}
+.managerComparisonWorkspace{margin:16px 0 24px;padding:20px}.comparisonWorkspaceHeader{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:16px;border-bottom:1px solid #e0e9ef;padding-bottom:16px}.comparisonWorkspaceTitle{text-align:center;min-width:0}.comparisonWorkspaceTitle h2{margin:0 0 5px;color:#163f63}.comparisonWorkspaceTitle p{margin:0;color:#63798b;line-height:1.65}.comparisonBackButton{min-height:42px;border-radius:10px;border:1px solid #c8d8e3;background:#fff;color:#224d6e;padding:8px 15px;font-weight:850;cursor:pointer}
+.managerComparisonMode .managerFinalCommentCard,.managerComparisonMode .finalCommentCard.managerOnly,.managerComparisonMode #managerVehiclePhotos,.managerComparisonMode .dashboard.managerOnly,.managerComparisonMode #managerWeightPanel,.managerComparisonMode .analyticsGrid.managerOnly,.managerComparisonMode .classificationCard.managerOnly,.managerComparisonMode .summary.managerOnly,.managerComparisonMode #strengthWeaknessCard,.managerComparisonMode #managerReviewComments,.managerComparisonMode #revisionHistoryCard,.managerComparisonMode .managerHero,.managerComparisonMode .assessmentLayout,.managerComparisonMode .scoreGuide,.managerComparisonMode .evaluatorProgress,.managerComparisonMode #expertPanel{display:none!important}.managerComparisonMode #managerComparisonEntry{display:none!important}.managerComparisonMode #managerComparisonCard{display:block!important}
+.comparisonChartsGrid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(360px,.85fr);gap:16px;margin-top:18px}.comparisonChartCard{border:1px solid #dce7ee;border-radius:15px;background:#fff;padding:16px;min-width:0}.comparisonQualityCard{grid-column:1/-1}.comparisonChartHeader{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:10px}.comparisonChartHeader h3{margin:0;color:#173f62;font-size:18px}.comparisonChartHeader p{margin:4px 0 0;color:#718493;font-size:13px;line-height:1.55}.comparisonChartHeader>span{font-family:"Times New Roman",serif;font-weight:800;color:#597184}.comparisonLegend{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin:8px 0 14px;color:#405d74;font-size:13px;font-weight:800}.comparisonLegend span{display:inline-flex;align-items:center;gap:7px}.comparisonLegend span::before{content:"";width:12px;height:12px;border-radius:3px}.vehicleOneLegend::before{background:#195b8e}.vehicleTwoLegend::before{background:#12877e}
+.headToHeadBars{display:grid;gap:9px}.headToHeadRow{display:grid;grid-template-columns:minmax(150px,220px) 1fr;gap:12px;align-items:center}.headToHeadLabel{display:flex;align-items:center;gap:8px;min-width:0}.headToHeadLabel b{width:25px;height:25px;border-radius:7px;display:grid;place-items:center;background:#edf4f8;color:#315a77;font-family:"Times New Roman",serif}.headToHeadLabel span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#294d68;font-size:12px;font-weight:800}.headToHeadTracks{display:grid;gap:4px}.compareTrack{height:18px;background:#eef3f6;border-radius:999px;position:relative;overflow:visible;padding-inline-end:42px}.compareTrack i{display:block;height:100%;border-radius:999px;width:var(--compare-value);min-width:0}.vehicleOneBar{background:#195b8e}.vehicleTwoBar{background:#12877e}.compareTrack strong{position:absolute;inset-inline-start:calc(min(var(--compare-value), 94%) + 7px);top:50%;transform:translateY(-50%);font-size:11px;color:#294a61;font-family:"Times New Roman",serif}
+.comparisonRadarCard{display:flex;flex-direction:column}.comparisonRadar{width:100%;max-width:500px;align-self:center;overflow:visible}.radarGrid polygon{fill:none;stroke:#d6e2e9;stroke-width:1}.radarGrid line{stroke:#dbe5eb;stroke-width:1}.radarGrid text{font-size:11px;font-weight:800;fill:#607789}.radarVehicleOne{fill:rgba(25,91,142,.13);stroke:#195b8e;stroke-width:3}.radarVehicleTwo{fill:rgba(18,135,126,.12);stroke:#12877e;stroke-width:3}.radarIndex{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px 10px;margin-top:8px}.radarIndex span{font-size:11px;color:#607487;display:flex;gap:6px;min-width:0}.radarIndex b{font-family:"Times New Roman",serif;color:#214d6c}.radarIndex span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.opposedQuality{display:grid;gap:7px;max-width:980px;margin:0 auto}.opposedQualityRow{display:grid;grid-template-columns:1fr 38px 1fr;align-items:center;gap:8px}.opposedHalf{display:grid;align-items:center;gap:7px}.opposedHalf.left{grid-template-columns:36px 1fr}.opposedHalf.right{grid-template-columns:1fr 36px}.opposedHalf>div{height:17px;background:#eef3f6;border-radius:999px;overflow:hidden;position:relative}.opposedHalf i{display:block;height:100%;width:var(--compare-value);border-radius:999px}.opposedHalf.left i{margin-left:auto}.opposedHalf strong{font-family:"Times New Roman",serif;font-size:12px;color:#31556f;text-align:center}.qualityScoreBadge{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:#f0f5f8;color:#204c6d;font-family:"Times New Roman",serif}.comparisonModeEmpty{display:grid;gap:6px;padding:34px 16px}.comparisonModeEmpty strong{color:#244e6d}.comparisonModeEmpty span{color:#728697;font-size:13px}
+html[dir="rtl"] .comparisonEntryCopy{text-align:right}html[dir="ltr"] .comparisonEntryCopy{text-align:left}
+@media(max-width:1050px){.comparisonChartsGrid{grid-template-columns:1fr}.comparisonQualityCard{grid-column:auto}.headToHeadRow{grid-template-columns:minmax(130px,190px) 1fr}}
+@media(max-width:760px){.comparisonEntryCopy{align-items:stretch;flex-direction:column}.comparisonEntryCopy button{width:100%}.comparisonWorkspaceHeader{grid-template-columns:1fr}.comparisonWorkspaceTitle{text-align:start}.comparisonStatus{justify-self:start}.comparisonControls{grid-template-columns:1fr!important}.comparisonMessage{grid-column:auto!important}.headToHeadRow{grid-template-columns:1fr}.radarIndex{grid-template-columns:1fr}.managerComparisonWorkspace{padding:14px}.comparisonScoreGrid{grid-template-columns:1fr!important}}
+
+
+/* v42.css */
+/* v42 — login and comparison refinements */
+.entryAuthForm{max-width:640px;margin:18px auto 20px;padding:18px;border:1px solid #d8e5ed;border-radius:16px;background:#f8fbfd;display:grid;grid-template-columns:1fr 1fr auto;gap:12px;align-items:end}
+.entryAuthForm[hidden]{display:none!important}.entryAuthForm label{display:grid;gap:7px;min-width:0}.entryAuthForm label span{font-weight:850;color:#244d6d;font-size:13px}.entryAuthForm input{width:100%;min-height:46px;border:1px solid #cbdce7;border-radius:11px;background:#fff;padding:9px 12px;font-size:16px;color:#183b57;outline:none}.entryAuthForm input:focus{border-color:#14827f;box-shadow:0 0 0 3px rgba(20,130,127,.12)}.entryAuthForm button{min-height:46px;border:0;border-radius:11px;padding:9px 24px;background:linear-gradient(135deg,#154c78,#11867f);color:#fff;font-weight:900;cursor:pointer}.entryAuthMessage{grid-column:1/-1;min-height:22px;font-size:13px;font-weight:800}.entryAuthMessage.error{color:#b13d50}.entryAuthMessage.success{color:#087457}.entryAuthenticatedBar{max-width:760px;margin:14px auto 18px;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:11px 14px;border:1px solid #d9e7ed;border-radius:12px;background:#f5fafb;color:#28516d}.entryAuthenticatedBar[hidden]{display:none!important}.entryAuthenticatedBar span{direction:ltr;unicode-bidi:isolate;font-family:"Times New Roman",serif;font-weight:800}.entryAuthenticatedBar button{border:1px solid #cbdbe5;background:#fff;color:#315771;border-radius:9px;padding:7px 13px;font-weight:800;cursor:pointer}
+
+/* Comparison: separate radars side by side, same vehicle colors as the comparison workspace. */
+.comparisonRadarPairCard{grid-column:1/-1}.comparisonRadarPair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;align-items:start}.comparisonRadarPane{min-width:0;border:1px solid #e0e8ed;border-radius:14px;padding:12px;background:#fbfdfe;display:flex;flex-direction:column;align-items:center}.comparisonRadarPane>strong{display:block;width:100%;text-align:center;margin-bottom:4px;color:#294f6b;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.comparisonRadarPane.vehicleOneRadar>strong{color:#195b8e}.comparisonRadarPane.vehicleTwoRadar>strong{color:#12877e}.comparisonRadarPane .comparisonRadar{max-width:460px}.radarSingleData{stroke-width:3}.vehicleOneRadar .radarSingleData{fill:rgba(25,91,142,.13);stroke:#195b8e}.vehicleTwoRadar .radarSingleData{fill:rgba(18,135,126,.13);stroke:#12877e}
+
+/* Quality comparison: one row per score, two grade-colored bars with vehicle name/count in white. */
+.pairedQuality{display:grid;gap:11px}.pairedQualityRow{display:grid;grid-template-columns:38px minmax(0,1fr);gap:12px;align-items:center}.pairedQualityBars{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.pairedQualityTrack{height:30px;border-radius:8px;background:#edf3f6;overflow:hidden;position:relative}.pairedQualityTrack i{display:flex;align-items:center;height:100%;width:max(24%,var(--compare-value));max-width:100%;border-radius:8px;background:var(--grade-color);padding:0 9px;overflow:hidden}.pairedQualityTrack i span{display:block;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#fff;font-size:12px;font-weight:900;text-shadow:0 1px 2px rgba(0,0,0,.22);direction:auto;unicode-bidi:plaintext}
+
+/* Negative signs must remain on the left of the number even in RTL Persian mode. */
+.comparisonDiff,.comparisonDeltaCard b{direction:ltr!important;unicode-bidi:isolate!important}
+
+/* Do not expose the management final-comment editor while inside comparison mode. */
+.managerComparisonMode .managerFinalCommentCard,.managerComparisonMode .finalCommentCard.managerOnly{display:none!important}
+
+@media(max-width:820px){.entryAuthForm{grid-template-columns:1fr}.entryAuthMessage{grid-column:auto}.comparisonRadarPair{grid-template-columns:1fr}.pairedQualityBars{grid-template-columns:1fr}}
+
+
+/* v43.css */
+/* v43 — Persian auth direction and management-identical comparison radars */
+#entryAuthenticatedUser{font-family:inherit!important;display:inline-flex;align-items:center;gap:6px;min-width:0;direction:ltr!important;unicode-bidi:isolate!important}
+html[dir="rtl"] #entryAuthenticatedUser{flex-direction:row-reverse;justify-content:flex-start}
+#entryAuthenticatedUser .authSignedLabel{font-family:inherit;white-space:nowrap;direction:rtl;unicode-bidi:isolate}
+html[dir="ltr"] #entryAuthenticatedUser .authSignedLabel{direction:ltr}
+#entryAuthenticatedUser .authSignedEmail{direction:ltr!important;unicode-bidi:isolate!important;font-family:"Times New Roman",serif;white-space:nowrap}
+.comparisonRadarOnlyGrid{grid-template-columns:1fr!important}
+.comparisonRadarPairCard{grid-column:1/-1!important}
+.comparisonRadarPair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;align-items:start}
+.comparisonRadarPane{min-width:0;border:1px solid #e0e8ed;border-radius:14px;padding:12px;background:#fbfdfe;display:flex;flex-direction:column;align-items:stretch}
+.comparisonRadarPane>strong{display:block;width:100%;text-align:center;margin-bottom:4px;color:#294f6b;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.comparisonManagerRadar.radarChart{min-height:420px;width:100%;overflow:visible}
+.comparisonManagerRadar.radarChart svg{width:min(620px,100%);height:420px;overflow:visible}
+@media(max-width:980px){.comparisonRadarPair{grid-template-columns:1fr}}

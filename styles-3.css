@@ -1,0 +1,698 @@
+/* v44.css */
+/* v44 — role-scoped edit authorization + larger comparison radars + management-style comparison table */
+
+/* Keep a finalized case visually locked except for the exact authorized user+role. */
+.caseLocked.caseAuthorizedEdit .evaluatorOnly input,
+.caseLocked.caseAuthorizedEdit .evaluatorOnly textarea,
+.caseLocked.caseAuthorizedEdit .evaluatorOnly button:not(#finalizeAssessmentButton),
+.caseLocked.caseAuthorizedEdit .metadata input,
+.caseLocked.caseAuthorizedEdit #evaluatorVehiclePhotos button,
+.caseLocked.caseAuthorizedEdit #evaluatorVehiclePhotos input,
+.caseLocked.caseAuthorizedEdit .assessmentLayout button,
+.caseLocked.caseAuthorizedEdit .assessmentLayout input,
+.caseLocked.caseAuthorizedEdit .assessmentLayout textarea{
+  pointer-events:auto!important;
+  opacity:1!important;
+}
+.caseLocked.caseAuthorizedEdit #finalizeAssessmentButton{cursor:pointer!important;opacity:1!important}
+.caseLocked.expertMode:not(.caseAuthorizedEdit) #expertPanel input,
+.caseLocked.expertMode:not(.caseAuthorizedEdit) #expertPanel textarea,
+.caseLocked.expertMode:not(.caseAuthorizedEdit) #expertPanel select,
+.caseLocked.expertMode:not(.caseAuthorizedEdit) #expertPanel button,
+.caseLocked.expertMode:not(.caseAuthorizedEdit) #expertHeaderActions button{
+  pointer-events:none!important;
+  opacity:.58!important;
+}
+.caseLocked.expertMode.caseAuthorizedEdit #expertPanel input,
+.caseLocked.expertMode.caseAuthorizedEdit #expertPanel textarea,
+.caseLocked.expertMode.caseAuthorizedEdit #expertPanel select,
+.caseLocked.expertMode.caseAuthorizedEdit #expertPanel button,
+.caseLocked.expertMode.caseAuthorizedEdit #expertHeaderActions button{
+  pointer-events:auto!important;
+  opacity:1!important;
+}
+
+/* Larger, management-scale comparison radars. */
+.comparisonRadarPair{gap:22px!important;align-items:stretch!important}
+.comparisonRadarPane{padding:16px 12px 10px!important;min-height:610px!important}
+.comparisonRadarPane>strong{font-size:16px!important;margin-bottom:2px!important}
+.comparisonManagerRadar.radarChart{min-height:570px!important;width:100%!important;display:grid!important;place-items:center!important;overflow:visible!important}
+.comparisonManagerRadar.radarChart svg{width:min(820px,100%)!important;height:560px!important;max-width:none!important;overflow:visible!important}
+.comparisonManagerRadar.radarChart text{font-size:11px!important;font-weight:700}
+.comparisonManagerRadar .radarValue{font-size:12px!important;font-weight:900!important}
+
+/* Match the Management integrated-summary table visual language. */
+.managementStyleComparisonTable{
+  margin-top:18px!important;
+  overflow-x:auto!important;
+  border:1px solid #d9e6ee!important;
+  border-radius:16px!important;
+  background:#fff!important;
+}
+.managementStyleComparisonHead,
+.managementStyleComparisonRow{
+  display:grid!important;
+  grid-template-columns:58px 72px minmax(250px,1.55fr) minmax(135px,.72fr) minmax(135px,.72fr) minmax(115px,.62fr)!important;
+  align-items:center!important;
+  gap:10px!important;
+  min-width:940px!important;
+}
+.managementStyleComparisonHead{
+  min-height:0!important;
+  padding:14px 16px!important;
+  background:linear-gradient(135deg,#123f65,#0c756d)!important;
+  color:#fff!important;
+  font-weight:800!important;
+}
+.managementStyleComparisonHead>*{padding:0!important;text-align:center!important}
+.managementStyleComparisonHead strong{text-align:right!important}
+.english .managementStyleComparisonHead strong{text-align:left!important}
+.managementStyleComparisonRow{
+  position:relative!important;
+  min-height:0!important;
+  padding:12px 16px!important;
+  border-top:0!important;
+  border-bottom:1px solid #e4edf3!important;
+  background:#fff!important;
+  transition:.2s!important;
+}
+.managementStyleComparisonRow:last-child{border-bottom:0!important}
+.managementStyleComparisonRow:hover{background:#f4fafb!important;transform:translateX(-2px)}
+.managementStyleComparisonRow::before{
+  content:"";
+  position:absolute;
+  right:0;
+  top:8px;
+  bottom:8px;
+  width:4px;
+  border-radius:4px;
+  background:var(--row-accent);
+}
+.english .managementStyleComparisonRow::before{right:auto;left:0}
+.managementStyleComparisonRow>*{padding:0!important;text-align:center!important}
+.comparisonRowNumber{color:#6e8293;font-weight:800}
+.comparisonRowIcon{display:grid;place-items:center}
+.comparisonRowIcon>*{width:42px!important;height:42px!important}
+.managementStyleComparisonRow .comparisonCriterion{color:#183e5e!important;line-height:1.65!important;text-align:right!important}
+.english .managementStyleComparisonRow .comparisonCriterion{text-align:left!important}
+.comparisonVehicleScore{color:#176d91;font-weight:800;font-family:"Times New Roman",serif}
+.managementStyleComparisonRow .comparisonDiff{font-size:16px;font-weight:900}
+
+@media(max-width:1250px){
+  .comparisonRadarPair{grid-template-columns:1fr!important}
+  .comparisonRadarPane{min-height:590px!important}
+}
+.comparisonRowIcon > .criterionIcon{
+  width:42px!important;
+  height:42px!important;
+  color:#fff!important;
+  background:linear-gradient(135deg,#0b6594,#159486)!important;
+  border:0!important;
+  box-shadow:0 5px 12px #0b56732b;
+}
+.comparisonRowIcon > .criterionIcon svg{
+  display:block!important;
+  width:24px!important;
+  height:24px!important;
+  fill:none!important;
+  stroke:currentColor!important;
+  stroke-width:1.8!important;
+  stroke-linecap:round!important;
+  stroke-linejoin:round!important;
+}
+.caseLocked.caseAuthorizedEdit .uploadButton,
+.caseLocked.caseAuthorizedEdit .attachment button,
+.caseLocked.caseAuthorizedEdit .vehiclePhotoButton,
+.caseLocked.caseAuthorizedEdit .vehiclePhotoRemove{
+  pointer-events:auto!important;
+  opacity:1!important;
+  cursor:pointer!important;
+  filter:none!important;
+}
+#entryRoleChoices .roleChoice[hidden]{display:none!important}
+
+
+/* v45.css */
+/* v45 — comparison control cleanup and evaluator-experience lock */
+
+/* The comparison message strip was the source of a stray changing numeric artifact.
+   Status remains available in the workspace header, so this redundant strip is removed. */
+#managerComparisonCard .comparisonMessage{display:none!important}
+#managerComparisonCard .comparisonControls{
+  grid-template-columns:minmax(250px,auto) minmax(190px,auto)!important;
+  justify-content:start!important;
+}
+
+/* Destructive action mirrors the Management weight-file removal treatment. */
+#managerComparisonCard .comparisonRemoveButton{
+  background:#fbe9e9!important;
+  color:#a33b3b!important;
+  border:1px solid #e9bcbc!important;
+  box-shadow:none!important;
+}
+#managerComparisonCard .comparisonRemoveButton:hover:not(:disabled){
+  background:#f7dddd!important;
+  color:#8f2929!important;
+  border-color:#e3aaaa!important;
+}
+#managerComparisonCard .comparisonRemoveButton:disabled{
+  background:#f8eeee!important;
+  color:#b98b8b!important;
+  border-color:#ead5d5!important;
+  opacity:.55!important;
+}
+
+/* Work-experience control must look and behave locked with the rest of the finalized evaluator form. */
+.caseLocked:not(.caseAuthorizedEdit) [data-experience-select="evaluator"],
+.caseLocked:not(.caseAuthorizedEdit) [data-experience-other="evaluator"]{
+  pointer-events:none!important;
+  opacity:.58!important;
+  cursor:not-allowed!important;
+}
+.caseLocked.caseAuthorizedEdit [data-experience-select="evaluator"],
+.caseLocked.caseAuthorizedEdit [data-experience-other="evaluator"]{
+  pointer-events:auto!important;
+  opacity:1!important;
+  cursor:auto!important;
+}
+
+@media(max-width:760px){
+  #managerComparisonCard .comparisonControls{grid-template-columns:1fr!important}
+}
+
+
+/* v46.css */
+/* v46 — revision-role column + expert permission banner */
+.revisionEntry{
+  grid-template-columns:minmax(150px,.85fr) minmax(105px,.55fr) minmax(210px,1.35fr) minmax(140px,.8fr) minmax(120px,.7fr)!important;
+}
+.revisionRole strong{font-weight:800;color:#0f756e}
+
+.expertEditPermissionNotice{
+  display:grid;
+  gap:6px;
+  margin:0 0 14px;
+  padding:14px 16px;
+  border:1px solid #d8e5ec;
+  border-inline-start:4px solid #7d8e9d;
+  border-radius:13px;
+  background:#f8fbfd;
+  color:#173e62;
+}
+.expertEditPermissionNotice strong{font-size:16px}
+.expertEditPermissionNotice span,.expertEditPermissionNotice small{line-height:1.75;color:#5e7488}
+.expertEditPermissionNotice b{display:inline-block;color:#173e62;font-family:"Times New Roman",serif}
+.expertEditPermissionNotice.active{border-inline-start-color:#168378;background:#f1fbf8}
+.expertEditPermissionNotice.active strong{color:#0f756e}
+.expertEditPermissionNotice.waiting{border-inline-start-color:#d58a24;background:#fff9ef}
+.expertEditPermissionNotice.waiting strong{color:#9a6417}
+.expertEditPermissionNotice.locked{border-inline-start-color:#8b9baa;background:#f7f9fb}
+
+@media(max-width:1050px){.revisionEntry{grid-template-columns:1fr 1fr!important}.revisionReason{grid-column:1/-1}}
+@media(max-width:560px){.revisionEntry{grid-template-columns:1fr!important}.revisionReason{grid-column:auto}}
+
+
+/* v47.css */
+/* v47 — Excel completion + multi-vehicle comparison */
+.comparisonCountPrompt{
+  margin-top:18px;padding:18px;border:1px solid #d8e6ee;border-radius:15px;background:linear-gradient(135deg,#f8fbfd,#f1f8f7);
+  display:grid;grid-template-columns:minmax(280px,1fr) minmax(180px,230px) auto;gap:14px;align-items:end
+}
+.comparisonCountPrompt h3{margin:0 0 5px;color:#173f63;font-size:18px}.comparisonCountPrompt p{margin:0;color:#687e90;line-height:1.7;font-size:13px}
+.comparisonCountPrompt label,.comparisonCountToolbar label{display:grid;gap:6px;color:#49657b;font-weight:800;font-size:13px}
+.comparisonCountPrompt select,.comparisonCountToolbar select{min-height:44px;border:1px solid #cadbe5;border-radius:10px;background:#fff;padding:8px 12px;color:#173f63;font:inherit}
+.comparisonCountPrompt button,.comparisonCountToolbar button{min-height:44px;border:0;border-radius:11px;padding:9px 18px;background:linear-gradient(135deg,#164e79,#11857e);color:#fff;font-weight:900;cursor:pointer}
+.comparisonCountToolbar{margin-top:16px;padding:12px 14px;border:1px solid #dce7ed;border-radius:13px;background:#f9fbfc;display:grid;grid-template-columns:1fr 180px auto;gap:12px;align-items:end}
+.comparisonCountToolbar>div{display:grid;gap:3px}.comparisonCountToolbar>div strong{color:#173f63}.comparisonCountToolbar>div span{color:#718697;font-size:12px}
+.multiComparisonUploadGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:12px}
+.comparisonUploadSlot{border:1px solid #dbe7ee;border-radius:14px;background:#fff;padding:14px;display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center;min-width:0}
+.comparisonUploadSlot.loaded{background:#f8fcfb;border-color:#cae5df}.comparisonUploadSlot>div:first-child{display:grid;gap:4px;min-width:0}.comparisonUploadSlot small{color:#748798;font-weight:800}.comparisonUploadSlot strong{color:#173f63;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.comparisonUploadSlot span{color:#75899a;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.comparisonSlotActions{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:flex-end}.comparisonSlotActions .comparisonUploadButton,.comparisonSlotActions .comparisonRemoveButton{min-height:40px;padding:8px 13px;border-radius:10px;font-size:12px}
+.multiComparisonScoreGrid{grid-template-columns:repeat(auto-fit,minmax(210px,1fr))!important}.comparisonCardDiff{font-family:"Times New Roman",serif;font-weight:900!important}
+.multiRadarGrid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:22px!important}.multiRadarGrid .comparisonRadarPane{min-height:610px!important}
+.multiVehicleComparisonTable{overflow-x:auto!important}.multiVehicleComparisonHead,.multiVehicleComparisonRow{gap:10px!important}.multiVehicleScore{display:grid;gap:2px;justify-items:center}.multiVehicleScore b{font:800 16px "Times New Roman",serif;color:#176d91}.multiVehicleScore small{font:900 11px "Times New Roman",serif}.multiVehicleComparisonHead span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@media(max-width:1250px){.multiRadarGrid{grid-template-columns:1fr!important}}
+@media(max-width:900px){.comparisonCountPrompt{grid-template-columns:1fr 1fr}.comparisonCountPrompt>div{grid-column:1/-1}.comparisonCountToolbar{grid-template-columns:1fr 1fr}.comparisonCountToolbar>div{grid-column:1/-1}.multiComparisonUploadGrid{grid-template-columns:1fr}}
+@media(max-width:560px){.comparisonCountPrompt,.comparisonCountToolbar{grid-template-columns:1fr}.comparisonCountPrompt>div,.comparisonCountToolbar>div{grid-column:auto}.comparisonUploadSlot{grid-template-columns:1fr}.comparisonSlotActions{justify-content:stretch}.comparisonSlotActions>*{flex:1}}
+
+
+/* v48.css */
+/* v48 — localized comparison denominator + read-only evaluator navigation */
+/* A finalized evaluator case stays fully browseable: criteria and view-only photo tabs remain interactive. */
+.caseLocked:not(.caseAuthorizedEdit) .assessmentLayout .criterionTab,
+.caseLocked:not(.caseAuthorizedEdit) #evaluatorVehiclePhotos .vehicleGalleryThumb{
+  pointer-events:auto!important;
+  opacity:1!important;
+  cursor:pointer!important;
+}
+.caseLocked:not(.caseAuthorizedEdit) .assessmentLayout .criterionTab:disabled,
+.caseLocked:not(.caseAuthorizedEdit) #evaluatorVehiclePhotos .vehicleGalleryThumb:disabled{
+  pointer-events:auto!important;
+  opacity:1!important;
+  cursor:pointer!important;
+}
+.caseLocked:not(.caseAuthorizedEdit) .assessmentLayout details > summary{
+  pointer-events:auto!important;
+  opacity:1!important;
+  cursor:pointer!important;
+}
+/* Mutating controls remain visually read-only while the case is locked. */
+.caseLocked:not(.caseAuthorizedEdit) .assessmentLayout [data-score]:disabled,
+.caseLocked:not(.caseAuthorizedEdit) .assessmentLayout [data-note]:disabled,
+.caseLocked:not(.caseAuthorizedEdit) [data-final-comment="evaluator"]:disabled,
+.caseLocked:not(.caseAuthorizedEdit) .metadata input:disabled,
+.caseLocked:not(.caseAuthorizedEdit) .metadata select:disabled{
+  cursor:not-allowed!important;
+}
+
+
+/* v49.css */
+/* v49 — evaluator permission banner + locked expert Excel access */
+.evaluatorEditPermissionNotice{
+  display:grid;
+  gap:6px;
+  margin:16px 0 14px;
+  padding:18px 20px;
+  border:1px solid #d8e5ec;
+  border-inline-start:4px solid #8b9baa;
+  border-radius:16px;
+  background:#f7f9fb;
+  color:#173e62;
+}
+.evaluatorEditPermissionNotice strong{font-size:16px;font-weight:900}
+.evaluatorEditPermissionNotice span,.evaluatorEditPermissionNotice small{line-height:1.8;color:#5e7488}
+.evaluatorEditPermissionNotice b{display:inline-block;color:#173e62;font-family:"Times New Roman",serif}
+.evaluatorEditPermissionNotice.active{border-inline-start-color:#168378;background:#f1fbf8}
+.evaluatorEditPermissionNotice.active strong{color:#0f756e}
+.evaluatorEditPermissionNotice.waiting{border-inline-start-color:#d58a24;background:#fff9ef}
+.evaluatorEditPermissionNotice.waiting strong{color:#9a6417}
+.evaluatorEditPermissionNotice.locked{border-inline-start-color:#8b9baa;background:#f7f9fb}
+
+/* A locked Expert form is read-only, but a valid Excel snapshot may still be downloaded. */
+.caseLocked.expertMode:not(.caseAuthorizedEdit) #expertHeaderActions #expertExcelButton:not(:disabled){
+  pointer-events:auto!important;
+  opacity:1!important;
+  cursor:pointer!important;
+}
+.caseLocked.expertMode:not(.caseAuthorizedEdit) #expertHeaderActions #expertExcelButton:disabled{
+  pointer-events:none!important;
+  opacity:.58!important;
+}
+
+
+/* Starting a new assessment must remain available after the current evaluator case is locked. */
+.caseLocked #resetButton{
+  pointer-events:auto!important;
+  opacity:1!important;
+  cursor:pointer!important;
+}
+
+
+/* v50.css */
+/* v50 — single-row swipeable action strip below the application header + descriptive language control. */
+#appShell .topbar{
+  flex-wrap:wrap!important;
+  align-items:center!important;
+  gap:12px!important;
+  padding-top:12px!important;
+  padding-bottom:12px!important;
+}
+#appShell .topbar .brand{
+  flex:0 0 100%!important;
+  width:100%!important;
+  min-width:0!important;
+  justify-content:center!important;
+  margin:0!important;
+}
+#appShell .headerActions{
+  display:block!important;
+  flex:0 0 100%!important;
+  width:100%!important;
+  max-width:none!important;
+  min-width:0!important;
+  margin:0!important;
+  overflow-x:auto!important;
+  overflow-y:hidden!important;
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior-inline:contain;
+  scrollbar-width:thin;
+  scrollbar-color:#ffffff80 transparent;
+  padding:2px 0 5px!important;
+}
+#appShell .headerActions::-webkit-scrollbar{height:5px}
+#appShell .headerActions::-webkit-scrollbar-track{background:transparent}
+#appShell .headerActions::-webkit-scrollbar-thumb{background:#ffffff70;border-radius:999px}
+#appShell .headerActions .actionCard{
+  display:flex!important;
+  flex-direction:row!important;
+  flex-wrap:nowrap!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  gap:8px!important;
+  width:max-content!important;
+  min-width:100%!important;
+  margin:0!important;
+  padding:0 2px!important;
+  grid-template-columns:none!important;
+  grid-auto-rows:auto!important;
+}
+#appShell .headerActions .actionCard:before{display:none!important}
+#appShell .headerActions .actionCard .expertHeaderActions:not([hidden]){display:contents!important}
+#appShell .headerActions .actionCard > button,
+#appShell .headerActions .actionCard > .button,
+#appShell .headerActions .actionCard .expertHeaderActions > button{
+  flex:0 0 auto!important;
+  width:auto!important;
+  min-width:max-content!important;
+  min-height:44px!important;
+  height:44px!important;
+  padding:8px 14px!important;
+  white-space:nowrap!important;
+  text-align:center!important;
+  line-height:1.2!important;
+  scroll-snap-align:start;
+}
+#appShell .headerActions .languageButton{
+  flex:0 0 auto!important;
+  width:auto!important;
+  min-width:max-content!important;
+  min-height:44px!important;
+  height:44px!important;
+  padding:8px 15px!important;
+  margin:0!important;
+  font-family:inherit!important;
+  font-size:15px!important;
+  letter-spacing:0!important;
+}
+#appShell:not(.english) .headerActions .actionCard{direction:rtl}
+body.english #appShell .headerActions .actionCard{direction:ltr}
+
+/* The login language button uses the same explicit language wording. */
+#entryLanguageButton{
+  min-width:max-content!important;
+  font-family:inherit!important;
+  letter-spacing:0!important;
+  white-space:nowrap!important;
+}
+body.english #entryLanguageButton{font-family:"Times New Roman",Times,serif!important}
+
+@media(max-width:680px){
+  #appShell .topbar{padding-inline:10px!important}
+  #appShell .topbar .brand{justify-content:center!important}
+  #appShell .topbar .brand img{width:72px!important;height:50px!important}
+  #appShell .topbar .brand strong{font-size:20px!important}
+  #appShell .topbar .brand small{font-size:13px!important}
+  #appShell .headerActions .actionCard > button,
+  #appShell .headerActions .actionCard > .button,
+  #appShell .headerActions .actionCard .expertHeaderActions > button{
+    min-height:42px!important;
+    height:42px!important;
+    padding-inline:13px!important;
+    font-size:14px!important;
+  }
+  #appShell .headerActions .languageButton{
+    min-height:42px!important;
+    height:42px!important;
+    font-size:14px!important;
+  }
+}
+
+
+/* v51.css */
+/* v51 — unified panel header and action strip.
+   The blue header contains only the BAMCO brand. All role actions sit in one
+   equal-size, horizontally scrollable row immediately below the header. */
+
+/* Restore the brand to its original header position and scale. */
+#appShell .topbar{
+  min-height:92px!important;
+  display:flex!important;
+  flex-direction:row!important;
+  flex-wrap:nowrap!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  gap:0!important;
+  padding:13px max(24px,calc((100% - 1400px)/2))!important;
+}
+#appShell .topbar .brand{
+  flex:0 0 auto!important;
+  width:auto!important;
+  min-width:max-content!important;
+  justify-content:flex-start!important;
+  align-items:center!important;
+  margin:0!important;
+  gap:17px!important;
+  direction:rtl;
+}
+#appShell .topbar .brand img{
+  width:104px!important;
+  height:66px!important;
+  border-radius:12px!important;
+  padding:5px!important;
+}
+#appShell .topbar .brand strong{
+  font-size:31px!important;
+  line-height:1.25!important;
+}
+#appShell .topbar .brand small{
+  font-size:17px!important;
+  line-height:1.4!important;
+}
+body.english #appShell .topbar .brand{
+  direction:ltr;
+}
+
+/* Action row lives below the blue rectangle. */
+#appShell > .headerActions{
+  display:block!important;
+  width:100%!important;
+  max-width:none!important;
+  min-width:0!important;
+  margin:0!important;
+  padding:10px max(24px,calc((100% - 1400px)/2)) 11px!important;
+  overflow-x:auto!important;
+  overflow-y:hidden!important;
+  background:#f7fafe!important;
+  border-bottom:1px solid #d7e2ed!important;
+  box-shadow:0 4px 12px #0f27400d!important;
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior-inline:contain;
+  scrollbar-width:thin;
+  scrollbar-color:#9fb4c8 transparent;
+  scroll-snap-type:x proximity;
+}
+#appShell > .headerActions::-webkit-scrollbar{height:5px}
+#appShell > .headerActions::-webkit-scrollbar-track{background:transparent}
+#appShell > .headerActions::-webkit-scrollbar-thumb{background:#9fb4c8;border-radius:999px}
+
+#appShell > .headerActions .actionCard{
+  display:flex!important;
+  flex-direction:row!important;
+  flex-wrap:nowrap!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  gap:8px!important;
+  width:max-content!important;
+  min-width:100%!important;
+  margin:0!important;
+  padding:0!important;
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+  grid-template-columns:none!important;
+  grid-auto-rows:auto!important;
+}
+#appShell > .headerActions .actionCard:before{display:none!important}
+#appShell > .headerActions .expertHeaderActions:not([hidden]){display:contents!important}
+
+/* Every role uses exactly the same button geometry and surface style. */
+#appShell > .headerActions .actionCard > button,
+#appShell > .headerActions .actionCard > .button,
+#appShell > .headerActions .actionCard .expertHeaderActions > button{
+  flex:0 0 240px!important;
+  width:240px!important;
+  min-width:240px!important;
+  max-width:240px!important;
+  min-height:46px!important;
+  height:46px!important;
+  padding:8px 10px!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  margin:0!important;
+  border:1px solid #c7d5e4!important;
+  border-radius:10px!important;
+  background:#fff!important;
+  color:#173b63!important;
+  box-shadow:0 2px 7px #173b6310!important;
+  font-family:inherit!important;
+  font-size:14px!important;
+  font-weight:700!important;
+  line-height:1.25!important;
+  text-align:center!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+  scroll-snap-align:start;
+  transition:background .16s,color .16s,border-color .16s,transform .16s!important;
+}
+#appShell > .headerActions .actionCard > button:hover,
+#appShell > .headerActions .actionCard > .button:hover,
+#appShell > .headerActions .actionCard .expertHeaderActions > button:hover{
+  background:#eef5fc!important;
+  color:#0d568e!important;
+  border-color:#8eb4d5!important;
+  transform:translateY(-1px)!important;
+}
+#appShell > .headerActions .actionCard button:disabled{
+  opacity:.48!important;
+  cursor:not-allowed!important;
+  transform:none!important;
+}
+#appShell > .headerActions .languageButton{
+  font-family:inherit!important;
+  letter-spacing:0!important;
+}
+body.english #appShell > .headerActions .actionCard > button,
+body.english #appShell > .headerActions .actionCard > .button,
+body.english #appShell > .headerActions .actionCard .expertHeaderActions > button{
+  font-family:"Times New Roman",Times,serif!important;
+  font-size:15px!important;
+}
+#appShell:not(.english) > .headerActions .actionCard{direction:rtl}
+body.english #appShell > .headerActions .actionCard{direction:ltr}
+
+@media(max-width:680px){
+  #appShell .topbar{
+    min-height:78px!important;
+    padding:9px 14px!important;
+  }
+  #appShell .topbar .brand{
+    width:auto!important;
+    justify-content:flex-start!important;
+    gap:11px!important;
+  }
+  #appShell .topbar .brand img{
+    width:78px!important;
+    height:54px!important;
+  }
+  #appShell .topbar .brand strong{font-size:22px!important}
+  #appShell .topbar .brand small{font-size:13px!important}
+
+  #appShell > .headerActions{
+    padding:8px 14px 9px!important;
+  }
+  #appShell > .headerActions .actionCard > button,
+  #appShell > .headerActions .actionCard > .button,
+  #appShell > .headerActions .actionCard .expertHeaderActions > button{
+    flex-basis:208px!important;
+    width:208px!important;
+    min-width:208px!important;
+    max-width:208px!important;
+    min-height:44px!important;
+    height:44px!important;
+    padding:7px 9px!important;
+    font-size:13px!important;
+  }
+  body.english #appShell > .headerActions .actionCard > button,
+  body.english #appShell > .headerActions .actionCard > .button,
+  body.english #appShell > .headerActions .actionCard .expertHeaderActions > button{
+    font-size:14px!important;
+  }
+}
+
+
+/* v52.css */
+/* v52 — preserve each role's original action set while keeping the unified visual style. */
+
+/* Brand stays in the blue header; language is a header utility, not a panel action. */
+#appShell .topbar{
+  justify-content:space-between!important;
+}
+#appShell .topbar > .languageButton{
+  flex:0 0 auto!important;
+  width:auto!important;
+  min-width:150px!important;
+  min-height:46px!important;
+  height:46px!important;
+  padding:8px 15px!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  margin:0!important;
+  border:1px solid #ffffff9c!important;
+  border-radius:10px!important;
+  background:#ffffff16!important;
+  color:#fff!important;
+  box-shadow:none!important;
+  font-family:inherit!important;
+  font-size:14px!important;
+  font-weight:700!important;
+  line-height:1.25!important;
+  white-space:nowrap!important;
+  letter-spacing:0!important;
+}
+#appShell .topbar > .languageButton:hover{
+  background:#fff!important;
+  color:#0b568d!important;
+}
+body.english #appShell .topbar > .languageButton{
+  font-family:"Times New Roman",Times,serif!important;
+  font-size:15px!important;
+}
+
+/* Never allow the unified button geometry to unhide role-specific or utility controls. */
+#appShell > .headerActions .actionCard > [hidden],
+#appShell > .headerActions .actionCard > button[hidden],
+#appShell > .headerActions .actionCard > .button[hidden],
+#appShell > .headerActions .actionCard .expertHeaderActions[hidden],
+#appShell > .headerActions .actionCard .expertHeaderActions > [hidden]{
+  display:none!important;
+}
+
+/* Preserve the exact original action set for Expert. */
+body.expertMode #appShell > .headerActions .actionCard > #excelButton,
+body.expertMode #appShell > .headerActions .actionCard > .button,
+body.expertMode #appShell > .headerActions .actionCard > #resetButton{
+  display:none!important;
+}
+
+/* Preserve the exact original action set for Management. */
+body.managerMode #appShell > .headerActions .actionCard > #excelButton,
+body.managerMode #appShell > .headerActions .actionCard > .button,
+body.managerMode #appShell > .headerActions .actionCard > #resetButton,
+body.managerMode #appShell > .headerActions .actionCard > #finalizeAssessmentButton{
+  display:none!important;
+}
+body.managerMode #appShell > .headerActions .actionCard > #managerExcelButton:not([hidden]){
+  display:inline-flex!important;
+}
+
+/* Evaluator keeps the original evaluator-only controls; manager controls stay hidden. */
+body:not(.managerMode):not(.expertMode) #appShell > .headerActions .actionCard > .managerOnly,
+body:not(.managerMode):not(.expertMode) #appShell > .headerActions .actionCard > #managerExcelButton,
+body:not(.managerMode):not(.expertMode) #appShell > .headerActions .actionCard > #unlockAssessmentButton{
+  display:none!important;
+}
+
+@media(max-width:680px){
+  #appShell .topbar > .languageButton{
+    min-width:132px!important;
+    min-height:44px!important;
+    height:44px!important;
+    padding:7px 11px!important;
+    font-size:13px!important;
+  }
+  body.english #appShell .topbar > .languageButton{font-size:14px!important}
+}
+
+/* Requested management-only addition: allow the existing Open Case control in Management. */
+body.managerMode #appShell > .headerActions .actionCard > label.button:not([hidden]){
+  display:inline-flex!important;
+}
+
+/* Management spacing fix: keep equal vertical spacing around Vehicle Comparison entry. */
+body.managerMode #managerComparisonEntry{
+  margin-top:16px!important;
+  margin-bottom:16px!important;
+}
