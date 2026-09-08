@@ -1,4 +1,4 @@
-/* scripts-7 loader — preserves the previous bundle and then applies v54 comparison refinements */
+/* scripts-7 loader — preserves the previous bundle and then applies latest comparison/mobile refinements */
 (()=>{
   const load=(src,done)=>{
     const script=document.createElement('script');
@@ -7,5 +7,5 @@
     script.onerror=()=>console.error('BAMCO script load failed:',src);
     document.head.appendChild(script);
   };
-  load('./scripts-7-base.js?v=54',()=>load('./scripts-8.js?v=54',()=>load('./scripts-9.js?v=54',()=>load('./scripts-10.js?v=54'))));
+  load('./scripts-7-base.js?v=55',()=>load('./scripts-8.js?v=55',()=>load('./scripts-9.js?v=55',()=>load('./scripts-10.js?v=55'))));
 })();
