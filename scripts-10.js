@@ -1,4 +1,4 @@
-/* v53 — use the exact radar criterion labels and center the vertical comparison chart */
+/* v54 — exact radar labels, centered comparison chart, and consolidated comparison navigation */
 (()=>{
   const criteria=()=>window.ASSESSMENT_CRITERIA||[];
 
@@ -35,22 +35,64 @@
     });
   }
 
+  function placeBackButton(){
+    const card=document.querySelector('#managerComparisonCard');
+    if(!card)return;
+    const back=card.querySelector('#v52BackButton');
+    const dashboard=card.querySelector('#closeComparisonMode');
+    const header=dashboard?.closest('.comparisonWorkspaceHeader');
+    if(!back||!dashboard||!header)return;
+
+    let actions=header.querySelector('.v54NavActions');
+    if(!actions){
+      actions=document.createElement('div');
+      actions.className='v54NavActions';
+      header.insertBefore(actions,dashboard);
+      actions.appendChild(dashboard);
+    }
+    if(back.parentElement!==actions)actions.appendChild(back);
+    header.classList.add('v54HasDetailBack');
+  }
+
+  function normalizeNavigation(){
+    const card=document.querySelector('#managerComparisonCard');
+    if(!card)return;
+    const header=card.querySelector('.comparisonWorkspaceHeader');
+    const actions=header?.querySelector('.v54NavActions');
+    const back=card.querySelector('#v52BackButton');
+    if(back){placeBackButton();return}
+    header?.classList.remove('v54HasDetailBack');
+    if(actions&&!actions.querySelector('#v52BackButton'))actions.classList.add('v54DashboardOnly');
+  }
+
   function injectStyles(){
-    if(document.querySelector('#bamco-v53-styles'))return;
-    const style=document.createElement('style');
-    style.id='bamco-v53-styles';
+    let style=document.querySelector('#bamco-v53-styles');
+    if(!style){style=document.createElement('style');style.id='bamco-v53-styles';document.head.appendChild(style)}
     style.textContent=`
       #managerComparisonCard .v52ChartScroller{width:100%!important;display:block!important}
       #managerComparisonCard .v52Chart{width:max-content!important;min-width:max-content!important;margin-left:auto!important;margin-right:auto!important}
       #managerComparisonCard .v52DetailTitle h3{text-align:center!important}
+
+      #managerComparisonCard .v54NavActions{display:flex!important;align-items:center!important;gap:8px!important;flex-wrap:wrap!important;justify-content:flex-start!important;min-width:max-content}
+      #managerComparisonCard .v54NavActions .v52BackButton,
+      #managerComparisonCard .v54NavActions #closeComparisonMode{margin:0!important;min-height:42px!important}
+      #managerComparisonCard .v54NavActions .v52BackButton{background:#f4f8fb!important;border-color:#bfd0dd!important;color:#173f63!important}
+      #managerComparisonCard .v54NavActions .v52BackButton:hover{background:#eaf3f8!important;border-color:#a9c2d2!important}
+      #managerComparisonCard .v52DetailHeader{grid-template-columns:1fr!important;padding-top:2px!important}
+      #managerComparisonCard .v52DetailHeader>span:last-child{display:none!important}
+      #managerComparisonCard .v52DetailHeader .v52DetailTitle{grid-column:1!important;text-align:center!important;width:100%!important}
+      @media(max-width:760px){
+        #managerComparisonCard .v54NavActions{width:100%!important;min-width:0!important;justify-content:stretch!important}
+        #managerComparisonCard .v54NavActions>*{flex:1 1 auto!important}
+      }
     `;
-    document.head.appendChild(style);
   }
 
   let queued=false;
   function refresh(){
     injectStyles();
     patchCriterionLabels();
+    normalizeNavigation();
   }
   function schedule(){
     if(queued)return;
