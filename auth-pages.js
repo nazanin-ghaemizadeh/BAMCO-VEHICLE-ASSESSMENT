@@ -17,21 +17,38 @@
     if('caches' in window)caches.keys().then(keys=>Promise.all(keys.map(key=>caches.delete(key)))).catch(()=>{});
   };
   clearLegacyCaches();
+  let fa=true;
+  try{fa=sessionStorage.getItem('bamco-locale')!=='en'}catch(_){}
+  const copy={
+    fa:{language:'English',brand:'خودروسازان بم',loginTitle:'سامانه ارزیابی خودرو',loginIntro:'برای ورود، نام کاربری و رمز عبور را وارد کنید.',username:'نام کاربری',password:'رمز عبور',captcha:'پاسخ کپچا',signIn:'ورود',rolesTitle:'انتخاب پنل',rolesIntro:'پنل موردنظر را برای ادامه انتخاب کنید.',signOut:'خروج از حساب',signedIn:'کاربر واردشده:',evaluator:'ورود ارزیاب',evaluatorDesc:'ثبت اطلاعات، چک‌لیست، امتیازها و تصاویر مستند',expert:'ورود خبره',expertDesc:'ثبت اطلاعات تخصصی و تعیین وزن شاخص‌های اصلی',manager:'ورود مدیریت',managerDesc:'مشاهده داشبورد، نتایج و گزارش مدیریتی'},
+    en:{language:'فارسی',brand:'BAM Automotive Company',loginTitle:'Vehicle Assessment System',loginIntro:'Enter your username and password to sign in.',username:'Username',password:'Password',captcha:'Captcha answer',signIn:'Sign in',rolesTitle:'Choose a Panel',rolesIntro:'Choose an available panel to continue.',signOut:'Sign out',signedIn:'Signed in as:',evaluator:'Evaluator Login',evaluatorDesc:'Record vehicle details, checklist scores, notes, and supporting images',expert:'Expert Login',expertDesc:'Enter expert details and assign weights to the main criteria',manager:'Management Login',managerDesc:'Review the dashboard, assessment results, and management report'}
+  };
+  const setText=(selector,value)=>{const el=document.querySelector(selector);if(el)el.textContent=value};
+  const applyLocale=()=>{
+    const t=copy[fa?'fa':'en'];
+    document.documentElement.lang=fa?'fa':'en';document.documentElement.dir=fa?'rtl':'ltr';
+    setText('#languageButton',t.language);setText('#brandName',t.brand);setText('#loginTitle',t.loginTitle);setText('#loginIntro',t.loginIntro);setText('#usernameLabel',t.username);setText('#passwordLabel',t.password);setText('#loginButton',t.signIn);
+    const captcha=document.querySelector('#captchaAnswer');if(captcha)captcha.placeholder=t.captcha;
+    setText('#rolesTitle',t.rolesTitle);setText('#rolesIntro',t.rolesIntro);setText('#signOutButton',t.signOut);setText('#signedInLabel',t.signedIn);
+    setText('#evaluatorTitle',t.evaluator);setText('#evaluatorDesc',t.evaluatorDesc);setText('#expertTitle',t.expert);setText('#expertDesc',t.expertDesc);setText('#managerTitle',t.manager);setText('#managerDesc',t.managerDesc);
+  };
+  document.querySelector('#languageButton')?.addEventListener('click',()=>{fa=!fa;try{sessionStorage.setItem('bamco-locale',fa?'fa':'en')}catch(_){}applyLocale()});
+  applyLocale();
 
   if(page==='roles'){
     const user=readUser();
-    if(!user){window.location.replace(base('index.html?v=72'));return}
+    if(!user){window.location.replace(base('index.html?v=73'));return}
     document.querySelector('#signedInUser').textContent=user;
     const allowed=USER_ROLES[user]||[];
     document.querySelectorAll('[data-role]').forEach(link=>{link.hidden=!allowed.includes(link.dataset.role)});
     document.querySelector('#signOutButton').addEventListener('click',()=>{
       try{sessionStorage.removeItem(AUTH_KEY)}catch(_){}
-      window.location.replace(base('index.html?v=72'));
+      window.location.replace(base('index.html?v=73'));
     });
     return;
   }
 
-  if(readUser()){window.location.replace(base('roles.html?v=72'));return}
+  if(readUser()){window.location.replace(base('roles.html?v=73'));return}
   const form=document.querySelector('#loginForm');
   const username=document.querySelector('#username');
   const password=document.querySelector('#password');
@@ -43,7 +60,6 @@
   const loginButton=document.querySelector('#loginButton');
   const loginMessage=document.querySelector('#loginMessage');
   let expected=0;
-  let fa=true;
   const makeCaptcha=()=>{
     const a=Math.floor(Math.random()*8)+2,b=Math.floor(Math.random()*8)+1;
     expected=a+b;question.textContent=`${a} + ${b} = ?`;answer.value='';loginButton.disabled=true;captchaBox.className='captchaBox';captchaMessage.textContent=fa?'پاسخ عبارت بالا را وارد کنید.':'Enter the answer above.';
@@ -54,16 +70,6 @@
     captchaMessage.textContent=ok?(fa?'تأیید شد.':'Verified.'):(fa?'پاسخ عبارت بالا را وارد کنید.':'Enter the answer above.');
   };
   answer.addEventListener('input',validateCaptcha);refresh.addEventListener('click',makeCaptcha);
-  document.querySelector('#languageButton').addEventListener('click',()=>{
-    fa=!fa;document.documentElement.lang=fa?'fa':'en';document.documentElement.dir=fa?'rtl':'ltr';
-    document.querySelector('#languageButton').textContent=fa?'English':'فارسی';
-    document.querySelector('#brandName').textContent=fa?'خودروسازان بم':'BAM Automotive Company';
-    document.querySelector('#loginTitle').textContent=fa?'سامانه ارزیابی خودرو':'Vehicle Assessment System';
-    document.querySelector('#loginIntro').textContent=fa?'برای ورود، نام کاربری و رمز عبور را وارد کنید.':'Enter your username and password to sign in.';
-    document.querySelector('#usernameLabel').textContent=fa?'نام کاربری':'Username';
-    document.querySelector('#passwordLabel').textContent=fa?'رمز عبور':'Password';
-    answer.placeholder=fa?'پاسخ کپچا':'Captcha answer';loginButton.textContent=fa?'ورود':'Sign in';validateCaptcha();
-  });
   form.addEventListener('submit',event=>{
     event.preventDefault();
     const user=String(username.value||'').trim().toLowerCase();
@@ -71,7 +77,7 @@
     if(users.has(user)&&password.value===PASSWORD){
       try{sessionStorage.setItem(AUTH_KEY,user)}catch(_){}
       loginMessage.className='message success';loginMessage.textContent=fa?'ورود موفق بود.':'Signed in.';
-      window.location.replace(base('roles.html?v=72'));return;
+      window.location.replace(base('roles.html?v=73'));return;
     }
     loginMessage.className='message error';loginMessage.textContent=fa?'نام کاربری یا رمز عبور نادرست است.':'Incorrect username or password.';password.focus();password.select();makeCaptcha();
   });

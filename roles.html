@@ -8,23 +8,24 @@
   <meta http-equiv="Expires" content="0">
   <meta name="theme-color" content="#0b3a63">
   <title>انتخاب پنل سامانه ارزیابی خودرو</title>
-  <link rel="stylesheet" href="auth-pages.css?v=72">
+  <link rel="stylesheet" href="auth-pages.css?v=73">
 </head>
 <body data-auth-page="roles">
   <main class="rolesPage">
     <section class="rolesCard" aria-labelledby="rolesTitle">
+      <button class="languageButton" id="languageButton" type="button">English</button>
       <header class="rolesHeader">
         <div><h1 id="rolesTitle">انتخاب پنل</h1><p id="rolesIntro">پنل موردنظر را برای ادامه انتخاب کنید.</p></div>
         <button id="signOutButton" class="secondaryButton" type="button">خروج از حساب</button>
       </header>
       <div class="signedIn"><span id="signedInLabel">کاربر واردشده:</span> <bdi id="signedInUser" dir="ltr"></bdi></div>
       <nav class="roleList" aria-label="پنل‌های قابل دسترسی">
-        <a class="roleChoice evaluator" data-role="evaluator" href="evaluator.html?v=72"><span class="roleIcon">✓</span><span><strong>ورود ارزیاب</strong><small>ثبت اطلاعات، چک‌لیست، امتیازها و تصاویر مستند</small></span></a>
-        <a class="roleChoice expert" data-role="expert" href="expert.html?v=72"><span class="roleIcon">◇</span><span><strong>ورود خبره</strong><small>ثبت اطلاعات تخصصی و تعیین وزن شاخص‌های اصلی</small></span></a>
-        <a class="roleChoice manager" data-role="manager" href="manager.html?v=72"><span class="roleIcon">▦</span><span><strong>ورود مدیریت</strong><small>مشاهده داشبورد، نتایج و گزارش مدیریتی</small></span></a>
+        <a class="roleChoice evaluator" data-role="evaluator" href="evaluator.html?v=73"><span class="roleIcon">✓</span><span><strong id="evaluatorTitle">ورود ارزیاب</strong><small id="evaluatorDesc">ثبت اطلاعات، چک‌لیست، امتیازها و تصاویر مستند</small></span></a>
+        <a class="roleChoice expert" data-role="expert" href="expert.html?v=73"><span class="roleIcon">◇</span><span><strong id="expertTitle">ورود خبره</strong><small id="expertDesc">ثبت اطلاعات تخصصی و تعیین وزن شاخص‌های اصلی</small></span></a>
+        <a class="roleChoice manager" data-role="manager" href="manager.html?v=73"><span class="roleIcon">▦</span><span><strong id="managerTitle">ورود مدیریت</strong><small id="managerDesc">مشاهده داشبورد، نتایج و گزارش مدیریتی</small></span></a>
       </nav>
     </section>
   </main>
-  <script src="auth-pages.js?v=72"></script>
+  <script src="auth-pages.js?v=73"></script>
 </body>
 </html>
