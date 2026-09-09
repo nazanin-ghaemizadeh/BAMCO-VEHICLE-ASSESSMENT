@@ -14,17 +14,17 @@
 }
 
 #entryScreen .entryBrand img {
-  content: url("./bamco-logo.png?v=68") !important;
+  content: url("./bamco-logo.png?v=69") !important;
   display: block !important;
   width: min(320px, 66vw) !important;
   max-width: 320px !important;
-  height: 142px !important;
+  height: 154px !important;
   box-sizing: border-box;
-  padding: 18px 24px !important;
+  padding: 8px 14px !important;
   border: 0 !important;
   border-radius: 18px !important;
   background: linear-gradient(145deg, #082f57, #135c86) !important;
-  object-fit: contain !important;
+  object-fit: cover !important;
   opacity: 1 !important;
   visibility: visible !important;
 }
@@ -173,20 +173,21 @@
 
 #entryScreen.authenticatedStep .roleChoices {
   display: grid !important;
-  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  grid-template-columns: 1fr !important;
   gap: 16px !important;
 }
 
 /* Comparison labels: enough room for Persian/English without collisions. */
-#managerComparisonCard .v52PlotWrap { height: 468px !important; }
+#managerComparisonCard .v52PlotWrap { height: 492px !important; }
 #managerComparisonCard .v52QuestionGroup {
-  grid-template-rows: 360px 100px !important;
+  grid-template-rows: 360px 124px !important;
   min-width: 154px !important;
   max-width: 194px !important;
 }
 #managerComparisonCard .v52QuestionTitle {
-  min-height: 82px !important;
-  padding: 20px 8px 0 !important;
+  min-height: 96px !important;
+  padding: 28px 8px 0 !important;
+  transform: translateY(12px) !important;
   overflow: visible !important;
   white-space: normal !important;
   line-height: 1.7 !important;
@@ -198,8 +199,8 @@
   #entryScreen .entryCard { padding: 24px 18px !important; }
   #entryScreen .entryBrand img {
     width: min(280px, 78vw) !important;
-    height: 118px !important;
-    padding: 14px 18px !important;
+    height: 132px !important;
+    padding: 7px 12px !important;
   }
   #entryScreen .bamcoCaptchaRow {
     grid-template-columns: minmax(0, 1fr) 108px 42px !important;

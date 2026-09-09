@@ -783,8 +783,9 @@
 
   function renderAuthState(){
     const loggedIn=!!window.BAMCO_AUTH_USER;
+    const view=new URLSearchParams(window.location.search).get('view');
     const entryScreen=document.querySelector('#entryScreen');
-    entryScreen?.classList.toggle('authenticatedStep',loggedIn);
+    entryScreen?.classList.toggle('authenticatedStep',loggedIn&&view==='roles');
     if(authForm)authForm.hidden=loggedIn;
     if(roleChoices)roleChoices.hidden=!loggedIn;
     if(authenticatedBar)authenticatedBar.hidden=!loggedIn;
@@ -805,7 +806,7 @@
       if(authMessage){authMessage.className='entryAuthMessage success';authMessage.textContent=locale==='fa'?'ورود موفق بود. پنل موردنظر را انتخاب کنید.':'Signed in. Choose a panel.';}
       if(passwordInput)passwordInput.value='';
       setAuthUser(username);
-      roleChoices?.querySelector('button:not([hidden]):not([disabled])')?.focus();
+      window.location.assign(appRoute('roles'));
       return;
     }
     if(authMessage){authMessage.className='entryAuthMessage error';authMessage.textContent=locale==='fa'?'نام کاربری یا رمز عبور نادرست است.':'Incorrect username or password.';}
@@ -817,7 +818,7 @@
     setAuthUser('');
     if(usernameInput)usernameInput.value='';
     if(passwordInput)passwordInput.value='';
-    usernameInput?.focus();
+    window.location.replace(new URL('./',window.location.href).href);
   });
 
   /* Defense in depth: a role cannot be entered before a valid local sign-in. */
@@ -844,6 +845,25 @@
     authCopy();
     return result;
   };
+
+  /* Login, role selection and the application are separate document navigations. */
+  document.querySelector('#switchRoleButton')?.addEventListener('click',event=>{
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    window.location.assign(appRoute('roles'));
+  },true);
+  const routeParams=new URLSearchParams(window.location.search);
+  const routeView=routeParams.get('view');
+  const routeRole=routeParams.get('role');
+  const allowedRoles=USER_ROLES[window.BAMCO_AUTH_USER]||[];
+  if(!window.BAMCO_AUTH_USER&&(routeView==='roles'||routeView==='app')){
+    window.location.replace(new URL('./',window.location.href).href);
+  }else if(window.BAMCO_AUTH_USER&&!routeView){
+    window.location.replace(appRoute('roles'));
+  }else if(routeView==='app'){
+    if(allowedRoles.includes(routeRole))enter(routeRole);
+    else window.location.replace(appRoute('roles'));
+  }
 
   /* A full-case restore must visibly restore final comments and revision history, not only state. */
   window.addEventListener('bamco:case-restored',()=>{
