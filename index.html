@@ -8,35 +8,22 @@
 <meta http-equiv="Expires" content="0">
 <meta name="theme-color" content="#163b69">
 <title>سامانه ارزیابی خودرو | Vehicle Assessment System</title>
-<style>
-html,body{height:100%;margin:0}body{display:grid;place-items:center;background:#f4f8fb;color:#173f63;font-family:Tahoma,Arial,sans-serif}.boot{display:grid;gap:12px;place-items:center;text-align:center;padding:24px}.spinner{width:34px;height:34px;border:3px solid #d6e4ed;border-top-color:#147b86;border-radius:50%;animation:r .75s linear infinite}@keyframes r{to{transform:rotate(360deg)}}.boot small{color:#718697}
-</style>
+<style>html,body{height:100%;margin:0}body{background:#f4f8fb}</style>
 </head>
 <body>
-<div class="boot"><div class="spinner" aria-hidden="true"></div><strong>در حال بارگذاری آخرین نسخه سامانه…</strong><small>Loading the latest application version…</small></div>
 <script>
 (()=>{
-  const BUILD='20260909-infra-v1';
-  const fallback=`./app.html?build=${encodeURIComponent(BUILD)}&t=${Date.now()}`;
-  const goFallback=()=>location.replace(fallback);
-  if(!('serviceWorker' in navigator)){goFallback();return}
-  let finished=false;
-  const reloadControlled=()=>{
-    if(finished)return;
-    finished=true;
-    location.reload();
-  };
-  navigator.serviceWorker.register(`./sw.js?build=${encodeURIComponent(BUILD)}`,{scope:'./',updateViaCache:'none'})
-    .then(async reg=>{
-      try{await reg.update()}catch(_){ }
-      try{await navigator.serviceWorker.ready}catch(_){ }
-      if(navigator.serviceWorker.controller){reloadControlled();return}
-      navigator.serviceWorker.addEventListener('controllerchange',reloadControlled,{once:true});
-      setTimeout(()=>navigator.serviceWorker.controller?reloadControlled():goFallback(),2500);
-    })
-    .catch(goFallback);
+  const BUILD='20260909-v61';
+  const target=`./app.html?build=${encodeURIComponent(BUILD)}`;
+  /* Go straight to the application: no visible bootstrap/loading screen. */
+  if('serviceWorker' in navigator){
+    navigator.serviceWorker.register(`./sw.js?build=${encodeURIComponent(BUILD)}`,{scope:'./',updateViaCache:'none'})
+      .then(reg=>reg.update().catch(()=>{}))
+      .catch(()=>{});
+  }
+  location.replace(target);
 })();
 </script>
-<noscript><meta http-equiv="refresh" content="0;url=./app.html?build=20260909-infra-v1"></noscript>
+<noscript><meta http-equiv="refresh" content="0;url=./app.html?build=20260909-v61"></noscript>
 </body>
 </html>
