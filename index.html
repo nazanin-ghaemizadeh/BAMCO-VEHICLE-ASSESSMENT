@@ -9,6 +9,7 @@
   <meta name="theme-color" content="#0b3a63">
   <title>ورود به سامانه ارزیابی خودرو</title>
   <link rel="stylesheet" href="auth-pages.css?v=75">
+  <link rel="stylesheet" href="auth-guide.css?v=76">
 </head>
 <body data-auth-page="login">
   <main class="authPage">
@@ -16,24 +17,182 @@
       <button class="languageButton" id="languageButton" type="button" lang="en">English</button>
       <img class="brandLogo" src="bamco-logo.png?v=74" alt="لوگوی خودروسازان بم">
       <div class="brandName" id="brandName">خودروسازان بم</div>
-      <h1 id="loginTitle">سامانه ارزیابی خودرو</h1>
-      <p class="intro" id="loginIntro">برای ورود، نام کاربری و رمز عبور را وارد کنید.</p>
-      <form id="loginForm" autocomplete="on">
-        <label><span id="usernameLabel">نام کاربری</span><input id="username" name="username" type="email" dir="ltr" lang="en" autocomplete="username" placeholder="name@bamco.ir" required></label>
-        <label><span id="passwordLabel">رمز عبور</span><input id="password" name="password" type="password" dir="ltr" lang="en" autocomplete="current-password" required></label>
-        <div class="captchaBox">
-          <div class="captchaRow">
-            <input id="captchaAnswer" inputmode="numeric" autocomplete="off" aria-label="پاسخ کپچا" placeholder="پاسخ کپچا" dir="rtl" lang="fa">
-            <strong id="captchaQuestion" dir="ltr" lang="en"></strong>
-            <button id="captchaRefresh" class="captchaRefresh" type="button" aria-label="کپچای جدید">↻</button>
+      <div class="entryTabs" role="tablist" aria-label="بخش‌های صفحه ورود">
+        <button class="entryTabButton active" id="entryLoginTab" type="button" role="tab" aria-controls="entryLoginPanel" aria-selected="true" data-entry-tab="login"><span class="guideFa">ورود به سامانه</span><span class="guideEn">Sign in</span></button>
+        <button class="entryTabButton" id="entryGuideTab" type="button" role="tab" aria-controls="entryGuidePanel" aria-selected="false" tabindex="-1" data-entry-tab="guide"><span class="guideFa">راهنمای استفاده</span><span class="guideEn">User Guide</span></button>
+      </div>
+      <div id="entryLoginPanel" role="tabpanel" aria-labelledby="entryLoginTab" tabindex="0">
+        <h1 id="loginTitle">سامانه ارزیابی خودرو</h1>
+        <p class="intro" id="loginIntro">برای ورود، نام کاربری و رمز عبور را وارد کنید.</p>
+        <form id="loginForm" autocomplete="on">
+          <label><span id="usernameLabel">نام کاربری</span><input id="username" name="username" type="email" dir="ltr" lang="en" autocomplete="username" placeholder="name@bamco.ir" required></label>
+          <label><span id="passwordLabel">رمز عبور</span><input id="password" name="password" type="password" dir="ltr" lang="en" autocomplete="current-password" required></label>
+          <div class="captchaBox">
+            <div class="captchaRow">
+              <input id="captchaAnswer" inputmode="numeric" autocomplete="off" aria-label="پاسخ کپچا" placeholder="پاسخ کپچا" dir="rtl" lang="fa">
+              <strong id="captchaQuestion" dir="ltr" lang="en"></strong>
+              <button id="captchaRefresh" class="captchaRefresh" type="button" aria-label="کپچای جدید">↻</button>
+            </div>
+            <small id="captchaMessage" aria-live="polite">پاسخ عبارت بالا را وارد کنید.</small>
           </div>
-          <small id="captchaMessage" aria-live="polite">پاسخ عبارت بالا را وارد کنید.</small>
-        </div>
-        <button id="loginButton" class="primaryButton" type="submit" disabled>ورود</button>
-        <div id="loginMessage" class="message" role="status" aria-live="polite"></div>
-      </form>
+          <button id="loginButton" class="primaryButton" type="submit" disabled>ورود</button>
+          <div id="loginMessage" class="message" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+<section aria-labelledby="entryGuideTab" class="entryGuidePanel entryTabPanel" hidden="" id="entryGuidePanel" role="tabpanel">
+<div class="guideLang guideFa" dir="rtl" lang="fa">
+<div class="guideHero">
+<h1>راهنمای استفاده از سامانه ارزیابی خودرو</h1>
+<p>این سامانه یک ابزار آفلاین و یکپارچه برای ثبت ارزیابی فنی خودرو، وزن‌دهی تخصصی شاخص‌ها، تحلیل مدیریتی، کنترل اصلاحات و مقایسه چند خودرو است. داده‌های ارزیاب، نظر و وزن‌های خبره و خروجی‌های مدیریتی در یک پرونده واحد نگهداری می‌شوند؛ در ادامه، نحوه کار هر نقش و مسیر کامل پرونده توضیح داده شده است.</p>
+</div>
+<nav aria-label="دسترسی سریع راهنما" class="guideQuickNav">
+<a href="#guide-fa-overview">گردش کار</a><a href="#guide-fa-evaluator">ارزیاب</a><a href="#guide-fa-expert">خبره</a><a href="#guide-fa-manager">مدیریت</a><a href="#guide-fa-backup">پشتیبان و مقایسه</a>
+</nav>
+<section class="guideSection" id="guide-fa-overview">
+<div class="guideSectionHead"><span class="guideSectionIcon workflowIcon">↻</span><div><h2>ورود، نقش‌ها و گردش کلی پرونده</h2><p>هر کاربر ابتدا با نام کاربری و رمز عبور وارد می‌شود و فقط نقش‌های مجاز حساب خود را می‌بیند.</p></div></div>
+<div class="guideOverviewGrid">
+<article class="guideRoleTile evaluator"><strong>ارزیاب</strong><p>مشخصات خودرو و ارزیاب، چهار نمای خودرو، امتیازهای ۱ تا ۱۰، یادداشت‌ها، مستندات و نظر نهایی را ثبت می‌کند و پس از تکمیل پرونده آن را قفل می‌کند.</p></article>
+<article class="guideRoleTile expert"><strong>خبره</strong><p>اطلاعات تخصصی، وزن ۱۵ شاخص اصلی و نظر نهایی خبره را ثبت می‌کند. مجموع وزن‌ها باید دقیقاً برابر ۱ باشد.</p></article>
+<article class="guideRoleTile manager"><strong>مدیریت</strong><p>داشبورد و نتایج را مشاهده می‌کند، وزن‌های فعال را کنترل می‌کند، مجوز اصلاح صادر می‌کند، سوابق اصلاحات را می‌بیند و مقایسه چند خودرو را انجام می‌دهد.</p></article>
+</div>
+<figure aria-label="گردش کار پرونده" class="guideFlow">
+<div class="guideFlowNode"><b>ورود و انتخاب نقش</b><small>براساس دسترسی حساب</small></div><div class="guideFlowArrow">→</div>
+<div class="guideFlowBranch"><div class="guideFlowNode branch"><b>ارزیابی</b><small>امتیاز، مستندات، عکس و نظر نهایی</small></div><div class="guideFlowNode merge"><b>وزن‌دهی خبره</b><small>وزن ۱۵ شاخص و نظر خبره</small></div></div><div class="guideFlowArrow">→</div>
+<div class="guideFlowNode final"><b>مدیریت</b><small>تحلیل، مجوز اصلاح، مقایسه و خروجی</small></div><div class="guideFlowArrow">→</div>
+<div class="guideFlowNode"><b>پشتیبان کامل</b><small>JSON قابل بازیابی</small></div>
+</figure>
+<div class="guideCallout"><strong>تغییر نقش:</strong> فقط نمای سامانه را بین نقش‌های مجاز همان کاربر عوض می‌کند و اطلاعات پرونده حذف نمی‌شود. گزینه «شروع ارزیابی جدید» فقط در پنل ارزیاب در دسترس است و برای ایجاد پرونده یک خودروی جدید استفاده می‌شود.</div>
+</section>
+<section class="guideSection" id="guide-fa-evaluator">
+<div class="guideSectionHead"><span class="guideSectionIcon">✓</span><div><h2>پنل ارزیاب</h2><p>مرجع ثبت داده خام ارزیابی خودرو است.</p></div></div>
+<div class="guideSteps">
+<article class="guideStep"><span class="guideStepNum">۱</span><h3>اطلاعات ارزیابی</h3><p>نام و سابقه ارزیاب، تماس و ایمیل، تاریخ، برند، مدل، شماره شاسی و کارکرد را ثبت کنید.</p></article>
+<article class="guideStep"><span class="guideStepNum">۲</span><h3>چهار نمای خودرو</h3><p>نمای جلو، عقب، چپ و راست را اضافه کنید. این تصاویر در پشتیبان کامل، مدیریت و خروجی اکسل مربوطه استفاده می‌شوند.</p></article>
+<article class="guideStep"><span class="guideStepNum">۳</span><h3>امتیازدهی و مستندات</h3><p>برای هر آیتم امتیاز ۱ تا ۱۰ ثبت کنید. یادداشت و فایل مستند را در همان آیتم اضافه یا حذف کنید. درصد تکمیل به‌صورت زنده به‌روزرسانی می‌شود.</p></article>
+<article class="guideStep"><span class="guideStepNum">۴</span><h3>نظر نهایی ارزیاب</h3><p>جمع‌بندی نهایی را ثبت کنید. این نظر در مدیریت، پشتیبان کامل و خروجی‌های مرتبط نگهداری می‌شود.</p></article>
+<article class="guideStep"><span class="guideStepNum">۵</span><h3>تأیید نهایی و قفل</h3><p>پس از پاسخ‌دادن به تمام آیتم‌ها، «تأیید نهایی و قفل پرونده» را بزنید. پس از قفل، داده‌ها قابل تغییر نیستند.</p></article>
+<article class="guideStep"><span class="guideStepNum">۶</span><h3>مشاهده پرونده قفل‌شده</h3><p>در حالت قفل، شاخص‌ها و زیرشاخص‌ها همچنان باز و بسته می‌شوند و امتیازها، یادداشت‌ها، مستندات و تصاویر قبلی قابل مشاهده‌اند؛ اما هیچ داده‌ای قابل تغییر نیست. بالای فرم وضعیت قفل نمایش داده می‌شود.</p></article>
+<article class="guideStep"><span class="guideStepNum">۷</span><h3>اصلاح پس از قفل</h3><p>فقط مدیریت می‌تواند برای یک کاربر مشخص و در نقش «ارزیاب» مجوز اصلاح صادر کند. تنها همان کاربر در همان نقش امکان ویرایش خواهد داشت. پس از پایان اصلاح، ارزیاب دوباره پرونده را تأیید و قفل می‌کند.</p></article>
+</div>
+<h3>خروجی اکسل ارزیاب</h3>
+<div class="guideToolbar">
+<div class="guideTool"><strong>شیت اصلی</strong><span>اطلاعات ارزیابی، میانگین شاخص‌ها و نظر نهایی ارزیاب را در یک نمای خلاصه نگهداری می‌کند.</span></div>
+<div class="guideTool"><strong>چهار نمای خودرو</strong><span>یک شیت جداگانه برای تصاویر جلو، عقب، چپ و راست ایجاد می‌شود.</span></div>
+<div class="guideTool"><strong>جزئیات</strong><span>امتیاز آیتم‌ها، یادداشت‌ها و اطلاعات مستندات در شیت‌های جزئیات نگهداری می‌شوند.</span></div>
+</div>
+</section>
+<section class="guideSection" id="guide-fa-expert">
+<div class="guideSectionHead"><span class="guideSectionIcon">◇</span><div><h2>پنل خبره</h2><p>برای تعیین اهمیت نسبی ۱۵ شاخص اصلی و ثبت نظر تخصصی استفاده می‌شود.</p></div></div>
+<div class="guideSteps">
+<article class="guideStep"><span class="guideStepNum">۱</span><h3>اطلاعات خبره</h3><p>نام، تخصص، سمت، سازمان، سابقه، تماس، ایمیل و تاریخ تکمیل را ثبت کنید.</p></article>
+<article class="guideStep"><span class="guideStepNum">۲</span><h3>وزن‌ها</h3><p>وزن هر ۱۵ شاخص را وارد کنید. مجموع باید دقیقاً ۱ باشد. وزن پیش‌فرض هر شاخص ۱/۱۵ است.</p></article>
+<article class="guideStep"><span class="guideStepNum">۳</span><h3>تأیید نهایی خبره</h3><p>با معتبر بودن وزن‌ها، تأیید نهایی وزن‌های خبره را برای مدیریت فعال می‌کند. اگر خبره با مجوز اصلاح وارد پرونده قفل‌شده شده باشد، تأیید اصلاحات مجوز همان جلسه را خاتمه می‌دهد.</p></article>
+<article class="guideStep"><span class="guideStepNum">۴</span><h3>حالت قفل</h3><p>در پرونده قفل‌شده، فرم خبره فقط خواندنی است مگر مدیریت دقیقاً برای همان کاربر در نقش خبره مجوز اصلاح صادر کند. وضعیت مجوز بالای پنل خبره نمایش داده می‌شود.</p></article>
+<article class="guideStep"><span class="guideStepNum">۵</span><h3>خروجی اکسل خبره</h3><p>هر زمان تمام وزن‌ها وارد شده باشند و مجموع دقیقاً ۱ باشد، خروجی اکسل قابل دریافت است؛ حتی اگر پرونده قفل باشد. نظر نهایی خبره نیز در فایل اکسل درج می‌شود.</p></article>
+</div>
+</section>
+<section class="guideSection" id="guide-fa-manager">
+<div class="guideSectionHead"><span class="guideSectionIcon">▦</span><div><h2>پنل مدیریت</h2><p>مرکز تحلیل، کنترل وزن‌ها، مدیریت اصلاحات، مقایسه خودروها و گزارش نهایی است.</p></div></div>
+<div class="guideSteps">
+<article class="guideStep"><span class="guideStepNum">۱</span><h3>داشبورد و امتیاز نهایی</h3><p>مشخصات پرونده، تکمیل ارزیابی، میانگین شاخص‌ها، وزن فعال، سهم در امتیاز نهایی، نمودارها، نقاط قوت و ضعف و نظرات ارزیاب/خبره نمایش داده می‌شوند.</p></article>
+<article class="guideStep"><span class="guideStepNum">۲</span><h3>وزن فعال</h3><p>اولویت وزن‌ها: فایل وزن مدیریتیِ تأییدشده، سپس وزن تأییدشده خبره، و در نبود آن‌ها وزن‌های برابر. حذف فایل مدیریتی، سیستم را به وزن خبره یا پیش‌فرض برمی‌گرداند.</p></article>
+<article class="guideStep"><span class="guideStepNum">۳</span><h3>صدور مجوز اصلاح</h3><p>در پرونده قفل‌شده، مدیریت «نقش»، «کاربر دریافت‌کننده» و «دلیل اصلاح» را مشخص می‌کند. مجوز به ترکیب کاربر + نقش + پرونده وابسته است و برای کاربر دیگری قابل استفاده نیست.</p></article>
+<article class="guideStep"><span class="guideStepNum">۴</span><h3>سوابق اصلاحات</h3><p>در انتهای پنل مدیریت، نام کاربر، نقش ارزیاب/خبره، دلیل، تاریخ و ساعت مجوز/اصلاح ثبت می‌شود. این سوابق در پشتیبان کامل نیز نگهداری می‌شوند.</p></article>
+<article class="guideStep"><span class="guideStepNum">۵</span><h3>مقایسه چند خودرو</h3><p>از بخش مقایسه، ابتدا تعداد خودروهای مقایسه‌ای را از ۱ تا ۵ مشخص کنید و سپس فایل JSON هر خودرو را بارگذاری کنید. برای هر خودرو رادار مستقل و جدول مقایسه با اختلاف نسبت به خودروی فعلی نمایش داده می‌شود.</p></article>
+<article class="guideStep"><span class="guideStepNum">۶</span><h3>اکسل مدیریت</h3><p>خروجی مدیریت شامل داشبورد، امتیازها و وزن‌ها، نظر نهایی ارزیاب، خبره و مدیریت و چهار نمای خودرو است. اگر خودروهای مقایسه‌ای بارگذاری شده باشند، جدول و نمودارهای مقایسه نیز در فایل اکسل اضافه می‌شوند.</p></article>
+</div>
+<h3>طبقه‌بندی نتیجه</h3>
+<div class="guideDecision"><div class="pass"><strong>۸۵-۱۰۰</strong><span>عبور مقدماتی</span><small>ادامه بررسی‌های اقتصادی و صنعتی‌سازی</small></div><div class="conditional"><strong>۷۵-۸۵</strong><span>عبور مشروط</span><small>ادامه پس از برنامه اصلاحی</small></div><div class="revise"><strong>۶۵-۷۵</strong><span>اصلاح و ارزیابی مجدد</span><small>توقف تا اجرای اصلاحات</small></div><div class="reject"><strong>کمتر از ۶۵</strong><span>رد مقدماتی</span><small>عدم توصیه برای ادامه فرایند</small></div></div>
+</section>
+<section class="guideSection" id="guide-fa-backup">
+<div class="guideSectionHead"><span class="guideSectionIcon">⇩</span><div><h2>پشتیبان کامل، بازیابی و نکات مهم</h2><p>برای انتقال پرونده بین دستگاه‌ها یا نگهداری نسخه قابل بازیابی از JSON استفاده کنید.</p></div></div>
+<div class="guideSteps">
+<article class="guideStep"><span class="guideStepNum">۱</span><h3>پشتیبان کامل JSON</h3><p>امتیازها، متادیتا، یادداشت‌ها، مستندات، چهار تصویر خودرو، نظرهای نهایی، اطلاعات و وزن‌های خبره، وزن مدیریتی، وضعیت قفل/مجوز و سوابق اصلاحات را ذخیره می‌کند.</p></article>
+<article class="guideStep"><span class="guideStepNum">۲</span><h3>باز کردن پرونده</h3><p>از «باز کردن پرونده» برای بازیابی Full Case Backup استفاده کنید. نقش و وضعیت قفل پرونده پس از بازیابی مطابق اطلاعات ذخیره‌شده اعمال می‌شود.</p></article>
+<article class="guideStep"><span class="guideStepNum">۳</span><h3>نام فایل‌ها</h3><p>نام تمام فایل‌های خروجی به انگلیسی ساخته می‌شود تا در سیستم‌های مختلف سازگاری بیشتری داشته باشد؛ محتوای فایل براساس زبان رابط فارسی یا انگلیسی است.</p></article>
+</div>
+<div class="guideCallout warning"><strong>پیشنهاد:</strong> قبل از شروع ارزیابی جدید، قبل از انتقال پرونده به دستگاه دیگر و قبل از اصلاحات مهم یک پشتیبان کامل JSON بگیرید.</div>
+</section>
+</div>
+<div class="guideLang guideEn" dir="ltr" lang="en">
+<div class="guideHero">
+<h1>Vehicle Assessment System User Guide</h1>
+<p>This system is an integrated offline tool for recording technical vehicle assessments, expert weighting of criteria, management analysis, revision control, and multi-vehicle comparison. Evaluator data, Expert comments and weights, and Management outputs are stored in a single case; the sections below explain how each role works and the complete case workflow.</p>
+</div>
+<nav aria-label="Guide shortcuts" class="guideQuickNav">
+<a href="#guide-en-overview">Workflow</a><a href="#guide-en-evaluator">Evaluator</a><a href="#guide-en-expert">Expert</a><a href="#guide-en-manager">Management</a><a href="#guide-en-backup">Backup &amp; comparison</a>
+</nav>
+<section class="guideSection" id="guide-en-overview">
+<div class="guideSectionHead"><span class="guideSectionIcon workflowIcon">↻</span><div><h2>Sign-in, roles, and overall case workflow</h2><p>Each user first signs in with a username and password and sees only the roles authorized for that account.</p></div></div>
+<div class="guideOverviewGrid">
+<article class="guideRoleTile evaluator"><strong>Evaluator</strong><p>Records vehicle and evaluator information, four vehicle views, 1–10 scores, notes, evidence, and the final comment, then locks the case after completion.</p></article>
+<article class="guideRoleTile expert"><strong>Expert</strong><p>Records professional information, weights for the 15 main criteria, and the Expert final comment. The total of all weights must equal exactly 1.</p></article>
+<article class="guideRoleTile manager"><strong>Management</strong><p>Views the dashboard and results, controls active weights, grants revision permission, reviews revision history, and compares multiple vehicles.</p></article>
+</div>
+<figure aria-label="Case workflow" class="guideFlow">
+<div class="guideFlowNode"><b>Sign in and select role</b><small>Based on account access</small></div><div class="guideFlowArrow">→</div>
+<div class="guideFlowBranch"><div class="guideFlowNode branch"><b>Assessment</b><small>Scores, evidence, photos, and final comment</small></div><div class="guideFlowNode merge"><b>Expert weighting</b><small>15 criterion weights and Expert comment</small></div></div><div class="guideFlowArrow">→</div>
+<div class="guideFlowNode final"><b>Management</b><small>Analysis, revision permission, comparison, and output</small></div><div class="guideFlowArrow">→</div>
+<div class="guideFlowNode"><b>Full backup</b><small>Restorable JSON</small></div>
+</figure>
+<div class="guideCallout"><strong>Switch Role:</strong> only changes the system view between roles authorized for the same user and does not delete case data. “Start New Assessment” is available only in the Evaluator panel and is used to create a case for a new vehicle.</div>
+</section>
+<section class="guideSection" id="guide-en-evaluator">
+<div class="guideSectionHead"><span class="guideSectionIcon">✓</span><div><h2>Evaluator panel</h2><p>The source for recording raw vehicle-assessment data.</p></div></div>
+<div class="guideSteps">
+<article class="guideStep"><span class="guideStepNum">1</span><h3>Assessment information</h3><p>Enter the evaluator’s name and experience, contact details and email, date, vehicle brand, model, VIN, and odometer reading.</p></article>
+<article class="guideStep"><span class="guideStepNum">2</span><h3>Four vehicle views</h3><p>Add front, rear, left, and right views. These images are used in the full backup, Management, and the related Excel output.</p></article>
+<article class="guideStep"><span class="guideStepNum">3</span><h3>Scoring and evidence</h3><p>Enter a score from 1 to 10 for each item. Add or remove notes and evidence files within the same item. The completion percentage updates live.</p></article>
+<article class="guideStep"><span class="guideStepNum">4</span><h3>Evaluator final comment</h3><p>Record the final conclusion. This comment is retained in Management, the full backup, and related outputs.</p></article>
+<article class="guideStep"><span class="guideStepNum">5</span><h3>Final confirmation and lock</h3><p>After answering all items, click “Finalize and Lock Assessment.” After the case is locked, the data cannot be changed.</p></article>
+<article class="guideStep"><span class="guideStepNum">6</span><h3>View a locked case</h3><p>When locked, criteria and subcriteria can still be expanded and collapsed, and previous scores, notes, evidence, and images remain viewable; however, no data can be changed. The lock status is displayed above the form.</p></article>
+<article class="guideStep"><span class="guideStepNum">7</span><h3>Revision after locking</h3><p>Only Management can grant revision permission to a specific user in the “Evaluator” role. Only that same user in that role can edit the case. After completing the revision, the Evaluator confirms and locks the case again.</p></article>
+</div>
+<h3>Evaluator Excel Output</h3>
+<div class="guideToolbar">
+<div class="guideTool"><strong>Main sheet</strong><span>Keeps assessment information, criterion averages, and the Evaluator final comment in one summary view.</span></div>
+<div class="guideTool"><strong>Four vehicle views</strong><span>A separate sheet is created for the front, rear, left, and right images.</span></div>
+<div class="guideTool"><strong>Details</strong><span>Item scores, notes, and evidence information are retained in the detail sheets.</span></div>
+</div>
+</section>
+<section class="guideSection" id="guide-en-expert">
+<div class="guideSectionHead"><span class="guideSectionIcon">◇</span><div><h2>Expert panel</h2><p>Used to define the relative importance of the 15 main criteria and record the expert opinion.</p></div></div>
+<div class="guideSteps">
+<article class="guideStep"><span class="guideStepNum">1</span><h3>Expert information</h3><p>Enter name, specialty, position, organization, experience, contact details, email, and completion date.</p></article>
+<article class="guideStep"><span class="guideStepNum">2</span><h3>Weights</h3><p>Enter the weight of all 15 criteria. The total must equal exactly 1. The default weight for each criterion is 1/15.</p></article>
+<article class="guideStep"><span class="guideStepNum">3</span><h3>Expert final confirmation</h3><p>When the weights are valid, final confirmation makes the Expert weights available to Management. If the Expert entered a locked case with revision permission, confirming the revisions ends that session’s permission.</p></article>
+<article class="guideStep"><span class="guideStepNum">4</span><h3>Locked state</h3><p>In a locked case, the Expert form is read-only unless Management grants revision permission specifically to that same user in the Expert role. Permission status is displayed above the Expert panel.</p></article>
+<article class="guideStep"><span class="guideStepNum">5</span><h3>Expert Excel output</h3><p>Whenever all weights have been entered and their total equals exactly 1, the Excel output can be generated, even if the case is locked. The Expert final comment is also included in the Excel file.</p></article>
+</div>
+</section>
+<section class="guideSection" id="guide-en-manager">
+<div class="guideSectionHead"><span class="guideSectionIcon">▦</span><div><h2>Management panel</h2><p>The central area for analysis, weight control, revision management, vehicle comparison, and final reporting.</p></div></div>
+<div class="guideSteps">
+<article class="guideStep"><span class="guideStepNum">1</span><h3>Dashboard and final score</h3><p>Case information, assessment completion, criterion averages, active weights, contribution to the final score, charts, strengths and weaknesses, and Evaluator/Expert comments are displayed.</p></article>
+<article class="guideStep"><span class="guideStepNum">2</span><h3>Active weights</h3><p>Weight priority is: an approved Management weight file, then confirmed Expert weights, and equal weights if neither is available. Removing the Management file returns the system to Expert or default weights.</p></article>
+<article class="guideStep"><span class="guideStepNum">3</span><h3>Grant revision permission</h3><p>For a locked case, Management specifies the “role,” “receiving user,” and “revision reason.” Permission is tied to the combination of user + role + case and cannot be used by another user.</p></article>
+<article class="guideStep"><span class="guideStepNum">4</span><h3>Revision history</h3><p>At the end of the Management panel, the user name, Evaluator/Expert role, reason, date, and time of the permission/revision are recorded. These records are also retained in the full backup.</p></article>
+<article class="guideStep"><span class="guideStepNum">5</span><h3>Compare multiple vehicles</h3><p>In the comparison section, first select 1 to 5 comparison vehicles, then load the JSON file for each vehicle. A separate radar chart is displayed for each vehicle, together with a comparison table showing differences from the current vehicle.</p></article>
+<article class="guideStep"><span class="guideStepNum">6</span><h3>Management Excel</h3><p>The Management output includes the dashboard, scores and weights, the final comments from the Evaluator, Expert, and Management, and the four vehicle views. If comparison vehicles have been loaded, the comparison table and charts are also added to the Excel file.</p></article>
+</div>
+<h3>Result classification</h3>
+<div class="guideDecision"><div class="pass"><strong>85-100</strong><span>Preliminary pass</span><small>Continue economic and industrialization reviews</small></div><div class="conditional"><strong>75-85</strong><span>Conditional pass</span><small>Continue after a corrective plan</small></div><div class="revise"><strong>65-75</strong><span>Revise and reassess</span><small>Pause until corrections are implemented</small></div><div class="reject"><strong>Below 65</strong><span>Preliminary rejection</span><small>Further continuation is not recommended</small></div></div>
+</section>
+<section class="guideSection" id="guide-en-backup">
+<div class="guideSectionHead"><span class="guideSectionIcon">⇩</span><div><h2>Full backup, restore, and important notes</h2><p>Use JSON to transfer a case between devices or keep a restorable copy.</p></div></div>
+<div class="guideSteps">
+<article class="guideStep"><span class="guideStepNum">1</span><h3>Full JSON backup</h3><p>Stores scores, metadata, notes, evidence, four vehicle images, final comments, Expert information and weights, Management weights, lock/permission status, and revision history.</p></article>
+<article class="guideStep"><span class="guideStepNum">2</span><h3>Open case</h3><p>Use “Open Assessment File” to restore a Full Case Backup. After restoration, the role and case lock status are applied according to the saved information.</p></article>
+<article class="guideStep"><span class="guideStepNum">3</span><h3>File names</h3><p>All output file names are generated in English for better compatibility across systems; file content follows the Persian or English interface language.</p></article>
+</div>
+<div class="guideCallout warning"><strong>Recommendation:</strong> create a full JSON backup before starting a new assessment, before transferring the case to another device, and before major revisions.</div>
+</section>
+</div>
+  <button class="secondaryButton guideBackButton" id="guideBackButton" type="button"><span class="guideFa">بازگشت به ورود به سامانه</span><span class="guideEn">Back to sign in</span></button>
+</section>
+
     </section>
   </main>
-  <script src="auth-pages.js?v=75"></script>
+  <script src="auth-pages.js?v=76"></script>
 </body>
 </html>

@@ -27,6 +27,8 @@
   const applyLocale=()=>{
     const t=copy[fa?'fa':'en'];
     document.documentElement.lang=fa?'fa':'en';document.documentElement.dir=fa?'rtl':'ltr';
+    const entryTabs=document.querySelector('.entryTabs');
+    if(entryTabs)entryTabs.setAttribute('aria-label',fa?'بخش‌های صفحه ورود':'Login page sections');
     setText('#languageButton',t.language);const languageButton=document.querySelector('#languageButton');if(languageButton)languageButton.lang='en';setText('#brandName',t.brand);setText('#loginTitle',t.loginTitle);setText('#loginIntro',t.loginIntro);setText('#usernameLabel',t.username);setText('#passwordLabel',t.password);setText('#loginButton',t.signIn);
     const captcha=document.querySelector('#captchaAnswer');
     if(captcha){
@@ -42,6 +44,41 @@
   };
   document.querySelector('#languageButton')?.addEventListener('click',()=>{fa=!fa;try{sessionStorage.setItem('bamco-locale',fa?'fa':'en')}catch(_){}applyLocale()});
   applyLocale();
+
+  const entryTabs=[...document.querySelectorAll('[data-entry-tab]')];
+  const loginPanel=document.querySelector('#entryLoginPanel');
+  const guidePanel=document.querySelector('#entryGuidePanel');
+  if(loginPanel&&guidePanel&&entryTabs.length){
+    const selectEntryTab=(name,focus=false,scroll=true)=>{
+      const guide=name==='guide';
+      loginPanel.hidden=guide;guidePanel.hidden=!guide;
+      document.querySelector('.authPage').classList.toggle('guideMode',guide);
+      document.querySelector('.authCard').setAttribute('aria-labelledby',guide?'entryGuideTab':'loginTitle');
+      entryTabs.forEach(button=>{
+        const active=button.dataset.entryTab===name;
+        button.classList.toggle('active',active);
+        button.setAttribute('aria-selected',String(active));
+        button.tabIndex=active?0:-1;
+        if(active&&focus)button.focus();
+      });
+      if(scroll)window.scrollTo({top:0,behavior:'instant'});
+    };
+    entryTabs.forEach((button,index)=>{
+      button.addEventListener('click',()=>selectEntryTab(button.dataset.entryTab));
+      button.addEventListener('keydown',event=>{
+        let next;
+        if(event.key==='Home')next=0;
+        else if(event.key==='End')next=entryTabs.length-1;
+        else if(event.key==='ArrowRight')next=index+(fa?-1:1);
+        else if(event.key==='ArrowLeft')next=index+(fa?1:-1);
+        else return;
+        event.preventDefault();
+        selectEntryTab(entryTabs[(next+entryTabs.length)%entryTabs.length].dataset.entryTab,true);
+      });
+    });
+    document.querySelector('#guideBackButton')?.addEventListener('click',()=>selectEntryTab('login',true));
+    selectEntryTab('login',false,false);
+  }
 
   if(page==='roles'){
     const user=readUser();
