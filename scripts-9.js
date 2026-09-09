@@ -12,8 +12,8 @@
   const escHtml=value=>typeof esc==='function'?esc(String(value??'')):String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
   const shown=value=>fa()&&typeof localNumber==='function'?localNumber(value):String(value);
   const criteria=()=>window.ASSESSMENT_CRITERIA||[];
-  const criterionTitle=main=>fa()?(main.titleFa||main.textFa||main.id):(main.titleEn||main.textEn||main.titleFa||main.textFa||main.id);
-  const questionTitle=item=>fa()?(item.titleFa||item.textFa||item.id):(item.titleEn||item.textEn||item.titleFa||item.textFa||item.id);
+  const criterionTitle=main=>typeof title==='function'?title(main.titleFa,'main',main.id):(fa()?(main.titleFa||main.textFa||main.id):(main.titleEn||main.textEn||main.titleFa||main.textFa||main.id));
+  const questionTitle=item=>fa()?(item.titleFa||item.textFa||item.id):(typeof itemTitleEn==='function'?itemTitleEn(item):(item.titleEn||item.textEn||item.titleFa||item.textFa||item.id));
   const scoreKey=(main,sub,item)=>typeof itemKey==='function'?itemKey(main,sub,item):`${main.id}::${sub.id}::${item.id}`;
 
   function injectStyles(){
