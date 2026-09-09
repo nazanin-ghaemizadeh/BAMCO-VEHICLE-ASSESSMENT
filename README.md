@@ -1,5 +1,5 @@
-# BAMCO VEHICLE ASSESSMENT
+# BAMCO Vehicle Assessment
 
-Static web app ready for GitHub Pages.
+سامانه ارزیابی خودرو — نسخه وب مستقر روی GitHub Pages.
 
-Deployment refresh: v50 management comparison drill-down and review-band update.
+Deployment marker: 2026-09-09 v57
