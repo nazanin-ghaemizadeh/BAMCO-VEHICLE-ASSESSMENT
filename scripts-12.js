@@ -1,164 +1,58 @@
-/* v61 — entry captcha + company-brand polish + comparison criterion explanations */
+/* v62 — restore compact entry layout, official logo, ordered login fields, polished criterion tooltip */
 (()=>{
   const q=(sel,root=document)=>root.querySelector(sel);
-  const qa=(sel,root=document)=>[...root.querySelectorAll(sel)];
-  const isFa=()=>document.documentElement.lang!=='en' && !document.documentElement.classList.contains('english');
-
+  const isFa=()=>document.documentElement.lang!=='en'&&!document.documentElement.classList.contains('english');
   function injectStyles(){
-    if(q('#bamco-v61-styles'))return;
-    const style=document.createElement('style');
-    style.id='bamco-v61-styles';
+    let style=q('#bamco-v61-styles');if(!style){style=document.createElement('style');style.id='bamco-v61-styles';document.head.appendChild(style)}
     style.textContent=`
-      #entryScreen .entryBrand img{display:block!important;max-width:min(390px,82vw)!important;width:auto!important;height:auto!important;margin:0 auto!important;object-fit:contain!important}
-      #entryScreen .entryBrand{display:flex!important;align-items:center!important;justify-content:center!important;min-height:120px!important;padding:8px 12px 4px!important}
-      #entryScreen .bamcoCaptcha{margin:14px 0 4px;padding:14px;border:1px solid #d6e3eb;border-radius:14px;background:#f8fbfd;box-shadow:0 7px 22px rgba(22,63,99,.06)}
-      #entryScreen .bamcoCaptchaHead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}
-      #entryScreen .bamcoCaptchaHead strong{color:#173f63;font-size:13px;font-weight:900}
-      #entryScreen .bamcoCaptchaRefresh{border:1px solid #c7d9e4;background:#fff;color:#1d587d;border-radius:9px;min-width:38px;height:36px;cursor:pointer;font-weight:900}
-      #entryScreen .bamcoCaptchaRow{display:grid;grid-template-columns:minmax(96px,.65fr) minmax(120px,1fr);gap:10px;align-items:center}
-      #entryScreen .bamcoCaptchaQuestion{display:flex;align-items:center;justify-content:center;min-height:44px;border-radius:10px;background:#163f63;color:#fff;font:900 18px/1.2 Tahoma,Arial,sans-serif;direction:ltr;letter-spacing:.5px}
-      #entryScreen .bamcoCaptchaInput{width:100%;box-sizing:border-box;min-height:44px;border:1px solid #c7d9e4;border-radius:10px;background:#fff;padding:8px 12px;text-align:center;font-weight:800;outline:none}
-      #entryScreen .bamcoCaptchaInput:focus{border-color:#147b86;box-shadow:0 0 0 3px rgba(20,123,134,.12)}
-      #entryScreen .bamcoCaptchaMessage{display:block;min-height:20px;margin-top:8px;color:#687f90;font-size:11px;font-weight:700}
-      #entryScreen .bamcoCaptcha.ok{border-color:#9fd2bd;background:#f4fbf7}
-      #entryScreen .bamcoCaptcha.ok .bamcoCaptchaMessage{color:#187a54}
-      #entryScreen .bamcoCaptcha.bad{border-color:#e3aab0;background:#fff7f8}
-      #entryScreen .bamcoCaptcha.bad .bamcoCaptchaMessage{color:#a83042}
-      #entryScreen #authLoginButton[data-captcha-locked="1"]{opacity:.55;cursor:not-allowed;filter:saturate(.45)}
-      .v52QuestionTitle{cursor:help!important;text-decoration-line:underline;text-decoration-style:dotted;text-underline-offset:4px;text-decoration-color:#8ba4b7}
-      #bamcoCriterionTooltip{position:fixed;z-index:2147483000;display:none;width:min(360px,calc(100vw - 28px));max-height:min(330px,55vh);overflow:auto;padding:13px 15px;border:1px solid #c9d8e2;border-radius:13px;background:rgba(18,49,73,.97);color:#fff;box-shadow:0 16px 42px rgba(9,32,49,.28);font:700 12px/1.8 Tahoma,Arial,sans-serif;text-align:start;direction:rtl;pointer-events:none;backdrop-filter:blur(8px)}
-      #bamcoCriterionTooltip b{display:block;margin-bottom:5px;color:#cdebf1;font-size:12px;font-weight:900}
-      .english #bamcoCriterionTooltip{direction:ltr;font-family:"Times New Roman",serif}
-      @media(max-width:560px){#entryScreen .bamcoCaptchaRow{grid-template-columns:1fr}#entryScreen .entryBrand{min-height:94px!important}}
+      #entryScreen .entryCard{max-width:920px!important;width:min(920px,calc(100vw - 32px))!important;padding:26px 38px 22px!important}
+      #entryScreen .entryBrand{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:8px!important;min-height:0!important;padding:6px 12px 14px!important;text-align:center!important}
+      #entryScreen .entryBrand img{content:url('./bamco-logo.svg?v=62')!important;display:block!important;width:min(430px,72vw)!important;max-width:430px!important;height:170px!important;margin:0 auto!important;object-fit:contain!important}
+      #entryScreen .entryBrand>div{display:none!important}
+      #entryScreen .entryTabs{max-width:620px!important;margin:0 auto 22px!important}
+      #entryScreen .entryTabPanel{max-width:620px!important;margin-inline:auto!important}
+      #entryScreen .entryIntro{text-align:center!important;margin-bottom:18px!important}
+      #entryScreen .entryAuthForm{display:grid!important;grid-template-columns:1fr!important;gap:13px!important;max-width:520px!important;margin:0 auto!important;padding:20px!important;box-sizing:border-box!important}
+      #entryScreen .entryAuthForm>label{display:grid!important;grid-template-columns:1fr!important;gap:7px!important;width:100%!important;text-align:right!important}
+      #entryScreen .entryAuthForm input{width:100%!important;box-sizing:border-box!important;min-height:46px!important}
+      #entryScreen .bamcoCaptcha{order:30!important;width:100%!important;box-sizing:border-box!important;margin:2px 0 0!important;padding:13px 14px!important;border:1px solid #cbdde8!important;border-radius:12px!important;background:#f7fafc!important;box-shadow:none!important}
+      #entryScreen .bamcoCaptchaHead{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:12px!important;margin-bottom:9px!important}
+      #entryScreen .bamcoCaptchaHead strong{color:#173f63!important;font-size:13px!important;font-weight:800!important}
+      #entryScreen .bamcoCaptchaRefresh{border:1px solid #bdd2e0!important;background:#fff!important;color:#174f76!important;border-radius:8px!important;width:38px!important;height:36px!important;cursor:pointer!important;font-weight:900!important}
+      #entryScreen .bamcoCaptchaRow{display:grid!important;grid-template-columns:145px 1fr!important;gap:10px!important;align-items:center!important}
+      #entryScreen .bamcoCaptchaQuestion{display:flex!important;align-items:center!important;justify-content:center!important;min-height:44px!important;border-radius:9px!important;background:#174a72!important;color:#fff!important;font:800 17px/1.2 Tahoma,Arial,sans-serif!important;direction:ltr!important}
+      #entryScreen .bamcoCaptchaInput{min-height:44px!important;text-align:center!important}
+      #entryScreen .bamcoCaptchaMessage{display:block!important;min-height:18px!important;margin-top:7px!important;color:#687f90!important;font-size:11px!important;font-weight:600!important}
+      #entryScreen #authLoginButton{order:40!important;width:100%!important;min-height:46px!important;margin:0!important}
+      #entryScreen #entryAuthMessage{order:50!important}
+      #entryScreen #authLoginButton[data-captcha-locked="1"]{opacity:.58!important;cursor:not-allowed!important}
+      #entryScreen .bamcoCaptcha.ok{border-color:#a8d1bf!important;background:#f6fbf8!important}#entryScreen .bamcoCaptcha.ok .bamcoCaptchaMessage{color:#187a54!important}
+      #entryScreen .bamcoCaptcha.bad{border-color:#dfb1b6!important;background:#fff8f8!important}#entryScreen .bamcoCaptcha.bad .bamcoCaptchaMessage{color:#a83042!important}
+      #managerComparisonCard .v52QuestionTitle{cursor:help!important;text-decoration-line:underline!important;text-decoration-style:dotted!important;text-underline-offset:4px!important;text-decoration-color:#8ba4b7!important}
+      #bamcoCriterionTooltip{position:fixed!important;z-index:2147483000!important;display:none;width:min(390px,calc(100vw - 28px))!important;max-height:min(340px,58vh)!important;overflow:auto!important;padding:16px 18px!important;border:1px solid #c8dbe6!important;border-radius:14px!important;background:#f8fbfd!important;color:#35566d!important;box-shadow:0 14px 34px rgba(22,63,99,.18)!important;font-family:'B Nazanin','BNazanin','Nazanin',Tahoma,Arial,sans-serif!important;font-size:15px!important;font-weight:400!important;line-height:1.9!important;text-align:justify!important;text-align-last:right!important;direction:rtl!important;pointer-events:none!important}
+      #bamcoCriterionTooltip b{display:block!important;margin-bottom:5px!important;color:#163f63!important;font-size:16px!important;font-weight:700!important;text-align:right!important}
+      #bamcoCriterionTooltip .bamcoTipSub{display:block!important;margin-bottom:7px!important;color:#147b86!important;font-size:13px!important;font-weight:700!important;text-align:right!important}
+      #bamcoCriterionTooltip .bamcoTipBody{display:block!important;text-align:justify!important}
+      .english #bamcoCriterionTooltip{direction:ltr!important;text-align:left!important;text-align-last:left!important;font-family:'Times New Roman',serif!important;font-size:13px!important}
+      @media(max-width:650px){#entryScreen .entryCard{padding:20px 16px!important}#entryScreen .entryBrand img{width:min(350px,84vw)!important;height:145px!important}#entryScreen .entryAuthForm{padding:14px!important}#entryScreen .bamcoCaptchaRow{grid-template-columns:1fr!important}}
     `;
-    document.head.appendChild(style);
   }
-
-  function makeChallenge(){
-    const a=2+Math.floor(Math.random()*8);
-    const b=1+Math.floor(Math.random()*8);
-    const add=Math.random()>.35;
-    return add?{text:`${a} + ${b} = ?`,answer:a+b}:{text:`${a+b} − ${b} = ?`,answer:a};
-  }
-
+  function makeChallenge(){const a=2+Math.floor(Math.random()*8),b=1+Math.floor(Math.random()*8),add=Math.random()>.35;return add?{text:`${a} + ${b} = ?`,answer:a+b}:{text:`${a+b} − ${b} = ?`,answer:a}}
   let captcha={challenge:null,passed:false};
-  function syncLoginLock(){
-    const button=q('#authLoginButton');
-    if(!button)return;
-    button.dataset.captchaLocked=captcha.passed?'0':'1';
-    button.setAttribute('aria-disabled',captcha.passed?'false':'true');
-  }
-  function refreshCaptcha(focus=false){
-    captcha.challenge=makeChallenge();
-    captcha.passed=false;
-    const box=q('#bamcoEntryCaptcha');
-    const question=q('#bamcoCaptchaQuestion');
-    const input=q('#bamcoCaptchaInput');
-    const msg=q('#bamcoCaptchaMessage');
-    if(question)question.textContent=captcha.challenge.text;
-    if(input){input.value='';if(focus)input.focus()}
-    if(box)box.classList.remove('ok','bad');
-    if(msg)msg.textContent=isFa()?'پاسخ عبارت بالا را وارد کنید.':'Enter the answer to the expression above.';
-    syncLoginLock();
-  }
-  function validateCaptcha(){
-    const box=q('#bamcoEntryCaptcha');
-    const input=q('#bamcoCaptchaInput');
-    const msg=q('#bamcoCaptchaMessage');
-    if(!input||!captcha.challenge)return false;
-    const normalized=String(input.value||'').replace(/[۰-۹]/g,d=>'0123456789'['۰۱۲۳۴۵۶۷۸۹'.indexOf(d)]).trim();
-    const ok=Number(normalized)===captcha.challenge.answer;
-    captcha.passed=ok;
-    box?.classList.toggle('ok',ok);
-    box?.classList.toggle('bad',!ok&&normalized!=='');
-    if(msg)msg.textContent=ok?(isFa()?'تأیید شد؛ می‌توانید وارد شوید.':'Verified. You can sign in.'):(normalized?(isFa()?'پاسخ کپچا صحیح نیست.':'The captcha answer is incorrect.'):(isFa()?'پاسخ عبارت بالا را وارد کنید.':'Enter the answer to the expression above.'));
-    syncLoginLock();
-    return ok;
-  }
-  function installCaptcha(){
-    const form=q('#entryAuthForm');
-    const login=q('#authLoginButton');
-    if(!form||!login||q('#bamcoEntryCaptcha'))return;
-    const box=document.createElement('div');
-    box.className='bamcoCaptcha';
-    box.id='bamcoEntryCaptcha';
-    box.innerHTML=`<div class="bamcoCaptchaHead"><strong>${isFa()?'تأیید انسانی':'Human verification'}</strong><button class="bamcoCaptchaRefresh" id="bamcoCaptchaRefresh" type="button" aria-label="${isFa()?'ساخت کپچای جدید':'New captcha'}">↻</button></div><div class="bamcoCaptchaRow"><div class="bamcoCaptchaQuestion" id="bamcoCaptchaQuestion"></div><input class="bamcoCaptchaInput" id="bamcoCaptchaInput" inputmode="numeric" autocomplete="off" placeholder="${isFa()?'پاسخ':'Answer'}" aria-label="${isFa()?'پاسخ کپچا':'Captcha answer'}"></div><small class="bamcoCaptchaMessage" id="bamcoCaptchaMessage"></small>`;
-    form.insertBefore(box,login);
-    q('#bamcoCaptchaRefresh')?.addEventListener('click',()=>refreshCaptcha(true));
-    q('#bamcoCaptchaInput')?.addEventListener('input',validateCaptcha);
-    form.addEventListener('submit',event=>{
-      if(validateCaptcha())return;
-      event.preventDefault();
-      event.stopImmediatePropagation();
-      q('#bamcoCaptchaInput')?.focus();
-    },true);
-    refreshCaptcha(false);
-  }
-
-  function normalize(value){return String(value||'').replace(/\s+/g,' ').trim()}
-  function findItemByVisibleTitle(titleText){
-    const wanted=normalize(titleText);
-    for(const main of (window.ASSESSMENT_CRITERIA||[])){
-      for(const sub of (main.subgroups||[])){
-        for(const item of (sub.items||[])){
-          const candidates=[item.titleFa,item.titleEn,item.textFa,item.textEn].map(normalize).filter(Boolean);
-          if(candidates.includes(wanted))return {main,sub,item};
-        }
-      }
-    }
-    return null;
-  }
-  function ensureTooltip(){
-    let tip=q('#bamcoCriterionTooltip');
-    if(tip)return tip;
-    tip=document.createElement('div');
-    tip.id='bamcoCriterionTooltip';
-    tip.setAttribute('role','tooltip');
-    document.body.appendChild(tip);
-    return tip;
-  }
-  function tooltipContent(label){
-    const hit=findItemByVisibleTitle(label.textContent);
-    if(!hit)return null;
-    const {sub,item}=hit;
-    const faMode=isFa();
-    const heading=faMode?(item.titleFa||'توضیح شاخص'):(item.titleEn||item.titleFa||'Criterion');
-    const description=faMode?(item.textFa||item.exampleFa||''):(item.textEn||item.textFa||item.exampleEn||item.exampleFa||'');
-    const subgroup=faMode?(sub.titleFa||''):(sub.titleEn||sub.titleFa||'');
-    return {heading,description,subgroup};
-  }
-  function showTooltip(label,event){
-    const data=tooltipContent(label);if(!data)return;
-    const tip=ensureTooltip();
-    tip.innerHTML=`<b>${escapeHtml(data.heading)}</b>${data.subgroup?`<span>${escapeHtml(data.subgroup)}</span><br>`:''}<span>${escapeHtml(data.description)}</span>`;
-    tip.style.display='block';
-    moveTooltip(event);
-  }
-  function moveTooltip(event){
-    const tip=q('#bamcoCriterionTooltip');if(!tip||tip.style.display==='none')return;
-    const gap=14;
-    const rect=tip.getBoundingClientRect();
-    let left=event.clientX+gap,top=event.clientY+gap;
-    if(left+rect.width>innerWidth-8)left=event.clientX-rect.width-gap;
-    if(top+rect.height>innerHeight-8)top=event.clientY-rect.height-gap;
-    tip.style.left=Math.max(8,left)+'px';tip.style.top=Math.max(8,top)+'px';
-  }
+  function syncLoginLock(){const button=q('#authLoginButton');if(!button)return;button.dataset.captchaLocked=captcha.passed?'0':'1';button.setAttribute('aria-disabled',captcha.passed?'false':'true')}
+  function refreshCaptcha(focus=false){captcha.challenge=makeChallenge();captcha.passed=false;const box=q('#bamcoEntryCaptcha'),question=q('#bamcoCaptchaQuestion'),input=q('#bamcoCaptchaInput'),msg=q('#bamcoCaptchaMessage');if(question)question.textContent=captcha.challenge.text;if(input){input.value='';if(focus)input.focus()}box?.classList.remove('ok','bad');if(msg)msg.textContent=isFa()?'پاسخ عبارت بالا را وارد کنید.':'Enter the answer above.';syncLoginLock()}
+  function validateCaptcha(){const box=q('#bamcoEntryCaptcha'),input=q('#bamcoCaptchaInput'),msg=q('#bamcoCaptchaMessage');if(!input||!captcha.challenge)return false;const normalized=String(input.value||'').replace(/[۰-۹]/g,d=>'0123456789'['۰۱۲۳۴۵۶۷۸۹'.indexOf(d)]).trim(),ok=normalized!==''&&Number(normalized)===captcha.challenge.answer;captcha.passed=ok;box?.classList.toggle('ok',ok);box?.classList.toggle('bad',!ok&&normalized!=='');if(msg)msg.textContent=ok?(isFa()?'تأیید شد.':'Verified.'):(normalized?(isFa()?'پاسخ کپچا صحیح نیست.':'Incorrect captcha answer.'):(isFa()?'پاسخ عبارت بالا را وارد کنید.':'Enter the answer above.'));syncLoginLock();return ok}
+  function installCaptcha(){const form=q('#entryAuthForm'),login=q('#authLoginButton');if(!form||!login)return;let box=q('#bamcoEntryCaptcha');if(!box){box=document.createElement('div');box.className='bamcoCaptcha';box.id='bamcoEntryCaptcha';box.innerHTML=`<div class="bamcoCaptchaHead"><strong>${isFa()?'تأیید انسانی':'Human verification'}</strong><button class="bamcoCaptchaRefresh" id="bamcoCaptchaRefresh" type="button" aria-label="${isFa()?'کپچای جدید':'New captcha'}">↻</button></div><div class="bamcoCaptchaRow"><div class="bamcoCaptchaQuestion" id="bamcoCaptchaQuestion"></div><input class="bamcoCaptchaInput" id="bamcoCaptchaInput" inputmode="numeric" autocomplete="off" placeholder="${isFa()?'پاسخ کپچا':'Captcha answer'}"></div><small class="bamcoCaptchaMessage" id="bamcoCaptchaMessage"></small>`;form.insertBefore(box,login);q('#bamcoCaptchaRefresh')?.addEventListener('click',()=>refreshCaptcha(true));q('#bamcoCaptchaInput')?.addEventListener('input',validateCaptcha);form.addEventListener('submit',event=>{if(validateCaptcha())return;event.preventDefault();event.stopImmediatePropagation();q('#bamcoCaptchaInput')?.focus()},true);refreshCaptcha()}}
+  function setOfficialLogo(){const img=q('#entryScreen .entryBrand img');if(img){img.src='./bamco-logo.svg?v=62';img.removeAttribute('srcset');img.removeAttribute('hidden');img.style.visibility='visible';img.style.opacity='1'}}
+  const normalize=v=>String(v||'').replace(/\s+/g,' ').trim();
+  function findItemByVisibleTitle(text){const wanted=normalize(text);for(const main of(window.ASSESSMENT_CRITERIA||[]))for(const sub of(main.subgroups||[]))for(const item of(sub.items||[])){const candidates=[item.titleFa,item.titleEn,item.textFa,item.textEn].map(normalize).filter(Boolean);if(candidates.includes(wanted))return{main,sub,item}}return null}
+  function ensureTooltip(){let tip=q('#bamcoCriterionTooltip');if(!tip){tip=document.createElement('div');tip.id='bamcoCriterionTooltip';tip.setAttribute('role','tooltip');document.body.appendChild(tip)}return tip}
+  const esc=v=>String(v??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+  function tooltipContent(label){const hit=findItemByVisibleTitle(label.textContent);if(!hit)return null;const{sub,item}=hit,fa=isFa();return{heading:fa?(item.titleFa||'توضیح شاخص'):(item.titleEn||item.titleFa||'Criterion'),description:fa?(item.textFa||item.exampleFa||''):(item.textEn||item.textFa||item.exampleEn||item.exampleFa||''),subgroup:fa?(sub.titleFa||''):(sub.titleEn||sub.titleFa||'')}}
+  function showTooltip(label,event){const d=tooltipContent(label);if(!d)return;const tip=ensureTooltip();tip.innerHTML=`<b>${esc(d.heading)}</b>${d.subgroup?`<span class="bamcoTipSub">${esc(d.subgroup)}</span>`:''}<span class="bamcoTipBody">${esc(d.description)}</span>`;tip.style.display='block';moveTooltip(event)}
+  function moveTooltip(event){const tip=q('#bamcoCriterionTooltip');if(!tip||tip.style.display==='none')return;const gap=14,r=tip.getBoundingClientRect();let left=event.clientX+gap,top=event.clientY+gap;if(left+r.width>innerWidth-8)left=event.clientX-r.width-gap;if(top+r.height>innerHeight-8)top=event.clientY-r.height-gap;tip.style.left=Math.max(8,left)+'px';tip.style.top=Math.max(8,top)+'px'}
   function hideTooltip(){const tip=q('#bamcoCriterionTooltip');if(tip)tip.style.display='none'}
-  function escapeHtml(value){return String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]))}
-
-  document.addEventListener('mouseover',event=>{const label=event.target?.closest?.('#managerComparisonCard .v52QuestionTitle');if(label)showTooltip(label,event)},true);
-  document.addEventListener('mousemove',event=>{if(event.target?.closest?.('#managerComparisonCard .v52QuestionTitle'))moveTooltip(event)},true);
-  document.addEventListener('mouseout',event=>{const label=event.target?.closest?.('#managerComparisonCard .v52QuestionTitle');if(label&&!label.contains(event.relatedTarget))hideTooltip()},true);
-  document.addEventListener('focusin',event=>{const label=event.target?.closest?.('#managerComparisonCard .v52QuestionTitle');if(label){const r=label.getBoundingClientRect();showTooltip(label,{clientX:r.left+r.width/2,clientY:r.top})}},true);
-  document.addEventListener('focusout',event=>{if(event.target?.closest?.('#managerComparisonCard .v52QuestionTitle'))hideTooltip()},true);
-  addEventListener('scroll',hideTooltip,true);
-
-  function keepBrandVisible(){
-    const img=q('#entryScreen .entryBrand img');
-    if(img){img.removeAttribute('hidden');img.style.visibility='visible';img.style.opacity='1'}
-  }
-  function boot(){injectStyles();installCaptcha();keepBrandVisible()}
-  const observer=new MutationObserver(()=>{installCaptcha();keepBrandVisible()});
-  observer.observe(document.documentElement,{subtree:true,childList:true});
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
+  document.addEventListener('mouseover',e=>{const l=e.target?.closest?.('#managerComparisonCard .v52QuestionTitle');if(l)showTooltip(l,e)},true);document.addEventListener('mousemove',e=>{if(e.target?.closest?.('#managerComparisonCard .v52QuestionTitle'))moveTooltip(e)},true);document.addEventListener('mouseout',e=>{const l=e.target?.closest?.('#managerComparisonCard .v52QuestionTitle');if(l&&!l.contains(e.relatedTarget))hideTooltip()},true);addEventListener('scroll',hideTooltip,true);
+  function boot(){injectStyles();setOfficialLogo();installCaptcha()}
+  const observer=new MutationObserver(()=>{setOfficialLogo();installCaptcha()});observer.observe(document.documentElement,{subtree:true,childList:true});if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
 })();
