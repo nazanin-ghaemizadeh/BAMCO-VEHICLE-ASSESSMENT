@@ -1,42 +1,76 @@
-/* v58 — center comparison workspace title and gate Back to Comparison to real drill-down only */
+/* v59 — deterministic comparison navigation state + centered comparison title */
 (()=>{
-  function visible(el){
+  const q=(sel,root=document)=>root.querySelector(sel);
+
+  function elementVisible(el){
     if(!el||!el.isConnected||el.hidden)return false;
     let node=el;
-    while(node&&node!==document.body){
+    while(node&&node!==document.documentElement){
       if(node.hidden)return false;
       node=node.parentElement;
     }
-    return true;
+    const cs=getComputedStyle(el);
+    return cs.display!=='none'&&cs.visibility!=='hidden';
   }
 
-  function detailActive(card){
-    if(!card)return false;
-    const barDetail=card.querySelector('#vehicleComparisonBody > .v52DetailView');
-    if(visible(barDetail))return true;
-    const criterionDetail=card.querySelector('#comparisonCriterionDetail');
-    if(visible(criterionDetail)&&card.classList.contains('criterionDetailMode'))return true;
-    return false;
+  function comparisonOpen(){
+    const card=q('#managerComparisonCard');
+    return elementVisible(card);
+  }
+
+  function drilldownOpen(){
+    const card=q('#managerComparisonCard');
+    if(!elementVisible(card))return false;
+    /* The requested detail state is specifically the per-criterion vertical bar chart.
+       scripts-9 replaces #vehicleComparisonBody with .v52DetailView only after a criterion is opened. */
+    return !!q('#vehicleComparisonBody > .v52DetailView',card);
+  }
+
+  function forceDisplay(el,show,display='inline-flex'){
+    if(!el)return;
+    el.hidden=!show;
+    el.style.setProperty('display',show?display:'none','important');
+    el.setAttribute('aria-hidden',show?'false':'true');
+    if('disabled' in el)el.disabled=!show;
   }
 
   function syncNavigation(){
-    const card=document.querySelector('#managerComparisonCard');
-    const inComparison=!!card&&!card.hidden&&document.body.classList.contains('managerMode');
-    const inDetail=inComparison&&detailActive(card);
-    document.body.classList.toggle('v58ComparisonOpen',inComparison);
-    document.body.classList.toggle('v58ComparisonDetail',inDetail);
+    const open=comparisonOpen();
+    const detail=open&&drilldownOpen();
+    const row=q('#appShell > .headerActions > .v55ComparisonNavRow');
+    const dashboard=q('#v55BackDashboard');
+    const comparison=q('#v55BackComparison');
 
-    const dashboard=document.querySelector('#v55BackDashboard');
-    const comparison=document.querySelector('#v55BackComparison');
-    if(dashboard)dashboard.hidden=!inComparison;
-    if(comparison)comparison.hidden=!inDetail;
-    const row=document.querySelector('#appShell > .headerActions > .v55ComparisonNavRow');
-    if(row)row.hidden=!inComparison;
+    forceDisplay(row,open,'flex');
+    forceDisplay(dashboard,open,'inline-flex');
+    forceDisplay(comparison,detail,'inline-flex');
+
+    document.documentElement.classList.toggle('bamcoComparisonOpen',open);
+    document.documentElement.classList.toggle('bamcoComparisonDetailOpen',detail);
+  }
+
+  function bindNavigation(){
+    const dashboard=q('#v55BackDashboard');
+    const comparison=q('#v55BackComparison');
+    if(dashboard&&!dashboard.dataset.v59Bound){
+      dashboard.dataset.v59Bound='1';
+      dashboard.addEventListener('click',()=>{
+        const close=q('#managerComparisonCard #closeComparisonMode');
+        if(close)close.click();
+      });
+    }
+    if(comparison&&!comparison.dataset.v59Bound){
+      comparison.dataset.v59Bound='1';
+      comparison.addEventListener('click',()=>{
+        const back=q('#managerComparisonCard #v52BackButton');
+        if(back)back.click();
+      });
+    }
   }
 
   function injectStyles(){
-    let style=document.querySelector('#bamco-v58-styles');
-    if(!style){style=document.createElement('style');style.id='bamco-v58-styles';document.head.appendChild(style)}
+    let style=q('#bamco-v59-styles');
+    if(!style){style=document.createElement('style');style.id='bamco-v59-styles';document.head.appendChild(style)}
     style.textContent=`
       #managerComparisonCard > .comparisonWorkspaceHeader{
         position:relative!important;
@@ -67,9 +101,8 @@
         width:auto!important;
         max-width:max-content!important;
       }
-      body.v58ComparisonOpen:not(.v58ComparisonDetail) #v55BackComparison{display:none!important}
-      body:not(.v58ComparisonOpen) #v55BackDashboard,
-      body:not(.v58ComparisonOpen) #v55BackComparison{display:none!important}
+      html:not(.bamcoComparisonOpen) #appShell > .headerActions > .v55ComparisonNavRow{display:none!important}
+      html.bamcoComparisonOpen:not(.bamcoComparisonDetailOpen) #v55BackComparison{display:none!important}
       @media(max-width:760px){
         #managerComparisonCard > .comparisonWorkspaceHeader > .comparisonWorkspaceTitle{
           padding-inline:0!important;
@@ -87,13 +120,25 @@
   function schedule(){
     if(queued)return;
     queued=true;
-    requestAnimationFrame(()=>{queued=false;injectStyles();syncNavigation()});
+    requestAnimationFrame(()=>{
+      queued=false;
+      injectStyles();
+      bindNavigation();
+      syncNavigation();
+    });
   }
 
-  new MutationObserver(schedule).observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['hidden','class']});
-  document.addEventListener('click',schedule,true);
-  document.addEventListener('keydown',schedule,true);
+  new MutationObserver(schedule).observe(document.documentElement,{
+    subtree:true,
+    childList:true,
+    attributes:true,
+    attributeFilter:['hidden','class','style']
+  });
+  document.addEventListener('click',()=>setTimeout(schedule,0),true);
+  document.addEventListener('keydown',()=>setTimeout(schedule,0),true);
   addEventListener('resize',schedule);
+  addEventListener('pageshow',schedule);
   injectStyles();
+  bindNavigation();
   syncNavigation();
 })();
