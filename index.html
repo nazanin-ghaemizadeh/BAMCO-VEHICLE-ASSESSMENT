@@ -13,9 +13,8 @@
 <body>
 <script>
 (()=>{
-  const BUILD='20260909-v61';
+  const BUILD='20260909-v64';
   const target=`./app.html?build=${encodeURIComponent(BUILD)}`;
-  /* Go straight to the application: no visible bootstrap/loading screen. */
   if('serviceWorker' in navigator){
     navigator.serviceWorker.register(`./sw.js?build=${encodeURIComponent(BUILD)}`,{scope:'./',updateViaCache:'none'})
       .then(reg=>reg.update().catch(()=>{}))
@@ -24,6 +23,6 @@
   location.replace(target);
 })();
 </script>
-<noscript><meta http-equiv="refresh" content="0;url=./app.html?build=20260909-v61"></noscript>
+<noscript><meta http-equiv="refresh" content="0;url=./app.html?build=20260909-v64"></noscript>
 </body>
 </html>
