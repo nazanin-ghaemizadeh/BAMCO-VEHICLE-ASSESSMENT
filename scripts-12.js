@@ -25,7 +25,7 @@
   function setLogo(){
     const img=q('#entryScreen .entryBrand img');
     if(!img)return;
-    const src='./bamco-logo.svg?v=67';
+    const src='./bamco-logo.png?v=68';
     if(img.getAttribute('src')!==src)img.src=src;
     img.removeAttribute('srcset');
     img.style.content=`url("${src}")`;
@@ -79,7 +79,8 @@
   function findItem(text){
     const wanted=norm(text);
     for(const main of(window.ASSESSMENT_CRITERIA||[]))for(const sub of(main.subgroups||[]))for(const item of(sub.items||[])){
-      if([item.titleFa,item.titleEn,item.textFa,item.textEn].map(norm).filter(Boolean).includes(wanted))return{sub,item};
+      const translated=typeof itemTitleEn==='function'?itemTitleEn(item):'';
+      if([item.titleFa,item.titleEn,item.textFa,item.textEn,translated].map(norm).filter(Boolean).includes(wanted))return{sub,item};
     }
     return null;
   }
@@ -87,9 +88,9 @@
   function showTooltip(label,e){
     const hit=findItem(label.textContent);if(!hit)return;
     const fa=isFa(),t=ensureTooltip();
-    const heading=fa?(hit.item.titleFa||hit.item.textFa||'توضیح شاخص'):(hit.item.titleEn||hit.item.textEn||hit.item.titleFa||hit.item.textFa||'Criterion');
-    const desc=fa?(hit.item.textFa||hit.item.exampleFa||''):(hit.item.textEn||hit.item.exampleEn||hit.item.textFa||hit.item.exampleFa||'');
-    const sub=fa?(hit.sub.titleFa||''):(hit.sub.titleEn||hit.sub.titleFa||'');
+    const heading=fa?(hit.item.titleFa||hit.item.textFa||'توضیح شاخص'):(typeof itemTitleEn==='function'?itemTitleEn(hit.item):(hit.item.titleEn||'Criterion'));
+    const desc=fa?(hit.item.textFa||hit.item.exampleFa||''):(hit.item.textEn||hit.item.exampleEn||'Carry out this inspection or driving check under safe, representative conditions. Observe the vehicle response, record any abnormal behavior or deviation, and assign the appropriate score.');
+    const sub=typeof title==='function'?title(hit.sub.titleFa,'sub',hit.sub.id):(fa?(hit.sub.titleFa||''):(hit.sub.titleEn||hit.sub.titleFa||''));
     t.innerHTML=`<b>${esc(heading)}</b>${sub?`<span class="bamcoTipSub">${esc(sub)}</span>`:''}<span class="bamcoTipBody">${esc(desc)}</span>`;
     t.style.display='block';moveTooltip(e);
   }

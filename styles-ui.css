@@ -14,7 +14,7 @@
 }
 
 #entryScreen .entryBrand img {
-  content: url("./bamco-logo.svg?v=67") !important;
+  content: url("./bamco-logo.png?v=68") !important;
   display: block !important;
   width: min(320px, 66vw) !important;
   max-width: 320px !important;
@@ -132,16 +132,61 @@
 #entryScreen .bamcoCaptcha.bad { border-color: #dfb1b6 !important; background: #fff8f8 !important; }
 #entryScreen .bamcoCaptcha.bad .bamcoCaptchaMessage { color: #a83042 !important; }
 
+/* Authentication and role selection are two distinct full-screen steps. */
+#entryScreen.authenticatedStep {
+  min-height: 100svh !important;
+  display: grid !important;
+  place-items: center !important;
+  padding: 28px !important;
+}
+
+#entryScreen.authenticatedStep .entryCard {
+  width: min(980px, 100%) !important;
+  min-height: 0 !important;
+  padding: 38px !important;
+}
+
+#entryScreen.authenticatedStep .entryBrand,
+#entryScreen.authenticatedStep .entryTabs,
+#entryScreen.authenticatedStep .entryGuidePanel,
+#entryScreen.authenticatedStep .entryFooter,
+#entryScreen.authenticatedStep .entryLanguageButton {
+  display: none !important;
+}
+
+#entryScreen.authenticatedStep #entryLoginPanel {
+  display: block !important;
+}
+
+#entryScreen.authenticatedStep .entryIntro {
+  margin: 0 0 24px !important;
+}
+
+#entryScreen.authenticatedStep .entryAuthForm {
+  display: none !important;
+}
+
+#entryScreen.authenticatedStep .entryAuthenticatedBar {
+  margin: 0 0 22px !important;
+  max-width: none !important;
+}
+
+#entryScreen.authenticatedStep .roleChoices {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 16px !important;
+}
+
 /* Comparison labels: enough room for Persian/English without collisions. */
-#managerComparisonCard .v52PlotWrap { height: 452px !important; }
+#managerComparisonCard .v52PlotWrap { height: 468px !important; }
 #managerComparisonCard .v52QuestionGroup {
-  grid-template-rows: 360px 84px !important;
+  grid-template-rows: 360px 100px !important;
   min-width: 154px !important;
   max-width: 194px !important;
 }
 #managerComparisonCard .v52QuestionTitle {
-  min-height: 70px !important;
-  padding: 10px 8px 0 !important;
+  min-height: 82px !important;
+  padding: 20px 8px 0 !important;
   overflow: visible !important;
   white-space: normal !important;
   line-height: 1.7 !important;
@@ -163,4 +208,7 @@
   #entryScreen .bamcoCaptchaQuestion,
   #entryScreen .bamcoCaptchaInput { min-height: 42px !important; }
   #entryScreen .bamcoCaptchaRefresh { width: 42px !important; height: 42px !important; }
+  #entryScreen.authenticatedStep { padding: 14px !important; }
+  #entryScreen.authenticatedStep .entryCard { padding: 24px 18px !important; }
+  #entryScreen.authenticatedStep .roleChoices { grid-template-columns: 1fr !important; }
 }

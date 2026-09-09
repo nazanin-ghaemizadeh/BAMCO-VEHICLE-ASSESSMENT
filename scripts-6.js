@@ -783,6 +783,8 @@
 
   function renderAuthState(){
     const loggedIn=!!window.BAMCO_AUTH_USER;
+    const entryScreen=document.querySelector('#entryScreen');
+    entryScreen?.classList.toggle('authenticatedStep',loggedIn);
     if(authForm)authForm.hidden=loggedIn;
     if(roleChoices)roleChoices.hidden=!loggedIn;
     if(authenticatedBar)authenticatedBar.hidden=!loggedIn;
