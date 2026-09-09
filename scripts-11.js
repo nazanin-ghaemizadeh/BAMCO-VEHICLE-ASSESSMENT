@@ -1,4 +1,4 @@
-/* v59 — deterministic comparison navigation state + centered comparison title */
+/* v60 — deterministic comparison navigation state + centered comparison title + remove radar hint */
 (()=>{
   const q=(sel,root=document)=>root.querySelector(sel);
 
@@ -32,6 +32,10 @@
     el.style.setProperty('display',show?display:'none','important');
     el.setAttribute('aria-hidden',show?'false':'true');
     if('disabled' in el)el.disabled=!show;
+  }
+
+  function removeComparisonInteractionHint(){
+    document.querySelectorAll('#managerComparisonCard .radarInteractionHint').forEach(hint=>hint.remove());
   }
 
   function syncNavigation(){
@@ -101,6 +105,7 @@
         width:auto!important;
         max-width:max-content!important;
       }
+      #managerComparisonCard .radarInteractionHint{display:none!important}
       html:not(.bamcoComparisonOpen) #appShell > .headerActions > .v55ComparisonNavRow{display:none!important}
       html.bamcoComparisonOpen:not(.bamcoComparisonDetailOpen) #v55BackComparison{display:none!important}
       @media(max-width:760px){
@@ -123,6 +128,7 @@
     requestAnimationFrame(()=>{
       queued=false;
       injectStyles();
+      removeComparisonInteractionHint();
       bindNavigation();
       syncNavigation();
     });
@@ -139,6 +145,7 @@
   addEventListener('resize',schedule);
   addEventListener('pageshow',schedule);
   injectStyles();
+  removeComparisonInteractionHint();
   bindNavigation();
   syncNavigation();
 })();
