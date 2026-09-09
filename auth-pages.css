@@ -3,6 +3,7 @@
 html,body{min-height:100%;margin:0}
 html[lang="fa"] body,html[lang="fa"] body *{font-family:"B Nazanin","B Zar","B Yas",Nazanin,"B Nazanin Regular",Tahoma,Arial,sans-serif!important}
 html[lang="en"] body,html[lang="en"] body *{font-family:"Times New Roman",Times,serif!important}
+html[lang="fa"] body [lang="en"],html[lang="fa"] body [dir="ltr"],html[lang="fa"] body input[type="email"],html[lang="fa"] body input[type="password"]{font-family:"Times New Roman",Times,serif!important}
 body{background:radial-gradient(circle at 85% 12%,#53b8bd 0,#0b5b98 28%,#082f57 72%);background-attachment:fixed}
 button,input{font:inherit}
 .authPage,.rolesPage{min-height:100svh;display:grid;place-items:center;padding:34px}

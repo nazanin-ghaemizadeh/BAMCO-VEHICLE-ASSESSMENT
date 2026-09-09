@@ -27,7 +27,7 @@
   const applyLocale=()=>{
     const t=copy[fa?'fa':'en'];
     document.documentElement.lang=fa?'fa':'en';document.documentElement.dir=fa?'rtl':'ltr';
-    setText('#languageButton',t.language);setText('#brandName',t.brand);setText('#loginTitle',t.loginTitle);setText('#loginIntro',t.loginIntro);setText('#usernameLabel',t.username);setText('#passwordLabel',t.password);setText('#loginButton',t.signIn);
+    setText('#languageButton',t.language);const languageButton=document.querySelector('#languageButton');if(languageButton)languageButton.lang=fa?'en':'fa';setText('#brandName',t.brand);setText('#loginTitle',t.loginTitle);setText('#loginIntro',t.loginIntro);setText('#usernameLabel',t.username);setText('#passwordLabel',t.password);setText('#loginButton',t.signIn);
     const captcha=document.querySelector('#captchaAnswer');if(captcha)captcha.placeholder=t.captcha;
     setText('#rolesTitle',t.rolesTitle);setText('#rolesIntro',t.rolesIntro);setText('#signOutButton',t.signOut);setText('#signedInLabel',t.signedIn);
     setText('#evaluatorTitle',t.evaluator);setText('#evaluatorDesc',t.evaluatorDesc);setText('#expertTitle',t.expert);setText('#expertDesc',t.expertDesc);setText('#managerTitle',t.manager);setText('#managerDesc',t.managerDesc);
@@ -37,18 +37,18 @@
 
   if(page==='roles'){
     const user=readUser();
-    if(!user){window.location.replace(base('index.html?v=73'));return}
+    if(!user){window.location.replace(base('index.html?v=74'));return}
     document.querySelector('#signedInUser').textContent=user;
     const allowed=USER_ROLES[user]||[];
     document.querySelectorAll('[data-role]').forEach(link=>{link.hidden=!allowed.includes(link.dataset.role)});
     document.querySelector('#signOutButton').addEventListener('click',()=>{
       try{sessionStorage.removeItem(AUTH_KEY)}catch(_){}
-      window.location.replace(base('index.html?v=73'));
+      window.location.replace(base('index.html?v=74'));
     });
     return;
   }
 
-  if(readUser()){window.location.replace(base('roles.html?v=73'));return}
+  if(readUser()){window.location.replace(base('roles.html?v=74'));return}
   const form=document.querySelector('#loginForm');
   const username=document.querySelector('#username');
   const password=document.querySelector('#password');
@@ -77,7 +77,7 @@
     if(users.has(user)&&password.value===PASSWORD){
       try{sessionStorage.setItem(AUTH_KEY,user)}catch(_){}
       loginMessage.className='message success';loginMessage.textContent=fa?'ورود موفق بود.':'Signed in.';
-      window.location.replace(base('roles.html?v=73'));return;
+      window.location.replace(base('roles.html?v=74'));return;
     }
     loginMessage.className='message error';loginMessage.textContent=fa?'نام کاربری یا رمز عبور نادرست است.':'Incorrect username or password.';password.focus();password.select();makeCaptcha();
   });
