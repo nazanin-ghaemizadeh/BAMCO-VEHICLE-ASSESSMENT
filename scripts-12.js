@@ -25,7 +25,7 @@
   function setLogo(){
     const img=q('#entryScreen .entryBrand img');
     if(!img)return;
-    const src='./bamco-logo.png?v=69';
+    const src='./bamco-logo.png?v=70';
     if(img.getAttribute('src')!==src)img.src=src;
     img.removeAttribute('srcset');
     img.style.content=`url("${src}")`;

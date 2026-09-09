@@ -783,9 +783,9 @@
 
   function renderAuthState(){
     const loggedIn=!!window.BAMCO_AUTH_USER;
-    const view=new URLSearchParams(window.location.search).get('view');
+    const page=currentPage();
     const entryScreen=document.querySelector('#entryScreen');
-    entryScreen?.classList.toggle('authenticatedStep',loggedIn&&view==='roles');
+    entryScreen?.classList.toggle('authenticatedStep',loggedIn&&page==='roles.html');
     if(authForm)authForm.hidden=loggedIn;
     if(roleChoices)roleChoices.hidden=!loggedIn;
     if(authenticatedBar)authenticatedBar.hidden=!loggedIn;
@@ -818,7 +818,7 @@
     setAuthUser('');
     if(usernameInput)usernameInput.value='';
     if(passwordInput)passwordInput.value='';
-    window.location.replace(new URL('./',window.location.href).href);
+    window.location.replace(appRoute('login'));
   });
 
   /* Defense in depth: a role cannot be entered before a valid local sign-in. */
@@ -852,15 +852,15 @@
     event.stopImmediatePropagation();
     window.location.assign(appRoute('roles'));
   },true);
-  const routeParams=new URLSearchParams(window.location.search);
-  const routeView=routeParams.get('view');
-  const routeRole=routeParams.get('role');
+  const routePage=currentPage();
+  const routeRole=routePage.replace(/\.html$/,'');
+  const appPages=['evaluator','expert','manager'];
   const allowedRoles=USER_ROLES[window.BAMCO_AUTH_USER]||[];
-  if(!window.BAMCO_AUTH_USER&&(routeView==='roles'||routeView==='app')){
-    window.location.replace(new URL('./',window.location.href).href);
-  }else if(window.BAMCO_AUTH_USER&&!routeView){
+  if(!window.BAMCO_AUTH_USER&&(routePage==='roles.html'||appPages.includes(routeRole))){
+    window.location.replace(appRoute('login'));
+  }else if(window.BAMCO_AUTH_USER&&(routePage==='index.html'||routePage==='app.html')){
     window.location.replace(appRoute('roles'));
-  }else if(routeView==='app'){
+  }else if(appPages.includes(routeRole)){
     if(allowedRoles.includes(routeRole))enter(routeRole);
     else window.location.replace(appRoute('roles'));
   }

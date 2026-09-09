@@ -14,7 +14,7 @@
 }
 
 #entryScreen .entryBrand img {
-  content: url("./bamco-logo.png?v=69") !important;
+  content: url("./bamco-logo.png?v=70") !important;
   display: block !important;
   width: min(320px, 66vw) !important;
   max-width: 320px !important;
@@ -176,6 +176,30 @@
   grid-template-columns: 1fr !important;
   gap: 16px !important;
 }
+
+/* Physical route isolation: login, role chooser and every role are separate pages. */
+body[data-page="roles"] #entryScreen {
+  min-height: 100svh !important;
+  display: grid !important;
+  place-items: center !important;
+  padding: 28px !important;
+}
+body[data-page="roles"] #entryScreen .entryCard {
+  width: min(980px, 100%) !important;
+  min-height: 0 !important;
+  padding: 38px !important;
+}
+body[data-page="roles"] #entryScreen .entryBrand,
+body[data-page="roles"] #entryScreen .entryTabs,
+body[data-page="roles"] #entryScreen .entryGuidePanel,
+body[data-page="roles"] #entryScreen .entryFooter,
+body[data-page="roles"] #entryScreen .entryLanguageButton,
+body[data-page="roles"] #entryScreen .entryAuthForm { display: none !important; }
+body[data-page="roles"] #entryScreen #entryLoginPanel { display: block !important; }
+body[data-page="roles"] #entryScreen .entryIntro { margin: 0 0 24px !important; }
+body[data-page="roles"] #entryScreen .entryAuthenticatedBar { margin: 0 0 22px !important; max-width: none !important; }
+body[data-page="roles"] #entryScreen .roleChoices { display: grid !important; grid-template-columns: 1fr !important; gap: 16px !important; }
+body[data-page="app"] #entryScreen { display: none !important; }
 
 /* Comparison labels: enough room for Persian/English without collisions. */
 #managerComparisonCard .v52PlotWrap { height: 492px !important; }
