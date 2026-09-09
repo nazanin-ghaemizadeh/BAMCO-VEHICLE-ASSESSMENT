@@ -13,7 +13,7 @@
 <body>
 <script>
 (()=>{
-  const BUILD='20260909-v65';
+  const BUILD='20260910-v66';
   const target=`./app.html?build=${encodeURIComponent(BUILD)}`;
   if('serviceWorker' in navigator){
     navigator.serviceWorker.register(`./sw.js?build=${encodeURIComponent(BUILD)}`,{scope:'./',updateViaCache:'none'})
@@ -23,6 +23,6 @@
   location.replace(target);
 })();
 </script>
-<noscript><meta http-equiv="refresh" content="0;url=./app.html?build=20260909-v65"></noscript>
+<noscript><meta http-equiv="refresh" content="0;url=./app.html?build=20260910-v66"></noscript>
 </body>
 </html>
