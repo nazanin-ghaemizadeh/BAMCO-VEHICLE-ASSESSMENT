@@ -21,14 +21,22 @@
   try{fa=sessionStorage.getItem('bamco-locale')!=='en'}catch(_){}
   const copy={
     fa:{language:'English',brand:'خودروسازان بم',loginTitle:'سامانه ارزیابی خودرو',loginIntro:'برای ورود، نام کاربری و رمز عبور را وارد کنید.',username:'نام کاربری',password:'رمز عبور',captcha:'پاسخ کپچا',signIn:'ورود',rolesTitle:'انتخاب پنل',rolesIntro:'پنل موردنظر را برای ادامه انتخاب کنید.',signOut:'خروج از حساب',signedIn:'کاربر واردشده:',evaluator:'ورود ارزیاب',evaluatorDesc:'ثبت اطلاعات، چک‌لیست، امتیازها و تصاویر مستند',expert:'ورود خبره',expertDesc:'ثبت اطلاعات تخصصی و تعیین وزن شاخص‌های اصلی',manager:'ورود مدیریت',managerDesc:'مشاهده داشبورد، نتایج و گزارش مدیریتی'},
-    en:{language:'فارسی',brand:'BAM Automotive Company',loginTitle:'Vehicle Assessment System',loginIntro:'Enter your username and password to sign in.',username:'Username',password:'Password',captcha:'Captcha answer',signIn:'Sign in',rolesTitle:'Choose a Panel',rolesIntro:'Choose an available panel to continue.',signOut:'Sign out',signedIn:'Signed in as:',evaluator:'Evaluator Login',evaluatorDesc:'Record vehicle details, checklist scores, notes, and supporting images',expert:'Expert Login',expertDesc:'Enter expert details and assign weights to the main criteria',manager:'Management Login',managerDesc:'Review the dashboard, assessment results, and management report'}
+    en:{language:'Persian',brand:'BAM Automotive Company',loginTitle:'Vehicle Assessment System',loginIntro:'Enter your username and password to sign in.',username:'Username',password:'Password',captcha:'Captcha answer',signIn:'Sign in',rolesTitle:'Choose a Panel',rolesIntro:'Choose an available panel to continue.',signOut:'Sign out',signedIn:'Signed in as:',evaluator:'Evaluator Login',evaluatorDesc:'Record vehicle details, checklist scores, notes, and supporting images',expert:'Expert Login',expertDesc:'Enter expert details and assign weights to the main criteria',manager:'Management Login',managerDesc:'Review the dashboard, assessment results, and management report'}
   };
   const setText=(selector,value)=>{const el=document.querySelector(selector);if(el)el.textContent=value};
   const applyLocale=()=>{
     const t=copy[fa?'fa':'en'];
     document.documentElement.lang=fa?'fa':'en';document.documentElement.dir=fa?'rtl':'ltr';
-    setText('#languageButton',t.language);const languageButton=document.querySelector('#languageButton');if(languageButton)languageButton.lang=fa?'en':'fa';setText('#brandName',t.brand);setText('#loginTitle',t.loginTitle);setText('#loginIntro',t.loginIntro);setText('#usernameLabel',t.username);setText('#passwordLabel',t.password);setText('#loginButton',t.signIn);
-    const captcha=document.querySelector('#captchaAnswer');if(captcha)captcha.placeholder=t.captcha;
+    setText('#languageButton',t.language);const languageButton=document.querySelector('#languageButton');if(languageButton)languageButton.lang='en';setText('#brandName',t.brand);setText('#loginTitle',t.loginTitle);setText('#loginIntro',t.loginIntro);setText('#usernameLabel',t.username);setText('#passwordLabel',t.password);setText('#loginButton',t.signIn);
+    const captcha=document.querySelector('#captchaAnswer');
+    if(captcha){
+      captcha.placeholder=t.captcha;captcha.setAttribute('aria-label',t.captcha);
+      captcha.lang=fa?'fa':'en';captcha.dir=fa?'rtl':'ltr';
+    }
+    const captchaRefresh=document.querySelector('#captchaRefresh');
+    if(captchaRefresh)captchaRefresh.setAttribute('aria-label',fa?'کپچای جدید':'New captcha');
+    const captchaVerified=document.querySelector('.captchaBox')?.classList.contains('valid');
+    setText('#captchaMessage',captchaVerified?(fa?'تأیید شد.':'Verified.'):(fa?'پاسخ عبارت بالا را وارد کنید.':'Enter the answer above.'));
     setText('#rolesTitle',t.rolesTitle);setText('#rolesIntro',t.rolesIntro);setText('#signOutButton',t.signOut);setText('#signedInLabel',t.signedIn);
     setText('#evaluatorTitle',t.evaluator);setText('#evaluatorDesc',t.evaluatorDesc);setText('#expertTitle',t.expert);setText('#expertDesc',t.expertDesc);setText('#managerTitle',t.manager);setText('#managerDesc',t.managerDesc);
   };
