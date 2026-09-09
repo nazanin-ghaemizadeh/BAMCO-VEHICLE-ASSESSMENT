@@ -1,6 +1,6 @@
 /* scripts-7 loader — preserves the previous bundle and then applies latest comparison/mobile refinements */
 (()=>{
-  const BUILD='20260909-v63';
+  const BUILD='20260909-v64';
   window.BAMCO_FRONTEND_BUILD=BUILD;
   const load=(src,done)=>{
     const script=document.createElement('script');
