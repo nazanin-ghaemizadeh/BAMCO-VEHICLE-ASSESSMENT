@@ -93,7 +93,7 @@
     return;
   }
 
-  if(readUser()){window.location.replace(base('roles.html?v=83'));return}
+  if(readUser()){window.location.replace(base('roles.html?v=84'));return}
   const form=document.querySelector('#loginForm');
   const username=document.querySelector('#username');
   const password=document.querySelector('#password');
@@ -122,7 +122,7 @@
     if(users.has(user)&&password.value===PASSWORD){
       try{sessionStorage.setItem(AUTH_KEY,user)}catch(_){}
       loginMessage.className='message success';loginMessage.textContent=fa?'ورود موفق بود.':'Signed in.';
-      window.location.replace(base('roles.html?v=83'));return;
+      window.location.replace(base('roles.html?v=84'));return;
     }
     loginMessage.className='message error';loginMessage.textContent=fa?'نام کاربری یا رمز عبور نادرست است.':'Incorrect username or password.';password.focus();password.select();makeCaptcha();
   });

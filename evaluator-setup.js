@@ -22,9 +22,8 @@
   const dialog=document.createElement('dialog');
   dialog.id='evaluatorSetup';dialog.className='evaluatorSetup';
   dialog.setAttribute('aria-labelledby','evaluatorSetupTitle');
-  dialog.setAttribute('aria-describedby','evaluatorSetupHint');
   const form=document.createElement('form');
-  form.innerHTML='<header><h2 id="evaluatorSetupTitle"></h2><button type="button" class="setupClose">×</button></header><p id="evaluatorSetupHint"></p><div class="setupFields"></div><p class="setupError" role="alert"></p><footer><button type="button" class="setupCancel secondaryButton"></button><button type="submit" class="setupContinue"></button></footer>';
+  form.innerHTML='<header><h2 id="evaluatorSetupTitle"></h2><button type="button" class="setupClose">×</button></header><div class="setupFields"></div><p class="setupError" role="alert"></p><footer><button type="button" class="setupCancel secondaryButton"></button><button type="submit" class="setupContinue"></button></footer>';
   dialog.append(form);document.body.append(dialog);
   const grid=form.querySelector('.setupFields');
   fields.forEach(([id,,,options])=>{
@@ -43,7 +42,7 @@
     const resources=[
       'evaluator.html?v=83','styles-1.css?v=70','styles-2.css?v=70',
       'styles-3.css?v=70','styles-ui.css?v=70','panel-refinements.css?v=83',
-      'scripts-1.js?v=70','scripts-2.js?v=83','scripts-3.js?v=70',
+      'scripts-1.js?v=70','scripts-2.js?v=84','scripts-3.js?v=70',
       'scripts-4.js?v=70','scripts-5.js?v=70','scripts-6.js?v=81',
       'scripts-7-base.js?v=81','scripts-8.js?v=81','scripts-9.js?v=70',
       'scripts-10.js?v=70','scripts-11.js?v=70','scripts-12.js?v=70'
@@ -59,7 +58,6 @@
   }
   function translate(){
     form.querySelector('h2').textContent=copy('انتخاب مشخصات خودرو','Select vehicle details');
-    form.querySelector('#evaluatorSetupHint').textContent=copy('این انتخاب‌ها صرفاً اطلاعاتی هستند و روی امتیازها، وزن‌ها، مقایسه یا تحلیل فنی اثری ندارند.','These choices are informational only and do not affect scores, weights, comparisons, or technical analysis.');
     fields.forEach(([id,persian,english])=>{
       form.querySelector(`[data-setup-label="${id}"]`).textContent=copy(persian,english);
       const select=form.elements.namedItem(id);
