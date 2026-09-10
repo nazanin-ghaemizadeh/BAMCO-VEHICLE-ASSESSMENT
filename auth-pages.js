@@ -82,18 +82,18 @@
 
   if(page==='roles'){
     const user=readUser();
-    if(!user){window.location.replace(base('index.html?v=81'));return}
+    if(!user){window.location.replace(base('index.html?v=82'));return}
     document.querySelector('#signedInUser').textContent=user;
     const allowed=USER_ROLES[user]||[];
     document.querySelectorAll('[data-role]').forEach(link=>{link.hidden=!allowed.includes(link.dataset.role)});
     document.querySelector('#signOutButton').addEventListener('click',()=>{
       try{sessionStorage.removeItem(AUTH_KEY)}catch(_){}
-      window.location.replace(base('index.html?v=81'));
+      window.location.replace(base('index.html?v=82'));
     });
     return;
   }
 
-  if(readUser()){window.location.replace(base('roles.html?v=81'));return}
+  if(readUser()){window.location.replace(base('roles.html?v=82'));return}
   const form=document.querySelector('#loginForm');
   const username=document.querySelector('#username');
   const password=document.querySelector('#password');
@@ -122,7 +122,7 @@
     if(users.has(user)&&password.value===PASSWORD){
       try{sessionStorage.setItem(AUTH_KEY,user)}catch(_){}
       loginMessage.className='message success';loginMessage.textContent=fa?'ورود موفق بود.':'Signed in.';
-      window.location.replace(base('roles.html?v=81'));return;
+      window.location.replace(base('roles.html?v=82'));return;
     }
     loginMessage.className='message error';loginMessage.textContent=fa?'نام کاربری یا رمز عبور نادرست است.':'Incorrect username or password.';password.focus();password.select();makeCaptcha();
   });

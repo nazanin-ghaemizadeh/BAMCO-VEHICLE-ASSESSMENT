@@ -1,18 +1,15 @@
 .aiTechnicalReview{border:1px solid #d8e6ee!important;background:linear-gradient(135deg,#f8fbfd,#eef7f6)!important}
-#aiTechnicalReview .aiDemoEntry{display:grid;grid-template-columns:230px minmax(0,1fr);align-items:center;gap:26px;direction:ltr}
-#aiTechnicalReview .aiDemoEntry>h2{grid-column:2;grid-row:1;min-width:0;margin:0;font-size:25px;text-align:start}
-html[lang="fa"] #aiTechnicalReview .aiDemoEntry>h2{direction:rtl;font-family:"B Nazanin",Nazanin,serif!important}
-html[lang="en"] #aiTechnicalReview .aiDemoEntry>h2{direction:ltr;font-family:"Times New Roman",Times,serif!important}
-#aiTechnicalReview .aiDemoVisual{grid-column:1;grid-row:1;display:flex;flex-direction:column;align-items:flex-start;gap:12px}
-#aiTechnicalReview picture{display:block;width:230px;max-width:100%;overflow:hidden;border-radius:12px}
+#aiTechnicalReview>.sectionTitle{direction:rtl;text-align:right}
+#aiTechnicalReview .aiDemoEntry{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,230px) minmax(0,1fr);align-items:center;gap:16px;direction:ltr}
+#aiTechnicalReview picture{grid-column:2;grid-row:1;display:block;width:230px;max-width:100%;justify-self:center;overflow:hidden;border-radius:12px}
 #aiTechnicalReview img{display:block;width:100%;height:auto;aspect-ratio:480/321;object-fit:contain}
-#aiTechnicalReview #aiReviewStart{width:auto;max-width:100%;margin:0}
+#aiTechnicalReview #aiReviewStart{grid-column:1;grid-row:1;justify-self:start;align-self:end;width:auto;max-width:100%;margin:0}
 html[lang="fa"] #aiTechnicalReview #aiReviewStart{font-family:"B Nazanin",Nazanin,serif!important;direction:rtl}
 html[lang="en"] #aiTechnicalReview #aiReviewStart{font-family:"Times New Roman",Times,serif!important;direction:ltr}
 .managerComparisonMode #aiTechnicalReview{display:none!important}
-@media(max-width:600px){
+@media(max-width:700px){
   #aiTechnicalReview .aiDemoEntry{grid-template-columns:minmax(0,1fr);gap:14px}
-  #aiTechnicalReview .aiDemoEntry>h2{grid-column:1;grid-row:1;font-size:22px}
-  #aiTechnicalReview .aiDemoVisual{grid-column:1;grid-row:2;justify-self:start;width:min(230px,100%)}
+  #aiTechnicalReview picture{grid-column:1;grid-row:1}
+  #aiTechnicalReview #aiReviewStart{grid-column:1;grid-row:2}
 }
 @media print{#aiTechnicalReview{display:none!important}}
