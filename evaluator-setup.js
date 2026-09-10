@@ -39,9 +39,9 @@
     if(prefetched)return;prefetched=true;
     // Fetch resources only; never run the assessment or its storage initialization here.
     const resources=[
-      'evaluator.html?v=85','styles-1.css?v=70','styles-2.css?v=70',
-      'styles-3.css?v=70','styles-ui.css?v=70','panel-refinements.css?v=83',
-      'scripts-1.js?v=70','scripts-2.js?v=85','scripts-3.js?v=70',
+      'evaluator.html?v=86','styles-1.css?v=70','styles-2.css?v=70',
+      'styles-3.css?v=70','styles-ui.css?v=70','panel-refinements.css?v=86',
+      'scripts-1.js?v=70','scripts-2.js?v=86','scripts-3.js?v=70',
       'scripts-4.js?v=70','scripts-5.js?v=70','scripts-6.js?v=85',
       'scripts-7-base.js?v=81','scripts-8.js?v=81','scripts-9.js?v=70',
       'scripts-10.js?v=70','scripts-11.js?v=70','scripts-12.js?v=70'
@@ -89,7 +89,7 @@
     if(!valid(choices)||!form.reportValidity())return;
     entering=true;form.querySelector('.setupContinue').disabled=true;
     // Navigate directly, keeping this dialog in place until the next document is ready.
-    location.assign(new URL('evaluator.html?v=85',location.href).href);
+    location.assign(new URL('evaluator.html?v=86',location.href).href);
   });
   window.addEventListener('pageshow',()=>{resetChoices();if(dialog.open)dialog.close()});
   new MutationObserver(translate).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});

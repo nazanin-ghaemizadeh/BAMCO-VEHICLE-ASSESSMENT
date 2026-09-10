@@ -13,8 +13,22 @@
 /* One consistent gap between management cards, including classification and summary. */
 body.managerMode #appShell > main{display:flex;flex-direction:column;gap:20px}
 body.managerMode #appShell > main > *{margin-block:0!important;flex-shrink:0}
+body.managerMode #managerComparisonEntry{background:#fff!important}
+/* Keep the answer count centered on the meter, independently of its percentage label. */
+#summaryBody .integratedCompletion{
+  grid-template-columns:42px minmax(0,170px)!important;
+  column-gap:9px;row-gap:5px;justify-content:center;direction:ltr;
+}
+#summaryBody .completionVisual{display:contents}
+#summaryBody .completionVisual>b{grid-column:1;grid-row:1}
+#summaryBody .completionMeter{grid-column:2;grid-row:1;width:100%}
+#summaryBody .integratedCompletion>small{
+  grid-column:2;grid-row:2;display:block;width:100%;justify-self:center;text-align:center;
+}
+html[dir="rtl"] #summaryBody .integratedCompletion>small{direction:rtl}
 @media(max-width:700px){
   #appShell .topbar .brand .panelBrandLogo{width:104px}
   body.managerMode #appShell > main{gap:16px}
+  #summaryBody .integratedCompletion{grid-template-columns:42px minmax(0,160px)!important}
 }
 @media(max-width:400px){#appShell .topbar .brand .panelBrandLogo{width:84px}}
