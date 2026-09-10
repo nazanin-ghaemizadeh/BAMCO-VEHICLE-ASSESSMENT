@@ -434,7 +434,7 @@
       const count=group.items.length;
       const countText=fa?`${localNumber(count)} مورد`:`${localNumber(count)} ${count===1?'item':'items'}`;
       return `<details class="performanceDetails"><summary><strong>${esc(title(group.main.titleFa,'main',group.main.id))}</strong><span>${countText} — ${levelTitle}</span></summary><div>${group.items.map(row=>`<article class="summaryPoint"><strong>${esc(fa?(row.item.titleFa||itemTitle(row.item)):itemTitleEn(row.item))}</strong><span>${localNumber(row.score)} ${fa?'از ۱۰':'out of 10'}</span><small>${esc(title(row.sub.titleFa,'sub',row.sub.id))}</small></article>`).join('')}</div></details>`;
-    }).join(''):`<div class="auditEmpty">${fa?(weak?'موردی با امتیاز ۱، ۲ یا ۳ در شاخص‌های دارای وزن ثبت نشده است.':'موردی با امتیاز ۸، ۹ یا ۱۰ در شاخص‌های دارای وزن ثبت نشده است.'):(weak?'No item scored 1, 2, or 3 in a criterion with active weight.':'No item scored 8, 9, or 10 in a criterion with active weight.')}</div>`;
+    }).join(''):`<div class="auditEmpty">${fa?(weak?'موردی با امتیاز ۱ تا ۳ در شاخص‌های دارای وزن ثبت نشده است.':'موردی با امتیاز ۸ تا ۱۰ در شاخص‌های دارای وزن ثبت نشده است.'):(weak?'No item scored 1 to 3 in a criterion with active weight.':'No item scored 8 to 10 in a criterion with active weight.')}</div>`;
 
     const a=document.querySelector('#strengthList');
     const b=document.querySelector('#weaknessList');

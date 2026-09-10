@@ -1,9 +1,9 @@
-.aiTechnicalReview{border:1px solid #d8e6ee!important;background:linear-gradient(135deg,#f8fbfd,#eef7f6)!important}
+.aiTechnicalReview{border:1px solid #d8e6ee!important;background:#fff!important}
 #aiTechnicalReview>.sectionTitle{direction:rtl;text-align:right}
 #aiTechnicalReview .aiDemoEntry{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,230px) minmax(0,1fr);align-items:center;gap:16px;direction:ltr}
 #aiTechnicalReview picture{grid-column:2;grid-row:1;display:block;width:230px;max-width:100%;justify-self:center;overflow:hidden;border-radius:12px}
 #aiTechnicalReview img{display:block;width:100%;height:auto;aspect-ratio:480/321;object-fit:contain}
-#aiTechnicalReview #aiReviewStart{grid-column:1;grid-row:1;justify-self:start;align-self:end;width:auto;max-width:100%;margin:0}
+#aiTechnicalReview #aiReviewStart{grid-column:2;grid-row:2;justify-self:center;width:auto;max-width:100%;margin:0}
 html[lang="fa"] #aiTechnicalReview #aiReviewStart{font-family:"B Nazanin",Nazanin,serif!important;direction:rtl}
 html[lang="en"] #aiTechnicalReview #aiReviewStart{font-family:"Times New Roman",Times,serif!important;direction:ltr}
 .managerComparisonMode #aiTechnicalReview{display:none!important}

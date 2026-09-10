@@ -1,4 +1,4 @@
-/* These session-only choices are deliberately separate from assessment state. */
+/* Each evaluator entry starts with fresh choices, separate from assessment state. */
 (()=>{
   'use strict';
   const fields=[
@@ -14,11 +14,10 @@
   fields.push(['referenceOne','خودروی مرجع اول','First reference vehicle',vehicles],['referenceTwo','خودروی مرجع دوم','Second reference vehicle',vehicles]);
   const fa=()=>document.documentElement.lang!=='en';
   const copy=(persian,english)=>fa()?persian:english;
-  const key=()=>`bamco-evaluator-choices:${sessionStorage.getItem('bamco-authenticated-user')||''}`;
-  const read=()=>{try{return JSON.parse(sessionStorage.getItem(key())||'{}')}catch(_){return {}}};
   const valid=value=>fields.every(([id,,,options])=>options.includes(value[id]));
   const roleLink=document.querySelector('[data-auth-page="roles"] [data-role="evaluator"]');
   if(!roleLink)return;
+  try{sessionStorage.removeItem(`bamco-evaluator-choices:${sessionStorage.getItem('bamco-authenticated-user')||''}`)}catch(_){}
   const dialog=document.createElement('dialog');
   dialog.id='evaluatorSetup';dialog.className='evaluatorSetup';
   dialog.setAttribute('aria-labelledby','evaluatorSetupTitle');
@@ -40,10 +39,10 @@
     if(prefetched)return;prefetched=true;
     // Fetch resources only; never run the assessment or its storage initialization here.
     const resources=[
-      'evaluator.html?v=83','styles-1.css?v=70','styles-2.css?v=70',
+      'evaluator.html?v=85','styles-1.css?v=70','styles-2.css?v=70',
       'styles-3.css?v=70','styles-ui.css?v=70','panel-refinements.css?v=83',
-      'scripts-1.js?v=70','scripts-2.js?v=84','scripts-3.js?v=70',
-      'scripts-4.js?v=70','scripts-5.js?v=70','scripts-6.js?v=81',
+      'scripts-1.js?v=70','scripts-2.js?v=85','scripts-3.js?v=70',
+      'scripts-4.js?v=70','scripts-5.js?v=70','scripts-6.js?v=85',
       'scripts-7-base.js?v=81','scripts-8.js?v=81','scripts-9.js?v=70',
       'scripts-10.js?v=70','scripts-11.js?v=70','scripts-12.js?v=70'
     ];
@@ -67,11 +66,14 @@
     form.querySelector('.setupCancel').textContent=copy('انصراف','Cancel');
     form.querySelector('.setupContinue').textContent=copy('انتخاب و ورود ارزیاب','Select and enter evaluator panel');
   }
-  function open(){
-    opener=document.activeElement;entering=false;
+  function resetChoices(){
+    entering=false;
+    form.reset();
     form.querySelector('.setupContinue').disabled=false;
-    const saved=read();fields.forEach(([id])=>{form.elements.namedItem(id).value=saved[id]||''});
-    form.querySelector('.setupError').textContent='';translate();dialog.showModal();
+    form.querySelector('.setupError').textContent='';translate();
+  }
+  function open(){
+    opener=document.activeElement;resetChoices();dialog.showModal();
     prepareEvaluatorPage();
   }
   function close(){if(!entering)dialog.close()}
@@ -85,14 +87,11 @@
     if(entering)return;
     const choices=Object.fromEntries(fields.map(([id])=>[id,form.elements.namedItem(id).value]));
     if(!valid(choices)||!form.reportValidity())return;
-    try{sessionStorage.setItem(key(),JSON.stringify(choices))}catch(_){
-      form.querySelector('.setupError').textContent=copy('ثبت انتخاب‌ها در این مرورگر ممکن نیست. دسترسی ذخیره‌سازی را فعال کنید.','Choices could not be saved. Enable browser storage.');return;
-    }
     entering=true;form.querySelector('.setupContinue').disabled=true;
     // Navigate directly, keeping this dialog in place until the next document is ready.
-    location.assign(new URL('evaluator.html?v=83',location.href).href);
+    location.assign(new URL('evaluator.html?v=85',location.href).href);
   });
-  window.addEventListener('pageshow',()=>{entering=false;form.querySelector('.setupContinue').disabled=false});
+  window.addEventListener('pageshow',()=>{resetChoices();if(dialog.open)dialog.close()});
   new MutationObserver(translate).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
   translate();
 })();
