@@ -1,0 +1,20 @@
+/* Display the supplied transparent artwork at its visible bounds, without changing the file. */
+#appShell .topbar .brand .panelBrandLogo{
+  position:relative;display:block;flex:0 0 auto;width:150px;height:83.18px;
+  overflow:hidden;background:transparent!important;border:0!important;border-radius:0!important;
+  box-shadow:none!important;padding:0!important;
+}
+#appShell .topbar .brand .panelBrandLogo img{
+  position:absolute!important;display:block!important;left:-34.196%!important;top:-51.344%!important;
+  width:160.627%!important;height:204.809%!important;max-width:none!important;max-height:none!important;
+  margin:0!important;padding:0!important;border:0!important;border-radius:0!important;
+  background:transparent!important;box-shadow:none!important;object-fit:fill!important;content:normal!important;
+}
+/* One consistent gap between management cards, including classification and summary. */
+body.managerMode #appShell > main{display:flex;flex-direction:column;gap:20px}
+body.managerMode #appShell > main > *{margin-block:0!important;flex-shrink:0}
+@media(max-width:700px){
+  #appShell .topbar .brand .panelBrandLogo{width:104px;height:57.67px}
+  body.managerMode #appShell > main{gap:16px}
+}
+@media(max-width:400px){#appShell .topbar .brand .panelBrandLogo{width:84px;height:46.58px}}

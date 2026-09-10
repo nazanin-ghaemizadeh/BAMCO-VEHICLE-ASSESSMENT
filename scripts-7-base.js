@@ -83,7 +83,7 @@
   const previousSetLocale=setLocale;
   setLocale=function(next){const out=previousSetLocale(next);syncExpertEditPermissionUi();return out};
 
-  document.querySelectorAll('[data-role]').forEach(btn=>btn.addEventListener('click',()=>requestAnimationFrame(syncExpertEditPermissionUi)));
+  document.querySelectorAll('#entryRoleChoices button[data-role]').forEach(btn=>btn.addEventListener('click',()=>requestAnimationFrame(syncExpertEditPermissionUi)));
   document.querySelector('#switchRoleButton')?.addEventListener('click',()=>requestAnimationFrame(syncExpertEditPermissionUi));
   window.addEventListener('bamco:case-restored',()=>requestAnimationFrame(syncExpertEditPermissionUi));
   syncExpertEditPermissionUi();
@@ -171,7 +171,7 @@
     return out;
   };
 
-  document.querySelectorAll('[data-role]').forEach(btn=>btn.addEventListener('click',()=>requestAnimationFrame(enforceEvaluatorReadOnly)));
+  document.querySelectorAll('#entryRoleChoices button[data-role]').forEach(btn=>btn.addEventListener('click',()=>requestAnimationFrame(enforceEvaluatorReadOnly)));
   document.querySelector('#switchRoleButton')?.addEventListener('click',()=>requestAnimationFrame(enforceEvaluatorReadOnly));
   window.addEventListener('bamco:case-restored',()=>requestAnimationFrame(enforceEvaluatorReadOnly));
 
@@ -265,7 +265,7 @@
   const priorLocale=setLocale;
   setLocale=function(next){const out=priorLocale(next);syncEvaluatorLockNotice();syncExpertExcelAvailability();return out};
 
-  document.querySelectorAll('[data-role]').forEach(btn=>btn.addEventListener('click',()=>requestAnimationFrame(()=>{syncEvaluatorLockNotice();syncExpertExcelAvailability()})));
+  document.querySelectorAll('#entryRoleChoices button[data-role]').forEach(btn=>btn.addEventListener('click',()=>requestAnimationFrame(()=>{syncEvaluatorLockNotice();syncExpertExcelAvailability()})));
   document.querySelector('#switchRoleButton')?.addEventListener('click',()=>requestAnimationFrame(()=>{syncEvaluatorLockNotice();syncExpertExcelAvailability()}));
   window.addEventListener('bamco:case-restored',()=>requestAnimationFrame(()=>{syncEvaluatorLockNotice();syncExpertExcelAvailability()}));
 

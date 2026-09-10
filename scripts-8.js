@@ -144,6 +144,6 @@
   const observer=new MutationObserver(mutations=>{if(mutations.some(m=>[...m.addedNodes].some(node=>node.nodeType===1&&(node.matches?.('#managerComparisonCard,.comparisonRadarPane,.strengthWeaknessGrid')||node.querySelector?.('.comparisonRadarPane,.strengthWeaknessGrid')))))scheduleRefresh()});
   observer.observe(document.body,{childList:true,subtree:true});
   document.addEventListener('click',event=>{if(event.target?.id==='closeComparisonMode'||event.target?.id==='switchRoleButton')closeCriterionDetails()});
-  window.addEventListener('bamco:case-restored',scheduleRefresh);document.querySelectorAll('[data-role]').forEach(btn=>btn.addEventListener('click',scheduleRefresh));
+  window.addEventListener('bamco:case-restored',scheduleRefresh);document.querySelectorAll('#entryRoleChoices button[data-role]').forEach(btn=>btn.addEventListener('click',scheduleRefresh));
   injectV51Styles();scheduleRefresh();
 })();

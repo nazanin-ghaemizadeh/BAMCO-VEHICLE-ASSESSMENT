@@ -6,3 +6,12 @@
 html[lang="fa"] .evaluatorSetup,html[lang="fa"] .evaluatorSetup button,html[lang="fa"] .evaluatorChoiceSummary{font-family:"B Nazanin",Nazanin,serif!important}html[lang="en"] .evaluatorSetup,html[lang="en"] .evaluatorSetup *,html[lang="en"] .evaluatorChoiceSummary{font-family:"Times New Roman",Times,serif!important}html[lang="fa"] .setupFields option[lang="fa"]{font-family:"B Nazanin",Nazanin,serif!important}
 @media(max-width:600px){.evaluatorSetup{padding:20px 16px}.setupFields{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 10px}.evaluatorSetup h2{font-size:22px}.evaluatorChoiceSummary{flex-direction:column;align-items:stretch}.evaluatorSetup footer button{padding:10px 14px}}
 @media(max-width:360px){.setupFields{grid-template-columns:1fr}}
+/* The control and its menu follow the interface direction; Latin values retain Times. */
+html[lang="fa"] body #evaluatorSetup .setupFields select,
+html[lang="fa"] body #evaluatorSetup .setupFields option{direction:rtl!important;text-align:right!important;text-align-last:right!important}
+html[lang="en"] body #evaluatorSetup .setupFields select,
+html[lang="en"] body #evaluatorSetup .setupFields option{direction:ltr!important;text-align:left!important;text-align-last:left!important}
+html body #evaluatorSetup .setupFields select[lang="fa"],
+html body #evaluatorSetup .setupFields option[lang="fa"]{font-family:"B Nazanin",Nazanin,serif!important}
+html body #evaluatorSetup .setupFields select[lang="en"],
+html body #evaluatorSetup .setupFields option[lang="en"]{font-family:"Times New Roman",Times,serif!important}

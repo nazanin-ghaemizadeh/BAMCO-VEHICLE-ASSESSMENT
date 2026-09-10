@@ -31,19 +31,27 @@
   fields.forEach(([id,,,options])=>{
     const label=document.createElement('label');label.htmlFor=`setup-${id}`;
     const caption=document.createElement('span');caption.dataset.setupLabel=id;
-    const select=document.createElement('select');select.id=label.htmlFor;select.name=id;select.required=true;select.dir='ltr';select.lang='en';
+    const select=document.createElement('select');select.id=label.htmlFor;select.name=id;select.required=true;
     select.add(new Option('',''));
-    options.forEach(value=>select.add(new Option(value,value)));
+    options.forEach(value=>{const option=new Option(value,value);option.lang='en';select.add(option)});
+    select.addEventListener('change',()=>localizeSelect(select));
     label.append(caption,select);grid.append(label);
   });
   let entryMode=false,opener=null;
+  function localizeSelect(select){
+    select.dir=fa()?'rtl':'ltr';
+    select.lang=fa()&&!select.value?'fa':'en';
+    select.options[0].textContent=copy('انتخاب کنید','Select');
+    select.options[0].lang=fa()?'fa':'en';
+    Array.from(select.options).forEach(option=>{option.dir=fa()?'rtl':'ltr'});
+  }
   function translate(){
     form.querySelector('h2').textContent=copy('انتخاب مشخصات خودرو','Select vehicle details');
     form.querySelector('#evaluatorSetupHint').textContent=copy('این انتخاب‌ها صرفاً اطلاعاتی هستند و روی امتیازها، وزن‌ها، مقایسه یا تحلیل فنی اثری ندارند.','These choices are informational only and do not affect scores, weights, comparisons, or technical analysis.');
     fields.forEach(([id,persian,english])=>{
       form.querySelector(`[data-setup-label="${id}"]`).textContent=copy(persian,english);
       const select=form.elements.namedItem(id);
-      select.options[0].textContent=copy('انتخاب کنید','Select');select.options[0].lang=fa()?'fa':'en';
+      localizeSelect(select);
     });
     form.querySelector('.setupClose').setAttribute('aria-label',copy('بستن','Close'));
     form.querySelector('.setupCancel').textContent=copy('انصراف','Cancel');
@@ -68,7 +76,7 @@
       form.querySelector('.setupError').textContent=copy('ثبت انتخاب‌ها در این مرورگر ممکن نیست. دسترسی ذخیره‌سازی را فعال کنید.','Choices could not be saved. Enable browser storage.');return;
     }
     close();renderSummary();
-    if(entryMode)location.assign(new URL('evaluator.html?v=80',location.href).href);
+    if(entryMode)location.assign(new URL('evaluator.html?v=81',location.href).href);
   });
   let summary;
   if(isEvaluator){

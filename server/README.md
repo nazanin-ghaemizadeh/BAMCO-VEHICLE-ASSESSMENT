@@ -1,6 +1,6 @@
 # BAMCO technical-review API
 
-The management panel sends the active assessment to `POST /api/technical-review` only when the manager clicks **Get technical review**. The implementation is ready; a live AI connection still requires an HTTPS server, an OpenAI project API key with credit, and an enabled model supporting Structured Outputs. Nothing calls OpenAI automatically, and no simulated report is presented as AI output.
+The management card is currently a visual demo at the owner’s request. Its button performs no action, has no connection settings, and sends no data. The API implementation below is retained for future activation and is not loaded by the management page. The implementation is ready; a live AI connection still requires an HTTPS server, an OpenAI project API key with credit, and an enabled model supporting Structured Outputs. Nothing calls OpenAI automatically, and no simulated report is presented as AI output.
 
 GitHub Pages serves static files and does not run this Node service. Deploy `server/ai-review.mjs` and the sibling `ai-review-core.js` on a Node 22+ server behind an HTTPS reverse proxy. Do not serve environment files as static files.
 

@@ -822,7 +822,7 @@
   });
 
   /* Defense in depth: a role cannot be entered before a valid local sign-in. */
-  document.querySelectorAll('[data-role]').forEach(button=>{
+  document.querySelectorAll('#entryRoleChoices button[data-role]').forEach(button=>{
     button.addEventListener('click',event=>{
       const user=window.BAMCO_AUTH_USER;
       const allowed=user&&(USER_ROLES[user]||[]).includes(button.dataset.role);
@@ -936,7 +936,7 @@
   };
 
   document.querySelector('#switchRoleButton')?.addEventListener('click',()=>requestAnimationFrame(enforceEvaluatorExperienceLock));
-  document.querySelectorAll('[data-role]').forEach(btn=>btn.addEventListener('click',()=>requestAnimationFrame(enforceEvaluatorExperienceLock)));
+  document.querySelectorAll('#entryRoleChoices button[data-role]').forEach(btn=>btn.addEventListener('click',()=>requestAnimationFrame(enforceEvaluatorExperienceLock)));
 
   /* Capture-phase guard: even scripted or keyboard changes cannot mutate this field while locked. */
   document.addEventListener('change',event=>{
