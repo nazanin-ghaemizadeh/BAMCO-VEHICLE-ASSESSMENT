@@ -1,3 +1,28 @@
+/* v67 — session lifecycle + existing UI refinements */
+(()=>{
+  'use strict';
+  const file=location.pathname.split('/').pop()||'';
+  if(!/^(evaluator|expert|manager)\.html$/i.test(file))return;
+  const AUTH_KEY='bamco-authenticated-user';
+  const clearWorkspace=()=>{
+    try{
+      ['bamco-vehicle-assessment','bamco-vehicle-expert-weights','bamco-manager-weight-control'].forEach(key=>localStorage.removeItem(key));
+      ['bamco-ai-technical-review-report','bamco-second-vehicle-comparison','bamco-multi-vehicle-comparisons','bamco-comparison-vehicle-count','bamco-clean-start-v1'].forEach(key=>sessionStorage.removeItem(key));
+      Object.keys(sessionStorage).filter(key=>key.startsWith('bamco-evaluator-choices:')).forEach(key=>sessionStorage.removeItem(key));
+    }catch(_){}
+  };
+  let user='';
+  try{user=sessionStorage.getItem(AUTH_KEY)||''}catch(_){}
+  const nav=performance.getEntriesByType?.('navigation')?.[0];
+  const reloaded=nav?.type==='reload'||performance.navigation?.type===1;
+  if(reloaded||!user){
+    clearWorkspace();
+    try{sessionStorage.removeItem(AUTH_KEY)}catch(_){}
+    document.documentElement.style.visibility='hidden';
+    location.replace(new URL('index.html?v=87',location.href).href);
+  }
+})();
+
 /* v66 — scoped login captcha + BAMCO Persian logo + localized comparison tooltip */
 (()=>{
   const q=(s,r=document)=>r.querySelector(s);
