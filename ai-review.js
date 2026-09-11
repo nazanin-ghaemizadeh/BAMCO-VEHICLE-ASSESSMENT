@@ -115,7 +115,9 @@
     }
 
     button.disabled=true;
+    lastReport=null;
     result.hidden=true;
+    result.innerHTML='';
     setStatus(fa()?'در حال تحلیل ارتباط نتایج ارزیابی و استخراج ۵ پیشنهاد فنی…':'Analyzing linked assessment results and generating five technical recommendations…','loading');
     translate();
 
