@@ -26,9 +26,66 @@ body.managerMode #managerComparisonEntry{background:#fff!important}
   grid-column:2;grid-row:2;display:block;width:100%;justify-self:center;text-align:center;
 }
 html[dir="rtl"] #summaryBody .integratedCompletion>small{direction:rtl}
+
+/*
+ * Role-page isolation.
+ * evaluator.html / expert.html / manager.html are separate routes, so their static
+ * data-role is the source of truth. Foreign-role blocks must never participate in
+ * layout, even if a later mobile media query or runtime mode class changes display.
+ */
+[hidden]{display:none!important}
+body[data-role="evaluator"] .managerOnly,
+body[data-role="evaluator"] .expertOnly,
+body[data-role="evaluator"] #expertPanel{
+  display:none!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+}
+body[data-role="expert"] .managerOnly,
+body[data-role="expert"] .evaluatorOnly{
+  display:none!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+}
+body[data-role="manager"] .evaluatorOnly,
+body[data-role="manager"] .expertOnly,
+body[data-role="manager"] #expertPanel,
+body[data-role="manager"] .assessmentLayout{
+  display:none!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+}
+
+/* Create a local stacking context per role page so fixed/sticky mobile elements
+   cannot escape over content belonging to another page. */
+body[data-role="evaluator"] #appShell,
+body[data-role="expert"] #appShell,
+body[data-role="manager"] #appShell{
+  position:relative;
+  isolation:isolate;
+  min-height:100dvh;
+  overflow-x:clip;
+}
+body[data-role="evaluator"] #appShell > main,
+body[data-role="expert"] #appShell > main,
+body[data-role="manager"] #appShell > main{
+  position:relative;
+  z-index:0;
+  min-width:0;
+}
+
 @media(max-width:700px){
   #appShell .topbar .brand .panelBrandLogo{width:104px}
   body.managerMode #appShell > main{gap:16px}
   #summaryBody .integratedCompletion{grid-template-columns:42px minmax(0,160px)!important}
+  /* Re-assert route isolation after every legacy mobile rule. */
+  body[data-role="evaluator"] .managerOnly,
+  body[data-role="evaluator"] .expertOnly,
+  body[data-role="expert"] .managerOnly,
+  body[data-role="expert"] .evaluatorOnly,
+  body[data-role="manager"] .evaluatorOnly,
+  body[data-role="manager"] .expertOnly,
+  body[data-role="manager"] #expertPanel,
+  body[data-role="manager"] .assessmentLayout{display:none!important}
 }
 @media(max-width:400px){#appShell .topbar .brand .panelBrandLogo{width:84px}}
