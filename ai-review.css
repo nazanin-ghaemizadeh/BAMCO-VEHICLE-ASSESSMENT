@@ -6,23 +6,28 @@
 #aiTechnicalReview img{display:block;width:100%;height:auto;aspect-ratio:480/321;object-fit:contain}
 #aiTechnicalReview #aiReviewStart{grid-column:2;grid-row:2;justify-self:center;width:auto;max-width:100%;margin:0;min-width:140px}
 #aiTechnicalReview #aiReviewStart:disabled{cursor:wait;opacity:.7}
-html[lang="fa"] #aiTechnicalReview,html[lang="fa"] #aiTechnicalReview #aiReviewStart{font-family:"B Nazanin",Nazanin,serif!important;direction:rtl}
-html[lang="en"] #aiTechnicalReview,html[lang="en"] #aiTechnicalReview #aiReviewStart{font-family:"Times New Roman",Times,serif!important;direction:ltr}
+html[lang="fa"] #aiTechnicalReview,html[lang="fa"] #aiTechnicalReview #aiReviewStart,html[lang="fa"] #aiTechnicalReview #aiReviewExcel{font-family:"B Nazanin",Nazanin,serif!important;direction:rtl}
+html[lang="en"] #aiTechnicalReview,html[lang="en"] #aiTechnicalReview #aiReviewStart,html[lang="en"] #aiTechnicalReview #aiReviewExcel{font-family:"Times New Roman",Times,serif!important;direction:ltr}
 .aiReviewStatus{min-height:1.7em;margin:16px 0 0;text-align:center;font-size:1rem;line-height:1.8}
 .aiReviewStatus:empty{display:none}
 .aiReviewStatus.loading{color:#315f86}
 .aiReviewStatus.success{color:#18724d}
 .aiReviewStatus.error{color:#a83d3d}
 .aiReviewResult{margin-top:18px}
+.aiReviewActions{display:flex;justify-content:center;margin-top:14px}
+#aiReviewExcel{min-width:190px}
 .aiReviewTableWrap{width:100%;overflow:auto;border:1px solid #d9e3ea;border-radius:14px}
 .aiReviewTable{width:100%;min-width:1180px;border-collapse:collapse;background:#fff}
-.aiReviewTable th,.aiReviewTable td{padding:12px 13px;border-bottom:1px solid #e3e9ee;border-inline-end:1px solid #edf1f4;text-align:right;vertical-align:top;line-height:1.9}
-.aiReviewTable th{position:sticky;top:0;background:#edf4f8;color:#173d5c;font-weight:700;white-space:nowrap;z-index:1}
-.aiReviewTable td:first-child,.aiReviewTable th:first-child{width:52px;text-align:center}
+.aiReviewTable th,.aiReviewTable td{padding:12px 13px;border-bottom:1px solid #e3e9ee;border-inline-end:1px solid #edf1f4;vertical-align:top;line-height:1.9}
+.aiReviewTable th{position:sticky;top:0;background:#edf4f8;color:#173d5c;font-weight:700;white-space:nowrap;z-index:1;text-align:right}
+.aiReviewTable td:first-child,.aiReviewTable th:first-child{width:52px;text-align:center!important;white-space:nowrap}
 .aiReviewTable td:nth-child(2){min-width:180px;font-weight:700;color:#183f61}
 .aiReviewTable td:nth-child(3){min-width:290px}
 .aiReviewTable td:nth-child(4){min-width:220px}
 .aiReviewTable td:nth-child(5),.aiReviewTable td:nth-child(6){min-width:280px}
+html[lang="fa"] .aiReviewTable td:not(:first-child){text-align:justify;text-align-last:right;direction:rtl}
+html[lang="fa"] .aiReviewTable li{text-align:justify;text-align-last:right}
+html[lang="en"] .aiReviewTable td:not(:first-child){text-align:justify;text-align-last:left;direction:ltr}
 .aiReviewTable tr:last-child td{border-bottom:0}
 .aiReviewTable ul{margin:0;padding-inline-start:20px}
 .aiReviewTable li+li{margin-top:6px}
