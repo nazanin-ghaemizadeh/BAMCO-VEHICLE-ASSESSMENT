@@ -1,46 +1,63 @@
-/* Shared, dependency-free request/response contract. Never includes login choices or media. */
+/* Shared, dependency-free request/response contract for the technical AI review. */
 (function(root,factory){const api=factory();if(typeof module==='object'&&module.exports)module.exports=api;else root.BamcoAIReview=api})(typeof globalThis!=='undefined'?globalThis:this,()=>{
   'use strict';
-  const object=properties=>({type:'object',properties,required:Object.keys(properties),additionalProperties:false});
-  const string={type:'string'},strings={type:'array',items:string};
-  const schema=object({
-    summary:string,limitations:strings,
-    findings:{type:'array',items:object({
-      criterionId:string,itemIds:strings,priority:{type:'string',enum:['critical','high','medium','low']},
-      evidence:string,possibleCauses:strings,
-      tests:{type:'array',items:object({name:string,purpose:string,method:string,acceptanceBasis:string})},
-      correctiveActions:strings,retestCriteria:string
-    })}
-  });
-  function cleanText(value,max=4000){if(typeof value!=='string'||value.length>max)throw new Error('invalid_payload');return value}
-  function number(value,min,max){if(typeof value!=='number'||!Number.isFinite(value)||value<min||value>max)throw new Error('invalid_payload');return value}
-  function validatePayload(input){
-    if(!input||input.version!==1||!['fa','en'].includes(input.language)||!Array.isArray(input.criteria)||!input.criteria.length||input.criteria.length>30)throw new Error('invalid_payload');
-    const vehicle={};for(const key of ['brand','model','date','odometer'])vehicle[key]=cleanText(input.vehicle?.[key]||'',200);
-    const seen=new Set();let total=0,completed=0;
-    const criteria=input.criteria.map(group=>{
-      const id=cleanText(group.id,60);if(seen.has(id)||!Array.isArray(group.items)||group.items.length>100)throw new Error('invalid_payload');seen.add(id);
-      const items=group.items.map(item=>{
-        const itemId=cleanText(item.id,100);if(seen.has(itemId)||++total>500)throw new Error('invalid_payload');seen.add(itemId);
-        const score=item.score===null?null:number(item.score,1,10);if(score!==null){if(!Number.isInteger(score))throw new Error('invalid_payload');completed++}
-        return {id:itemId,title:cleanText(item.title,500),instructions:cleanText(item.instructions||'',5000),score,note:cleanText(item.note||'',5000)};
-      });
-      return {id,title:cleanText(group.title,500),weight:number(group.weight,0,1),items};
-    });
-    if(!completed)throw new Error('empty_assessment');
-    return {version:1,language:input.language,vehicle,finalScore:input.finalScore===null?null:number(input.finalScore,0,100),completed,total,criteria,comments:{evaluator:cleanText(input.comments?.evaluator||'',12000),expert:cleanText(input.comments?.expert||'',12000)}};
+  const string={type:'string'};
+  const schema={
+    type:'object',
+    properties:{
+      suggestions:{
+        type:'array',minItems:5,maxItems:5,
+        items:{
+          type:'object',additionalProperties:false,
+          properties:{
+            improvementOpportunity:string,
+            linkedResultsReasoning:string,
+            probableCauses:{type:'array',minItems:1,maxItems:2,items:string},
+            diagnosticTest:string,
+            correctiveActionIfConfirmed:string
+          },
+          required:['improvementOpportunity','linkedResultsReasoning','probableCauses','diagnosticTest','correctiveActionIfConfirmed']
+        }
+      }
+    },
+    required:['suggestions'],
+    additionalProperties:false
+  };
+
+  function cleanText(value,max=5000){
+    if(value==null)return'';
+    if(typeof value!=='string'||value.length>max)throw new Error('invalid_payload');
+    return value.trim();
   }
-  function validateReport(report,payload){
-    cleanText(report?.summary,16000);
-    const list=(value,max=40)=>{if(!Array.isArray(value)||value.length>max)throw new Error('invalid_response');return value};
-    list(report.limitations).forEach(v=>cleanText(v,8000));
-    list(report.findings,60).forEach(finding=>{
-      const group=payload.criteria.find(group=>group.id===finding.criterionId);
-      if(!group||!['critical','high','medium','low'].includes(finding.priority))throw new Error('invalid_response');
-      if(!list(finding.itemIds,100).length||finding.itemIds.some(id=>!group.items.some(item=>item.id===id)))throw new Error('invalid_response');
-      cleanText(finding.evidence,8000);cleanText(finding.retestCriteria,8000);
-      for(const key of ['possibleCauses','correctiveActions'])list(finding[key]).forEach(v=>cleanText(v,8000));
-      list(finding.tests,20).forEach(test=>{for(const key of ['name','purpose','method','acceptanceBasis'])cleanText(test[key],8000)});
+  function validatePayload(input){
+    if(!input||input.version!==1||input.source!=='BAMCO_EVALUATOR_EXCEL_DETAILS'||!Array.isArray(input.rows)||!input.rows.length||input.rows.length>500)throw new Error('invalid_payload');
+    const vehicle={};for(const key of ['brand','model','date','odometer'])vehicle[key]=cleanText(input.vehicle?.[key]||'',200);
+    let answered=0;
+    const rows=input.rows.map(row=>{
+      const score=row.score==null||row.score===''?null:Number(row.score);
+      if(score!==null&&(!Number.isInteger(score)||score<1||score>10))throw new Error('invalid_payload');
+      if(score!==null)answered++;
+      return {
+        criterionCode:cleanText(row.criterionCode||'',40),
+        criterion:cleanText(row.criterion||'',300),
+        subcriterionCode:cleanText(row.subcriterionCode||'',40),
+        subcriterion:cleanText(row.subcriterion||'',500),
+        itemCode:cleanText(row.itemCode||'',60),
+        item:cleanText(row.item||'',700),
+        score,
+        evaluatorNote:cleanText(row.evaluatorNote||'',5000),
+        evidenceCount:Math.max(0,Math.min(50,Number(row.evidenceCount)||0))
+      };
+    });
+    if(!answered)throw new Error('empty_assessment');
+    return {version:1,source:input.source,vehicle,evaluatorFinalComment:cleanText(input.evaluatorFinalComment||'',12000),rows,answeredRows:answered,totalRows:rows.length};
+  }
+  function validateReport(report){
+    if(!report||!Array.isArray(report.suggestions)||report.suggestions.length!==5)throw new Error('invalid_response');
+    report.suggestions.forEach(item=>{
+      for(const key of ['improvementOpportunity','linkedResultsReasoning','diagnosticTest','correctiveActionIfConfirmed'])if(!cleanText(item?.[key],12000))throw new Error('invalid_response');
+      if(!Array.isArray(item.probableCauses)||item.probableCauses.length<1||item.probableCauses.length>2)item.probableCauses&&(()=>{throw new Error('invalid_response')})();
+      item.probableCauses.forEach(v=>{if(!cleanText(v,8000))throw new Error('invalid_response')});
     });
     return report;
   }
