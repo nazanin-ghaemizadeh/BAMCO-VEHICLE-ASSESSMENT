@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#153a60"><meta name="description" content="سامانه مستقل آزمون قابلیت رانندگی و دوام عملکردی و پرسشنامه تکمیلی خودروسازان بم">
+<title>سامانه ارزیابی عملکردی و دوام خودرو | خودروسازان بم</title>
+<link rel="icon" type="image/webp" href="../bamco-logo.webp">
+<link rel="stylesheet" href="./style.css?v=6">
+</head>
+<body>
+<header class="app-header">
+  <div class="brand"><img class="brand-logo" src="../bamco-logo.webp" alt="نشان خودروسازان بم"><div><b>سامانه ارزیابی عملکردی و دوام خودرو</b><small>BAMCO · VEHICLE ASSESSMENT</small></div></div>
+  <div class="header-right"><span class="header-pill" id="headerVehicle">انتخاب مشخصات خودرو</span><button class="header-button" id="backupBtn" type="button">دریافت نسخه پشتیبان</button></div>
+</header>
+<main class="main">
+ <div class="hero"><div><h1 id="pageTitle">تنظیم مشخصات خودرو و برنامه آزمون</h1><p id="pageSub">بانک واحد آزمون‌ها بر اساس فایل BAMCO؛ هر آزمون یک شناسه ثابت دارد.</p></div><button type="button" class="secondary hidden" id="editSetupBtn">ویرایش مشخصات خودرو</button></div>
+ <nav class="steps" aria-label="بخش‌های سامانه">
+  <button class="step active" data-tab="setup">۱. مشخصات خودرو</button>
+  <button class="step" data-tab="drive">۲. قابلیت رانندگی</button>
+  <button class="step" data-tab="durability">۳. آزمون دوام</button>
+  <button class="step" data-tab="supplementary">۴. پرسشنامه تکمیلی</button>
+  <button class="step" data-tab="results">۵. نتایج و میانگین‌ها</button>
+ </nav>
+ <section id="setupPanel" class="surface setup">
+   <div class="section-heading"><div><h2>مشخصات خودروی مورد ارزیابی</h2><p>ابتدا مشخصات را مطابق فهرست‌های اصلی تعیین کنید. آزمون‌های نامرتبط از برنامه اجرایی کنار گذاشته می‌شوند.</p></div><span class="chip">پیکربندی آزمون</span></div>
+   <form id="vehicleForm">
+   <div class="formgrid">
+    <div class="field"><label for="vclass">رده خودرو</label><select id="vclass"><option>M1</option><option>N1</option></select></div>
+    <div class="field"><label for="body">نوع بدنه</label><select id="body"><option>Sedan</option><option>SUV</option><option>Crossover</option><option>Pickup</option><option>Station Wagon</option><option>Hatchback</option><option>Off-road</option></select></div>
+    <div class="field"><label for="power">قوای محرکه</label><select id="power"><option>ICE</option><option>HEV</option><option>PHEV</option><option>BEV</option><option>EREV</option></select></div>
+    <div class="field"><label for="gear">گیربکس</label><select id="gear"><option>Manual</option><option selected>Automatic</option><option>Single-Speed</option></select></div>
+    <div class="field"><label for="driveType">سیستم محرک</label><select id="driveType"><option>FWD</option><option>RWD</option><option>AWD</option><option>4WD</option></select></div>
+    <div class="field"><label for="cabin">نوع کابین</label><select id="cabin"><option>Single</option><option>Extra</option><option>Double</option><option>All</option></select></div>
+    <div class="field"><label for="seatRows">تعداد ردیف صندلی</label><select id="seatRows"><option>1</option><option selected>2</option><option>3</option></select></div>
+    <div class="field"><label for="offroad">توانایی آفرود خودرو</label><select id="offroad"><option value="no">خیر</option><option value="yes">بله</option></select></div>
+    <div class="field"><label for="driveKm">هدف قابلیت رانندگی (کیلومتر)</label><input id="driveKm" type="number" min="1" max="20000" value="5250" required></div>
+    <div class="field"><label for="durKm">هدف پیمایش دوام (کیلومتر)</label><input id="durKm" type="number" min="100" max="200000" value="45000" required></div>
+    <div class="field"><label for="durDays">روزهای برنامه دوام</label><input id="durDays" type="number" min="1" max="365" value="90" list="durationChoices" required><datalist id="durationChoices"><option value="60"><option value="90"><option value="120"><option value="150"></datalist></div>
+    <div class="field"><label for="startOdo">کیلومترشمار شروع دوام</label><input id="startOdo" type="number" min="0" value="5000" required></div>
+   </div>
+   <div class="info-bar" id="setupInfo">با تغییر روزها و مسافت، تعداد و هدف کیلومتر هر روز، روزهای کنترل ۵٬۰۰۰ کیلومتری و فهرست آزمون‌ها بازتنظیم می‌شوند.</div>
+   <div class="toolbar"><button type="submit" class="primary">تأیید و ورود به ارزیابی ←</button><span class="tiny">مقادیر و نمره‌های ثبت‌شده روی همین مرورگر ذخیره می‌شوند. برای استفاده در دستگاه دیگر، فایل پشتیبان دریافت کنید.</span></div>
+   </form>
+ </section>
+ <section id="workPanel" class="hidden">
+   <div class="kpis" id="kpis"></div>
+   <div class="workspace" style="margin-top:18px">
+     <div class="content">
+      <div class="surface panel" id="schedulePanel"></div>
+      <div class="surface panel" id="questionsPanel"></div>
+     </div>
+     <aside class="surface sidebar"><h3>شاخص‌های ارزیابی</h3><div id="categories" class="cat-scroll"></div></aside>
+   </div>
+ </section>
+ <section class="surface panel hidden" id="resultsPanel"></section>
+ <footer class="footer">واحد مهندسی توسعه و تکوین محصول · خودروسازان بم | ارزیابی عملکردی بدون بازکردن مجموعه‌ها</footer>
+</main>
+<input id="importBackup" type="file" accept=".json" class="hidden">
+<div id="toast" class="toast hidden" role="status"></div>
+<script src="./data.js?v=6"></script><script defer src="./app.js?v=6"></script>
+</body>
+</html>
