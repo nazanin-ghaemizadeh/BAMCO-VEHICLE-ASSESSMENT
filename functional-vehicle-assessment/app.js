@@ -72,12 +72,62 @@ function scoresForTab(tab){return Object.entries(state.records).filter(([k,v])=>
 function viewSummary(items){const scored=items.filter(t=>Number(record(t).score)>0).length;return [items.length,scored]}
 function renderSetup(){for(const [k,v] of Object.entries(conf())){const e=byId(k);if(e)e.value=v;}const m=Math.ceil(Number(conf().durKm||45000)/Math.max(1,Number(conf().durDays||90)));byId('setupInfo').textContent='میانگین لازم: '+number(m)+' کیلومتر در روز. مسافت هدف هر نوع مسیر و روزهای کنترل، بعد از شروع برنامه محاسبه می‌شوند. داده‌های قبلی شما در همین مرورگر باقی می‌مانند.'}
 function getDriveRoute(p){return p.name||p.route||'تهران'}
-function routeTokens(label){const l=String(label||'').split(' یا ')[0].split('،')[0].replace(/ و بازگشت| دور برگشت|مطابق مجوز مسیر|حلقه /g,'').trim();const m=l.split(/[–—-]/).map(x=>x.trim()).filter(Boolean);if(m.length>1)return [m[0],m[m.length-1]];return ['تهران',l||'تهران']}
+function routeTokens(label){
+ const v=String(label||'').replace(/[\u200c\u200f]/g,' ').replace(/ و بازگشت.*| دور برگشت.*|مطابق مجوز مسیر/g,'').trim();
+ const separators=/\s+[–—-]\s+|\s+به\s+/;
+ const p=v.split(separators).map(x=>x.trim()).filter(Boolean);
+ if(p.length>1)return [p[0],p[p.length-1]];
+ return [p[0]||'تهران',p[0]||'تهران'];
+}
+const cityCoords={
+ 'تهران':[51.3890,35.6892],'قم':[50.8764,34.6416],'کرج':[50.9916,35.8400],'دیزین':[51.423,36.05],
+ 'ساری':[53.0586,36.5659],'فیروزکوه':[52.7751,35.7569],'قزوین':[50.0041,36.2688],
+ 'کاشان':[51.4272,33.9850],'اصفهان':[51.6660,32.6539],'یزد':[54.3675,31.8974],
+ 'کرمان':[57.0788,30.2839],'شهداد':[57.6969,30.4214],'بم':[58.3568,29.1060],
+ 'زاهدان':[60.8729,29.4963],'جیرفت':[57.7382,28.6751],'شیراز':[52.5311,29.5926],
+ 'مشهد':[59.6168,36.2605],'گرگان':[54.4342,36.8456],'رشت':[49.5887,37.2808],
+ 'شاهرود':[54.9763,36.4182],'اراک':[49.6892,34.0917],'ساوه':[50.3566,35.0213]
+};
+function cityCoordinate(name){
+ const raw=String(name||'').replace(/[()]/g,' ').replace(/ي/g,'ی').replace(/ك/g,'ک');
+ const names=Object.keys(cityCoords).filter(k=>raw.includes(k)).sort((a,b)=>b.length-a.length);
+ return names.length?cityCoords[names[0]]:null;
+}
+let currentRouteRequest=0;
+async function showRouteEstimate(origin,destination,targetKm){
+ const token=++currentRouteRequest;
+ const field=byId('liveRouteEstimate');
+ if(!field)return;
+ const a=cityCoordinate(origin),b=cityCoordinate(destination);
+ if(!a||!b||a.join(',')===b.join(',')){
+  field.textContent='این روز مسیر شهری یا حلقه‌ای دارد؛ زمان و مسافت جاده‌ای باید با انتخاب نقاط دقیق در گوگل مپ مشخص شود.';
+  return;
+ }
+ field.textContent='در حال دریافت مسافت و زمان تخمینی مسیر جاده‌ای…';
+ try{
+  const url='https://router.project-osrm.org/route/v1/driving/'+a.join(',')+';'+b.join(',')+'?overview=false';
+  const res=await fetch(url,{signal:AbortSignal.timeout(11000)});
+  if(!res.ok)throw Error('routing unavailable');
+  const json=await res.json();if(token!==currentRouteRequest)return;
+  if(json.code!=='Ok'||!json.routes?.length)throw Error('no route');
+  const km=json.routes[0].distance/1000;
+  const hours=json.routes[0].duration/3600;
+  const h=Math.floor(hours),m=Math.round((hours-h)*60);
+  field.innerHTML='<b>برآورد مسیر یک‌طرفه:</b> '+number(km)+' کیلومتر · '+number(h)+' ساعت و '+number(m)+' دقیقه'+
+  '<br><small>برآورد جاده‌ای بر اساس داده نقشه باز و بدون ترافیک زنده است؛ مسافت هدف برنامه '+number(targetKm)+' کیلومتر است و ممکن است به تکرار مسیر نیاز داشته باشد. برای مسافت و زمان لحظه‌ای گوگل روی لینک مسیر‌یابی کلیک کنید.</small>';
+ }catch(e){
+  if(token!==currentRouteRequest)return;
+  field.textContent='برآورد خودکار در دسترس نیست. مسافت و زمان تخمینی مسیر را از لینک گوگل مپ مشاهده کنید.';
+ }
+}
 function mapHtml(p){
-const rname=state.tab==='drive'?getDriveRoute(p):p.route;const parts=routeTokens(rname);
-const embed='https://maps.google.com/maps?q='+encodeURIComponent(rname+', Iran')+'&t=m&z=10&output=embed&hl=fa';
-const link='https://www.google.com/maps/dir/?api=1&origin='+encodeURIComponent(parts[0]+', Iran')+'&destination='+encodeURIComponent(parts[1]+', Iran')+'&travelmode=driving';
-return '<div class="map-grid"><iframe title="نقشه آنلاین گوگل برای مسیر روز" class="map-frame" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="'+esc(embed)+'"></iframe><div class="route-info"><h3>مشخصات مسیر روز</h3><p><b>مسیر پیشنهادی:</b> '+esc(rname)+'</p><p><b>نوع مسیر:</b> '+esc(p.type||p.route)+'</p><p><b>هدف روز:</b> '+number(p.km)+' کیلومتر</p><a class="map-link" href="'+esc(link)+'" target="_blank" rel="noopener noreferrer">مشاهده مسیر و مسیر‌یابی در گوگل‌مپ ↗</a><p class="disclaimer">نقشه تعبیه‌شده محدوده مسیر را نشان می‌دهد؛ برای مشاهده خط مسیر واقعی و انتخاب جاده از لینک گوگل‌مپ استفاده کنید. کیلومتر هدف برنامه ممکن است به تکرار مسیر نیاز داشته باشد.</p></div></div>'
+ const rname=state.tab==='drive'?getDriveRoute(p):p.route;
+ const endpoints=routeTokens(rname),origin=endpoints[0],destination=endpoints[1];
+ const params='saddr='+encodeURIComponent(origin+', Iran')+'&daddr='+encodeURIComponent(destination+', Iran');
+ const embed='https://maps.google.com/maps?'+params+'&output=embed&hl=fa';
+ const link='https://www.google.com/maps/dir/?api=1&origin='+encodeURIComponent(origin+', Iran')+'&destination='+encodeURIComponent(destination+', Iran')+'&travelmode=driving';
+ queueMicrotask(()=>showRouteEstimate(origin,destination,p.km));
+ return '<div class="map-grid"><iframe title="مسیر آنلاین گوگل مپ برای روز انتخاب‌شده" class="map-frame" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="'+esc(embed)+'"></iframe><div class="route-info"><h3>مشخصات مسیر روز</h3><p><b>مبدأ:</b> '+esc(origin)+'<br><b>مقصد:</b> '+esc(destination)+'</p><p><b>مسیر پیشنهادی:</b> '+esc(rname)+'</p><p><b>نوع مسیر:</b> '+esc(p.type||p.route)+'</p><p><b>هدف پیمایش روز:</b> '+number(p.km)+' کیلومتر</p><div class="route-estimate" id="liveRouteEstimate">در حال آماده‌سازی برآورد مسیر…</div><a class="map-link" href="'+esc(link)+'" target="_blank" rel="noopener noreferrer">نمایش مسیر و زمان ترافیکی در گوگل مپ</a><p class="disclaimer">در مسیرهای شهری و حلقه‌ای، مبدأ و مقصد دقیق باید در گوگل مپ مشخص شوند. مسافت هدف روز الزاماً معادل فاصله مستقیم بین دو شهر نیست.</p></div></div>';
 }
 function renderKpis(items){
 const total=state.tab==='drive'?candidates('drive').length:state.tab==='durability'?candidates('durability').length:candidates('supplementary').length;
