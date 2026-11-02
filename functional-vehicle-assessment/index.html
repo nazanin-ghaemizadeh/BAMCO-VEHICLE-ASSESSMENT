@@ -8,9 +8,9 @@
 <link rel="stylesheet" href="./style.css?v=6">
 </head>
 <body>
-<header class="app-header">
-  <div class="brand"><img class="brand-logo" src="../bamco-logo.webp" alt="نشان خودروسازان بم"><div><b>سامانه ارزیابی عملکردی و دوام خودرو</b><small>BAMCO · VEHICLE ASSESSMENT</small></div></div>
-  <div class="header-right"><span class="header-pill" id="headerVehicle">انتخاب مشخصات خودرو</span><button class="header-button" id="backupBtn" type="button">دریافت نسخه پشتیبان</button></div>
+<header class="app-header topbar">
+  <div class="brand"><img class="brand-logo original-brand-logo" src="../bamco-logo.webp" alt="نشان خودروسازان بم"><div><b>سامانه ارزیابی عملکردی و دوام خودرو</b><small>BAMCO · VEHICLE ASSESSMENT</small></div></div>
+  <div class="header-right headerActions"><span class="header-pill headerSeal" id="headerVehicle">انتخاب مشخصات خودرو</span><button class="header-button actionCard" id="backupBtn" type="button">دریافت نسخه پشتیبان</button></div>
 </header>
 <main class="main">
  <div class="hero"><div><h1 id="pageTitle">تنظیم مشخصات خودرو و برنامه آزمون</h1><p id="pageSub">بانک واحد آزمون‌ها بر اساس فایل BAMCO؛ هر آزمون یک شناسه ثابت دارد.</p></div><button type="button" class="secondary hidden" id="editSetupBtn">ویرایش مشخصات خودرو</button></div>
@@ -28,11 +28,8 @@
     <div class="field"><label for="vclass">رده خودرو</label><select id="vclass"><option>M1</option><option>N1</option></select></div>
     <div class="field"><label for="body">نوع بدنه</label><select id="body"><option>Sedan</option><option>SUV</option><option>Crossover</option><option>Pickup</option><option>Station Wagon</option><option>Hatchback</option><option>Off-road</option></select></div>
     <div class="field"><label for="power">قوای محرکه</label><select id="power"><option>ICE</option><option>HEV</option><option>PHEV</option><option>BEV</option><option>EREV</option></select></div>
-    <div class="field"><label for="gear">گیربکس</label><select id="gear"><option>Manual</option><option selected>Automatic</option><option>Single-Speed</option></select></div>
+    <div class="field"><label for="gear">گیربکس</label><select id="gear"><option>Manual</option><option selected>Automatic</option></select></div>
     <div class="field"><label for="driveType">سیستم محرک</label><select id="driveType"><option>FWD</option><option>RWD</option><option>AWD</option><option>4WD</option></select></div>
-    <div class="field"><label for="cabin">نوع کابین</label><select id="cabin"><option>Single</option><option>Extra</option><option>Double</option><option>All</option></select></div>
-    <div class="field"><label for="seatRows">تعداد ردیف صندلی</label><select id="seatRows"><option>1</option><option selected>2</option><option>3</option></select></div>
-    <div class="field"><label for="offroad">توانایی آفرود خودرو</label><select id="offroad"><option value="no">خیر</option><option value="yes">بله</option></select></div>
     <div class="field"><label for="driveKm">هدف قابلیت رانندگی (کیلومتر)</label><input id="driveKm" type="number" min="1" max="20000" value="5250" required></div>
     <div class="field"><label for="durKm">هدف پیمایش دوام (کیلومتر)</label><input id="durKm" type="number" min="100" max="200000" value="45000" required></div>
     <div class="field"><label for="durDays">روزهای برنامه دوام</label><input id="durDays" type="number" min="1" max="365" value="90" list="durationChoices" required><datalist id="durationChoices"><option value="60"><option value="90"><option value="120"><option value="150"></datalist></div>
