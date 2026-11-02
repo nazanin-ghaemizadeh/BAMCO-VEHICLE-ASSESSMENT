@@ -113,3 +113,37 @@ body{background:radial-gradient(ellipse at 92% -6%,#d9eee7 0%,transparent 37%),l
 .footer{color:#70897e}
 @media(max-width:1200px){.workspace{grid-template-columns:240px minmax(0,1fr)}}
 @media(max-width:800px){.main{padding:16px 12px 42px}.app-header.topbar{margin:12px 12px 0;border-radius:17px;padding:20px}.app-header.topbar .brand-logo{width:97px;height:57px}.app-header.topbar .brand b{font-size:22px}.workspace{grid-template-columns:1fr}.workspace>.sidebar{grid-column:1;grid-row:1;max-height:220px;position:static}.workspace>.content{grid-column:1;grid-row:2}.steps{width:100%;flex-wrap:wrap}.step{flex:1;min-width:125px;padding:10px}}
+
+/* Premium gateway and focused assessment experience */
+:root{--ink:#142d32;--quiet:#65817c;--surface:#f7faf9;--edge:#e1ebe8}
+body{background:#f5f8f7;color:var(--ink)}
+.app-header.topbar{max-width:100%;margin:0;border-radius:0;min-height:104px;padding:20px max(28px,calc((100% - 1400px)/2));background:linear-gradient(115deg,#0f2730,#163b40);box-shadow:none}
+.app-header.topbar:after{opacity:.28}
+.app-header.topbar .brand-logo{width:116px;height:59px}
+.app-header.topbar .brand b{font-size:clamp(20px,2vw,28px);font-weight:600}
+.main{max-width:1500px}
+.landing-shell{padding:55px clamp(16px,4vw,60px) 70px;min-height:72vh;direction:rtl}
+.gate-eyebrow{font-family:'Times New Roman',serif;font-size:12px;letter-spacing:2px;color:#278a73;font-weight:bold}
+.gate-title{font-size:clamp(34px,3.8vw,58px);font-weight:650;letter-spacing:-.7px;line-height:1.35;margin:15px 0;color:#152f36}
+.gate-lead{font-size:20px;color:#647d79;line-height:1.9;max-width:820px;margin:0 0 37px}
+.gate-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;max-width:1100px}
+.gate-grid.one{max-width:550px;grid-template-columns:1fr}
+.gate-card{min-height:285px;display:flex;flex-direction:column;text-align:right;align-items:flex-start;gap:12px;padding:29px 31px;background:#fff;border:1px solid #dce9e5;border-radius:19px;box-shadow:0 5px 24px #113a3010;transition:transform .2s,box-shadow .2s,border-color .2s;color:#173e3a}
+.gate-card:hover,.gate-card:focus-visible{transform:translateY(-5px);border-color:#8ccbb4;box-shadow:0 20px 54px #194b3e1c;outline:none}
+.gate-number{font-family:'Times New Roman',serif;color:#7da39b;letter-spacing:1.5px;font-size:13px}
+.gate-illustration{font-family:'Times New Roman',serif;font-size:44px;color:#317963;line-height:1.3;margin:8px 0 1px}
+.gate-card strong{font-size:27px;color:#193b37;font-weight:650}
+.gate-card small{font-size:17px;color:#728981;line-height:1.65}
+.gate-cta{font-size:17px;margin-top:auto;color:#1e8165;font-weight:bold}
+.gate-edit{margin:20px 0;border:1px solid #cbded5;padding:12px 20px;border-radius:9px;background:white;color:#2d6957}
+.route-report{margin-top:45px;border-top:1px solid #e3eee8;padding-top:22px}
+.route-report-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.route-report-card{border:1px solid #dfeae6;padding:20px;border-radius:15px;background:white}
+.route-label{display:flex;justify-content:space-between;gap:9px;align-items:flex-start;font-size:17px}
+.route-label span{color:#338168;white-space:nowrap}
+.route-target{font-size:29px;font-weight:700;margin:18px 0 7px;color:#1d4e40}
+.route-target small,.route-actual,.route-foot{font-size:14px;color:#6b847a}
+.route-track{height:9px;background:#e5efea;border-radius:99px;margin:13px 0;overflow:hidden}
+.route-track i{display:block;background:#2a9776;height:100%;border-radius:99px}
+@media(max-width:900px){.gate-grid,.route-report-grid{grid-template-columns:1fr 1fr}.landing-shell{padding:34px 14px}}
+@media(max-width:600px){.gate-grid,.route-report-grid{grid-template-columns:1fr}.gate-card{min-height:230px}.gate-title{font-size:30px}}
