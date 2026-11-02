@@ -5,16 +5,16 @@
 <meta name="theme-color" content="#153a60"><meta name="description" content="سامانه مستقل آزمون قابلیت رانندگی و دوام عملکردی و پرسشنامه تکمیلی خودروسازان بم">
 <title>سامانه ارزیابی عملکردی و دوام خودرو | خودروسازان بم</title>
 <link rel="icon" type="image/webp" href="../bamco-logo.webp">
-<link rel="stylesheet" href="./style.css?v=20261102-paint2">
+<link rel="stylesheet" href="./style.css?v=20261102-redesign11">
 </head>
 <body>
 <header class="app-header topbar">
   <div class="brand"><img class="brand-logo original-brand-logo" src="../bamco-logo.webp" alt="نشان خودروسازان بم"><div><b>سامانه ارزیابی عملکردی و دوام خودرو</b><small>BAMCO · VEHICLE ASSESSMENT</small></div></div>
   <div class="header-right headerActions"><span class="header-pill headerSeal" id="headerVehicle">انتخاب مشخصات خودرو</span><button class="header-button actionCard" id="backupBtn" type="button">دریافت نسخه پشتیبان</button></div>
 </header>
-<main class="main">
- <div class="hero"><div><h1 id="pageTitle">تنظیم مشخصات خودرو و برنامه آزمون</h1><p id="pageSub">بانک واحد آزمون‌ها بر اساس فایل BAMCO؛ هر آزمون یک شناسه ثابت دارد.</p></div><button type="button" class="secondary hidden" id="editSetupBtn">ویرایش مشخصات خودرو</button></div>
- <nav class="steps" aria-label="بخش‌های سامانه">
+<main class="main"><section id="landing" class="landing-shell"></section><section id="moduleLanding" class="landing-shell hidden"></section>
+ <div class="hero" id="innerHero"><div><h1 id="pageTitle">تنظیم مشخصات خودرو و برنامه آزمون</h1><p id="pageSub">بانک واحد آزمون‌ها بر اساس فایل BAMCO؛ هر آزمون یک شناسه ثابت دارد.</p></div><button type="button" class="secondary hidden" id="editSetupBtn">ویرایش مشخصات خودرو</button></div>
+ <nav id="legacySteps" class="steps" aria-label="بخش‌های سامانه">
   <button class="step active" data-tab="setup">۱. مشخصات خودرو</button>
   <button class="step" data-tab="drive">۲. قابلیت رانندگی</button>
   <button class="step" data-tab="durability">۳. آزمون دوام</button>
@@ -54,6 +54,6 @@
 </main>
 <input id="importBackup" type="file" accept=".json" class="hidden">
 <div id="toast" class="toast hidden" role="status"></div>
-<script src="./data.js?v=20261102-9"></script><script defer src="./app.js?v=20261102-9"></script>
+<script src="./data.js?v=20261102-9"></script><script defer src="./app.js?v=20261102-redesign11"></script>
 </body>
 </html>
