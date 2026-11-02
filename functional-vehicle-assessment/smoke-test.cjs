@@ -1,0 +1,36 @@
+const fs=require('fs');
+const assert=require('node:assert/strict');
+const {JSDOM}=require('jsdom');
+const base='functional-vehicle-assessment/';
+const html=fs.readFileSync(base+'index.html','utf8');
+const window=new JSDOM(html,{url:'https://example.org/functional-vehicle-assessment/',runScripts:'outside-only',pretendToBeVisual:true}).window;
+window.scrollTo=()=>{};
+window.confirm=()=>true;
+window.eval(fs.readFileSync(base+'data.js','utf8'));
+window.eval(fs.readFileSync(base+'app.js','utf8'));
+const doc=window.document;
+function form(){doc.getElementById('vehicleForm').dispatchEvent(new window.Event('submit',{bubbles:true,cancelable:true}));}
+function tab(name){doc.querySelector('[data-tab="'+name+'"]').click()}
+assert(doc.getElementById('setupPanel')&&!doc.getElementById('setupPanel').classList.contains('hidden'));
+form();
+assert(!doc.getElementById('workPanel').classList.contains('hidden'),'Driveability should open');
+assert(doc.querySelectorAll('[data-day]').length===26,'Driveability needs 26 days');
+assert(doc.querySelectorAll('[data-score]').length>0,'Scoring inputs should be present');
+doc.querySelector('[data-score="8"]').click();
+assert(doc.querySelectorAll('.score.selected').length>=1,'Score should persist in view');
+tab('durability');
+assert(doc.querySelectorAll('[data-day]').length===90,'Durability needs default 90 days');
+doc.getElementById('editSetupBtn').click();
+doc.getElementById('durDays').value='120';
+doc.getElementById('durKm').value='40000';
+form();tab('durability');
+assert(doc.querySelectorAll('[data-day]').length===120,'Duration change must rebuild plan');
+doc.querySelector('[data-day="120"]').click();
+assert(doc.getElementById('schedulePanel').textContent.includes('۱۲۰'),'Day 120 must load');
+tab('supplementary');
+assert(doc.getElementById('questionsPanel').querySelectorAll('.question').length>0,'Supplementary questions should load');
+tab('results');
+assert(doc.getElementById('resultsPanel').textContent.includes('میانگین'),'Result averages should render');
+assert(window.localStorage.getItem('bamco-functional-assessment-v1'),'State should save');
+console.log('Browser UI smoke test passed: setup, 26 drive days, 120 durability days, scoring, supplementary, results, persistence.');
+window.close();
