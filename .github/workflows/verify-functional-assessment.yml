@@ -1,0 +1,38 @@
+name: Verify Functional Vehicle Assessment
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'functional-vehicle-assessment/**'
+      - '.github/workflows/verify-functional-assessment.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate JavaScript syntax
+        run: |
+          node --check functional-vehicle-assessment/app.js
+          node --check functional-vehicle-assessment/data.js
+      - name: Validate workbook-derived test catalog and page assets
+        run: |
+          node <<'NODE'
+          const fs=require('fs'),vm=require('vm');
+          const dir='functional-vehicle-assessment/';
+          const ctx={window:{}};
+          vm.runInNewContext(fs.readFileSync(dir+'data.js','utf8'),ctx);
+          const data=ctx.window.BAMCO_DATA;
+          if(!data||data.tests.length!==1026)throw Error('Expected exactly 1026 tests');
+          if(data.driveDays.length!==26)throw Error('Expected 26 Driveability days');
+          const ids=data.tests.map(x=>x.id);
+          if(new Set(ids).size!==ids.length)throw Error('Duplicate fixed test IDs');
+          if(data.tests.filter(x=>x.scope.includes('durability')).length!==462)throw Error('Expected 462 durability tests');
+          if(data.tests.filter(x=>x.scope.includes('supplementary')).length!==516)throw Error('Expected 516 supplementary tests');
+          for(const id of ids)if(!id.startsWith('CR-'))throw Error('Invalid test ID: '+id);
+          const html=fs.readFileSync(dir+'index.html','utf8');
+          for(const asset of ['style.css','data.js','app.js'])if(!fs.existsSync(dir+asset)||!html.includes(asset))throw Error('Missing '+asset);
+          console.log('Verified: 1026 unique tests, 26 Driveability days, 462 durability, 516 supplementary; all assets present.');
+          NODE
