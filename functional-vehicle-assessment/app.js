@@ -4,7 +4,7 @@
 const DB=window.BAMCO_DATA;
 const KEY='bamco-functional-assessment-v1';
 const scoreWords=['','غیرقابل قبول','بحرانی','بسیار ضعیف','ضعیف','حداقل پذیرش','مرزی','قابل قبول','رضایت‌بخش','بسیار عالی','ممتاز'];
-const defaultConfig={vclass:'M1',body:'Sedan',power:'ICE',gear:'Automatic',driveType:'FWD',cabin:'Single',seatRows:'2',offroad:'no',driveKm:5250,durKm:45000,durDays:90,startOdo:5000};
+const defaultConfig={vclass:'M1',body:'Sedan',power:'ICE',gear:'Automatic',driveType:'FWD',driveKm:5250,durKm:45000,durDays:90,startOdo:5000};
 const state={config:{...defaultConfig},tab:'setup',driveDay:1,durDay:1,category:'همه',query:'',page:0,records:{},mileage:{drive:{},durability:{}},setupComplete:false};
 const categories=[...new Set(DB.tests.map(x=>x.cat))];
 const testById=new Map(DB.tests.map(x=>[x.id,x]));
@@ -13,23 +13,23 @@ const number=n=>Number(n||0).toLocaleString('fa-IR',{maximumFractionDigits:1});
 const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const fa=s=>String(s||'').replace(/ي/g,'ی').replace(/ك/g,'ک').replace(/ة/g,'ه');
 function save(){try{localStorage.setItem(KEY,JSON.stringify({config:state.config,records:state.records,mileage:state.mileage,setupComplete:state.setupComplete}));return true}catch(e){toast('حافظه مرورگر پر شده است؛ نسخه پشتیبان بگیرید.');return false}}
-function load(){try{const v=JSON.parse(localStorage.getItem(KEY)||'null');if(v){state.config={...defaultConfig,...(v.config||{})};state.records=v.records||{};state.mileage=v.mileage||{drive:{},durability:{}};state.setupComplete=Boolean(v.setupComplete);state.tab=state.setupComplete?'drive':'setup';}}catch(e){console.warn('Cannot read saved assessment',e)}}
+function load(){try{const v=JSON.parse(localStorage.getItem(KEY)||'null');if(v){state.config={...defaultConfig,...(v.config||{})};delete state.config.cabin;delete state.config.seatRows;delete state.config.offroad;state.records=v.records||{};state.mileage=v.mileage||{drive:{},durability:{}};state.setupComplete=Boolean(v.setupComplete);state.tab=state.setupComplete?'drive':'setup';}}catch(e){console.warn('Cannot read saved assessment',e)}}
 let tm;function toast(s){const t=byId('toast');t.textContent=s;t.classList.remove('hidden');clearTimeout(tm);tm=setTimeout(()=>t.classList.add('hidden'),3200)}
 function conf(){return state.config}
 function parts(s){return String(s||'').split(/\s*\/\s*|\s*\|\s*/).map(x=>x.trim()).filter(Boolean)}
 function allowed(rule,value){if(!rule||rule==='All'||rule==='None')return true;return parts(rule).includes(String(value))}
 function applicable(t){
 const v=t.vehicle||{},c=conf();
-if(!allowed(v.cls,c.vclass)||!allowed(v.body,c.body)||!allowed(v.power,c.power)||!allowed(v.gear,c.gear)||!allowed(v.drive,c.driveType)||!allowed(v.cabin,c.cabin)||!allowed(v.rows,c.seatRows))return false;
+if(!allowed(v.cls,c.vclass)||!allowed(v.body,c.body)||!allowed(v.power,c.power)||!allowed(v.gear,c.gear)||!allowed(v.drive,c.driveType))return false;
 const label=(t.name+' '+t.sub+' '+t.route).toLowerCase();
-if(c.offroad==='no'&&(/خارج.?جاده|آفرود|off.road|قفل دیفرانسیل/i.test(label)||String(t.route).includes('خاکی')))return false;
+if(!['AWD','4WD'].includes(c.driveType)&&(/خارج.?جاده|آفرود|off.road|قفل دیفرانسیل/i.test(label)||String(t.route).includes('خاکی')))return false;
 if(c.gear==='Manual'&&(/گیربکس اتوماتیک|دنده اتوماتیک|تیپ.?ترونیک|p\/n|p، r، n، d/i.test(label)))return false;
 if(c.gear==='Automatic'&&(/کیفیت تعویض دنده دستی|پدال کلاچ|اهرم کلاچ/i.test(label)))return false;
 if(c.power==='ICE'&&(/باتری کششی|موتور برقی محرکه|اینورتر قدرت|برد تمام.برقی|ترمز احیاکننده|شارژ باتری ولتاژ بالا/i.test(label)))return false;
 return true
 }
 const candidates=tab=>DB.tests.filter(t=>t.scope.includes(tab==='drive'?'drive':tab==='durability'?'durability':'supplementary')&&applicable(t));
-function activeRoutes(){const a=DB.routes.filter(r=>conf().offroad==='yes'||(!/خارج.?جاده|خاکی/i.test(r.name)));const total=a.reduce((v,x)=>v+Math.max(0,x.durShare),0);return a.map(x=>({...x,share:x.durShare/total}))}
+function activeRoutes(){const a=DB.routes.filter(r=>['AWD','4WD'].includes(conf().driveType)||(!/خارج.?جاده|خاکی/i.test(r.name)));const total=a.reduce((v,x)=>v+Math.max(0,x.durShare),0);return a.map(x=>({...x,share:x.durShare/total}))}
 function dayCategoryPlan(){
 const n=Math.max(1,Math.min(365,Number(conf().durDays)||90)),totalKm=Math.max(100,Number(conf().durKm)||45000),routes=activeRoutes();
 const raw=routes.map(r=>n*r.share),counts=raw.map(Math.floor),left=n-counts.reduce((a,b)=>a+b,0);
