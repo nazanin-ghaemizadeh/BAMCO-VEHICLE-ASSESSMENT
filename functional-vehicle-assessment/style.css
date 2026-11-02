@@ -24,3 +24,8 @@ body,button,input,select,textarea{font-family:'B Nazanin','BNazanin',Tahoma,sans
 .map-frame{height:360px;min-height:320px;border:1px solid #d1e5ef;border-radius:15px}
 @media(max-width:1200px){.workspace{grid-template-columns:220px minmax(0,1fr)}}
 @media(max-width:800px){.workspace{grid-template-columns:1fr}.workspace>.sidebar{grid-column:1;grid-row:1;position:static;max-height:190px}.workspace>.content{grid-column:1;grid-row:2}.map-frame{height:290px;min-height:250px}}
+
+/* Language-sensitive glyph fallback: Persian in B Nazanin, Latin in Times New Roman */
+@font-face{font-family:'BAMCO Mixed';src:local('Times New Roman');unicode-range:U+0000-024F,U+1E00-1EFF}
+@font-face{font-family:'BAMCO Mixed';src:local('B Nazanin');unicode-range:U+0600-06FF,U+0750-077F,U+08A0-08FF,U+FB50-FDFF,U+FE70-FEFF,U+200C-200F}
+body,button,input,select,textarea,.brand small,.score,.route-estimate small{font-family:'BAMCO Mixed','B Nazanin','Times New Roman',Tahoma,sans-serif}
