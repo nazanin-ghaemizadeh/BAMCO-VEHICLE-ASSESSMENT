@@ -147,3 +147,26 @@ body{background:#f5f8f7;color:var(--ink)}
 .route-track i{display:block;background:#2a9776;height:100%;border-radius:99px}
 @media(max-width:900px){.gate-grid,.route-report-grid{grid-template-columns:1fr 1fr}.landing-shell{padding:34px 14px}}
 @media(max-width:600px){.gate-grid,.route-report-grid{grid-template-columns:1fr}.gate-card{min-height:230px}.gate-title{font-size:30px}}
+
+/* Paint Shop gateway — actual dark entrance pattern */
+body:has(#landing:not(.hidden)),body:has(#moduleLanding:not(.hidden)){background:#0e2830}
+body:has(#landing:not(.hidden)) .main,body:has(#moduleLanding:not(.hidden)) .main{max-width:none;padding:0}
+body:has(#landing:not(.hidden)) .footer,body:has(#moduleLanding:not(.hidden)) .footer{display:none}
+body:has(#landing:not(.hidden)) .app-header,body:has(#moduleLanding:not(.hidden)) .app-header{background:#0e2830;box-shadow:none;border-bottom:1px solid #ffffff10}
+.landing-shell:not(.hidden){position:relative;isolation:isolate;min-height:calc(100dvh - 105px);overflow:hidden;padding:clamp(58px,8vh,105px) max(28px,calc((100vw - 1360px)/2)) 80px;color:#f6faf8;background:radial-gradient(ellipse at 95% 10%,#23635485,transparent 50%),linear-gradient(125deg,#102733,#123e3e)}
+.landing-shell:not(.hidden):before{content:"";position:absolute;z-index:-1;width:650px;height:650px;top:-290px;right:-270px;border-radius:50%;border:1px solid #d8ffec17;box-shadow:0 0 0 110px #d8ffec06,0 0 0 260px #d8ffec03}
+.landing-shell .gate-eyebrow{color:#9cdbc7;font-size:13px;letter-spacing:2px}
+.landing-shell .gate-title{color:#f5faf7;font-size:clamp(35px,4vw,61px);font-weight:450;line-height:1.25;margin:15px 0 45px;max-width:1000px}
+.landing-shell .gate-grid{max-width:1300px;grid-template-columns:repeat(4,minmax(0,1fr));gap:19px}
+.landing-shell .gate-grid.one{max-width:380px;grid-template-columns:1fr}
+.landing-shell .gate-card{height:clamp(265px,37vh,345px);min-height:265px;border-radius:18px;padding:25px;background:linear-gradient(145deg,#ffffff0e,#ffffff04);color:#f2faf6;border:1px solid #beddd72e;box-shadow:inset 0 1px #ffffff08;transition:transform .2s,background .2s,border-color .2s,box-shadow .2s}
+.landing-shell .gate-card:hover{transform:translateY(-5px);background:linear-gradient(145deg,#ffffff18,#ffffff08);border-color:#9ad9c1;box-shadow:0 15px 38px #001b232b}
+.landing-shell .gate-number{color:#9dbab2;font-size:13px}
+.landing-shell .gate-illustration{font-size:48px;color:#a5dfc6}
+.landing-shell .gate-card strong{color:#f8fffc;font-size:clamp(23px,2vw,29px);font-weight:600}
+.landing-shell .gate-card small{color:#bed1cc;font-size:16px;line-height:1.6}
+.landing-shell .gate-cta{color:#9cddc1;margin-top:auto;font-size:16px}
+.landing-shell .gate-edit{background:#ffffff09;border:1px solid #8ebfb25b;color:#d5e9de;padding:13px 23px;margin-top:25px}
+#legacySteps{display:none!important}
+@media(max-width:1100px){.landing-shell .gate-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:650px){.landing-shell:not(.hidden){padding:58px 20px 55px}.landing-shell .gate-grid{grid-template-columns:1fr}.landing-shell .gate-grid.one{max-width:none}.landing-shell .gate-card{height:225px;min-height:225px}.landing-shell .gate-title{font-size:34px}}
