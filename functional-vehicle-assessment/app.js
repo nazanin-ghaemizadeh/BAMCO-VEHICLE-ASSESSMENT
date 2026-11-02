@@ -192,8 +192,8 @@ function renderGate(){
  modules.classList.toggle('hidden',state.tab!=='modules');
  byId('innerHero').classList.toggle('hidden',main);
  byId('legacySteps').classList.toggle('hidden',main);
- if(state.tab==='home')landing.innerHTML='<div class="gate-eyebrow">BAMCO · PRODUCT DEVELOPMENT ENGINEERING</div><h1 class="gate-title">سامانه ارزیابی عملکرد و دوام خودرو</h1><p class="gate-lead">از پیکربندی خودرو تا اجرای آزمون، مسیرهای روزانه و تحلیل نتایج؛ همه در یک فضای یکپارچه.</p><div class="gate-grid one"><button type="button" class="gate-card" data-open="setup"><span class="gate-number">۰۱ / شروع</span><span class="gate-illustration">◇</span><strong>تعریف خودرو و برنامه آزمون</strong><small>انتخاب پنج ویژگی خودرو و تعیین روزها و کیلومترهای پیمایش</small><span class="gate-cta">ورود به مشخصات خودرو ←</span></button></div>';
- if(state.tab==='modules')modules.innerHTML='<div class="gate-eyebrow">BAMCO · ASSESSMENT WORKSPACE</div><h1 class="gate-title">کدام ارزیابی را آغاز می‌کنید؟</h1><p class="gate-lead">'+esc(conf().vclass+' · '+conf().body+' · '+conf().power)+' — آزمون‌های مرتبط با خودرو به‌صورت خودکار انتخاب شده‌اند.</p><div class="gate-grid">'+[
+ if(state.tab==='home')landing.innerHTML='<div class="gate-eyebrow">BAMCO · VEHICLE ASSESSMENT</div><h1 class="gate-title">ارزیابی عملکرد و دوام خودرو</h1><div class="gate-grid one"><button type="button" class="gate-card" data-open="setup"><span class="gate-number">۰۱ / VEHICLE SETUP</span><span class="gate-illustration">◇</span><strong>مشخصات خودرو</strong><span class="gate-cta">ورود و تکمیل اطلاعات ←</span></button></div>';
+ if(state.tab==='modules')modules.innerHTML='<div class="gate-eyebrow">BAMCO · ASSESSMENT</div><h1 class="gate-title">بخش‌های ارزیابی</h1><div class="gate-grid">'+[
  ['drive','۰۱','قابلیت رانندگی','برنامه ۲۶ روزه، مسیرهای پیشنهادی و نمره‌دهی روزانه','↗'],
  ['durability','۰۲','آزمون دوام','برنامه منعطف کیلومتری، کنترل‌های دوره‌ای و ثبت عملکرد','↗'],
  ['supplementary','۰۳','پرسشنامه تکمیلی','شاخص‌های تکمیلی و ارزیابی بدون محدودیت روزانه','↗'],
@@ -275,5 +275,5 @@ if(el.dataset.clear){if(confirm('تمام نمره‌ها و یادداشت‌ه
 document.addEventListener('change',e=>{const el=e.target;if(el.dataset.note){const t=testById.get(el.dataset.note);if(!t)return;const k=ratedKey(t);state.records[k]={...(state.records[k]||{}),note:el.value};save();return}if(el.dataset.photo){uploadPicture(el.files?.[0],el.dataset.photo);return}});
 document.addEventListener('input',e=>{if(e.target.id==='questionSearch'){state.query=e.target.value;state.page=0;const field=e.target;const pos=field.selectionStart;renderQuestions();const newField=byId('questionSearch');newField.focus();newField.setSelectionRange(pos,pos)}});
 byId('importBackup').addEventListener('change',e=>{const file=e.target.files?.[0];if(!file)return;const fr=new FileReader();fr.onload=()=>{try{const obj=JSON.parse(fr.result);if(!obj||!obj.records||!obj.config)throw Error('Invalid');if(!confirm('اطلاعات موجود با فایل پشتیبان جایگزین شود؟'))return;state.config={...defaultConfig,...obj.config};state.records=obj.records;state.mileage=obj.mileage||{drive:{},durability:{}};state.setupComplete=true;save();render();toast('بازیابی پشتیبان انجام شد.')}catch(err){toast('فایل JSON معتبر نیست.')}};fr.readAsText(file);e.target.value=''});
-load();state.tab=state.setupComplete?'modules':'home';render();
+load();state.tab='home';render();
 })();
