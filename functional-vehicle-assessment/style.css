@@ -29,3 +29,15 @@ body,button,input,select,textarea{font-family:'B Nazanin','BNazanin',Tahoma,sans
 @font-face{font-family:'BAMCO Mixed';src:local('Times New Roman');unicode-range:U+0000-024F,U+1E00-1EFF}
 @font-face{font-family:'BAMCO Mixed';src:local('B Nazanin');unicode-range:U+0600-06FF,U+0750-077F,U+08A0-08FF,U+FB50-FDFF,U+FE70-FEFF,U+200C-200F}
 body,button,input,select,textarea,.brand small,.score,.route-estimate small{font-family:'BAMCO Mixed','B Nazanin','Times New Roman',Tahoma,sans-serif}
+
+/* Header sourced from original BAMCO assessment styles-1.css: topbar/brand/headerSeal */
+.app-header.topbar{min-height:101px;height:auto;background:linear-gradient(110deg,#082f57,#0b5b98 58%,#087f8c);padding:13px max(24px,calc((100% - 1400px)/2));gap:24px;box-shadow:0 8px 25px #06294a35;flex-wrap:wrap}
+.app-header.topbar .brand{min-width:0;gap:17px}
+.app-header.topbar .brand-logo{width:104px;height:66px;object-fit:contain;background:#fff;border-radius:12px;padding:5px;box-shadow:0 7px 18px #001b3a3d}
+.app-header.topbar .brand b{font-size:29px;line-height:1.25;font-weight:800}
+.app-header.topbar .brand small{font-size:16px;line-height:1.4;color:#dcecff}
+.app-header.topbar .headerActions{display:flex;align-items:center;justify-content:flex-end;gap:10px;flex-wrap:wrap}
+.app-header.topbar .headerSeal{border:1px solid #80b6e8;border-radius:20px;padding:7px 16px;color:#e4f3ff;background:#ffffff10}
+.app-header.topbar .actionCard{border:1px solid #ffffff70;background:#ffffff20;color:#fff;border-radius:10px;padding:9px 15px}
+.app-header.topbar .actionCard:hover{background:#ffffff30}
+@media(max-width:700px){.app-header.topbar{padding:12px 15px}.app-header.topbar .brand b{font-size:20px}.app-header.topbar .brand-logo{width:75px;height:54px}.app-header.topbar .headerActions{width:100%;justify-content:flex-start}}
