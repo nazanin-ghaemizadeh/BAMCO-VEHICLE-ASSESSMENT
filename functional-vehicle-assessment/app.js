@@ -122,11 +122,19 @@ async function showRouteEstimate(origin,destination,targetKm){
 }
 function mapHtml(p){
  const rname=state.tab==='drive'?getDriveRoute(p):p.route;
- const endpoints=routeTokens(rname),origin=endpoints[0],destination=endpoints[1];
+ const isTehran=/تهران/.test(rname)&&!/[–—-]/.test(rname)&&!/دیزین|قم|کرج|قزوین|فیروزکوه|ساوه/.test(rname);
+ const circuits=[
+ ['میدان آزادی تهران','میدان ونک تهران','میدان انقلاب تهران'],
+ ['میدان تجریش تهران','میدان ونک تهران','میدان آرژانتین تهران'],
+ ['میدان هفت تیر تهران','میدان فاطمی تهران','میدان انقلاب تهران'],
+ ['میدان آزادی تهران','میدان صنعت تهران','میدان ونک تهران']
+ ];
+ const points=circuits[(p.day-1)%circuits.length];
+ const endpoints=isTehran?[points[0],points[2]]:routeTokens(rname),origin=endpoints[0],destination=endpoints[1];
  const params='saddr='+encodeURIComponent(origin+', Iran')+'&daddr='+encodeURIComponent(destination+', Iran');
  const embed='https://maps.google.com/maps?'+params+'&output=embed&hl=fa';
- const link='https://www.google.com/maps/dir/?api=1&origin='+encodeURIComponent(origin+', Iran')+'&destination='+encodeURIComponent(destination+', Iran')+'&travelmode=driving';
- queueMicrotask(()=>showRouteEstimate(origin,destination,p.km));
+ const link='https://www.google.com/maps/dir/?api=1&origin='+encodeURIComponent(origin+', Iran')+'&destination='+encodeURIComponent(destination+', Iran')+(isTehran?'&waypoints='+encodeURIComponent(points[1]):'')+'&travelmode=driving';
+ queueMicrotask(()=>{if(isTehran){const el=byId('liveRouteEstimate');if(el)el.textContent='مسیر پیشنهادی شهری: '+points.join(' ← ')+'؛ زمان و مسافت دقیق با توجه به ترافیک و راه انتخابی در گوگل مپ قابل مشاهده است.'}else showRouteEstimate(origin,destination,p.km)});
  return '<div class="map-grid"><iframe title="مسیر آنلاین گوگل مپ برای روز انتخاب‌شده" class="map-frame" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="'+esc(embed)+'"></iframe><div class="route-info"><h3>مشخصات مسیر روز</h3><p><b>مبدأ:</b> '+esc(origin)+'<br><b>مقصد:</b> '+esc(destination)+'</p><p><b>مسیر پیشنهادی:</b> '+esc(rname)+'</p><p><b>نوع مسیر:</b> '+esc(p.type||p.route)+'</p><p><b>هدف پیمایش روز:</b> '+number(p.km)+' کیلومتر</p><div class="route-estimate" id="liveRouteEstimate">در حال آماده‌سازی برآورد مسیر…</div><a class="map-link" href="'+esc(link)+'" target="_blank" rel="noopener noreferrer">نمایش مسیر و زمان ترافیکی در گوگل مپ</a><p class="disclaimer">در مسیرهای شهری و حلقه‌ای، مبدأ و مقصد دقیق باید در گوگل مپ مشخص شوند. مسافت هدف روز الزاماً معادل فاصله مستقیم بین دو شهر نیست.</p></div></div>';
 }
 function renderKpis(items){
