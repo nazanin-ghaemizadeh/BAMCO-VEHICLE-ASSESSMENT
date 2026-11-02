@@ -36,3 +36,7 @@ jobs:
           for(const asset of ['style.css','data.js','app.js'])if(!fs.existsSync(dir+asset)||!html.includes(asset))throw Error('Missing '+asset);
           console.log('Verified: 1026 unique tests, 26 Driveability days, 462 durability, 516 supplementary; all assets present.');
           NODE
+      - name: Browser interaction smoke tests
+        run: |
+          npm install --no-save --silent jsdom@26
+          node functional-vehicle-assessment/smoke-test.cjs
